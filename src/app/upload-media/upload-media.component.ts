@@ -16,9 +16,8 @@ export class UploadMediaComponent implements OnInit {
 
     fileName: String;
     selectedFile: File;
-    baseUrl = "http://localhost:8080/users/999/media";
+    postMediaUrl = "/users/999/media/";
 
-    media: Media;
     media = new Media("1453", "My Porsche 911", "porsche.jpg", ".jpg", "", [new Tag("Porsche"), new Tag("Auto"), new Tag("911")]);
 
     onFileChanged(event) {
@@ -29,24 +28,16 @@ export class UploadMediaComponent implements OnInit {
     }
 
     onUpload() {
-        // upload code goes here
-        //this.mediaService.upload(this.selectedFile);
-        /*
-        this.http.post(this.baseUrl, this.selectedFile, {
+        let headers = new HttpHeaders();
+        headers = headers.append('Content-Type', 'application/json');
+        console.log(JSON.stringify(this.media));
+        this.http.post(this.postMediaUrl, JSON.stringify(this.media), {
             reportProgress: true,
-            observe: 'events'
+            observe: 'events',
+            headers: headers
         })
             .subscribe(event => {
                 console.log(event); // handle event here
-            });*/
-
-        console.log(JSON.stringify(this.media));
-        this.http.post(this.baseUrl, JSON.stringify(this.media), {
-            reportProgress: true,
-            observe: 'events',
-        })
-            .subscribe(event => {
-                console.log("HALLO " + event); // handle event here
             });
     }
 
