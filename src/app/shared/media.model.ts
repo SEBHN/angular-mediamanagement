@@ -1,6 +1,9 @@
 import { Tag } from "./tag.model";
 import { FileElement } from "./file-element.model";
 
+/**
+ * Media of any type. Can be placed inside a Folder.
+ */
 export class Media implements FileElement {
 
   name: string;
@@ -21,7 +24,6 @@ export class Media implements FileElement {
       this.tags = [];
       this.file = file;
       this.fileExtension = fileExtension;
-      
   }
 
   getFile(): string {

@@ -1,5 +1,8 @@
 import { Tag } from "./tag.model";
 
+/**
+ * Represents Folder and Media.
+ */
 export interface FileElement {
   name: string;
   isFolder: boolean;
