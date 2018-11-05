@@ -1,9 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppComponent } from './app.component';
 import { CockpitComponent } from './cockpit/cockpit.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FileExplorerComponent } from './file-explorer/file-explorer.component';
 import { HighlightDirective } from './directives/highlight.directive';
 
 
@@ -11,6 +12,7 @@ import { HighlightDirective } from './directives/highlight.directive';
   declarations: [
     AppComponent,
     CockpitComponent,
+    FileExplorerComponent,
     HighlightDirective
   ],
   imports: [

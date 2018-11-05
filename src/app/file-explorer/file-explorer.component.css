@@ -1,0 +1,9 @@
+.main { 
+  background-color: #D6D6D6;
+  opacity: 0.9;
+  height: 100%;
+  width: 100%;
+  top: 56px;
+  left: 0px;
+  position: fixed;
+}

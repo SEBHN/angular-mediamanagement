@@ -1,9 +1,9 @@
-import { Directive, HostBinding, ElementRef, Renderer2, HostListener, OnInit } from '@angular/core';
+import { Directive, HostBinding, ElementRef, Renderer2, HostListener, OnInit, Input } from '@angular/core';
 
 /**
  * Use this directive to highlight an HTML element.
- * It adds the .text-warning Bootstrap4 class to the element
- * when hovered over
+ * It adds your class to the HTML element
+ * when hovered over.
  */
 @Directive({
   selector: '[appHighlight]'

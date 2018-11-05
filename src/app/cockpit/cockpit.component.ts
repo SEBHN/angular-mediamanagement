@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faHome, faCloudUploadAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faCloudUploadAlt, faSignOutAlt, faArrowLeft, faFolderPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-cockpit',
@@ -10,6 +10,8 @@ export class CockpitComponent implements OnInit {
   faHome = faHome;
   faCloudUploadAlt = faCloudUploadAlt;
   faSignOutAlt = faSignOutAlt;
+  faArrowLeft = faArrowLeft;
+  faFolderPlus = faFolderPlus;
 
   constructor() { }
 

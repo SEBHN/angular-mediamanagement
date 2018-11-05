@@ -1,6 +1,8 @@
 <!-- Cockpit navigation component -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Name</a>
+  <a appHighlight class="navbar-brand" href="#">
+    <fa-icon [icon]="faHome"></fa-icon>
+  </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse"
           data-target="#navbarNav">
     <span class="navbar-toggler-icon"></span>
@@ -10,10 +12,20 @@
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
         <a appHighlight class="nav-link" href="#">
-          <fa-icon [icon]="faHome"></fa-icon>
+          <fa-icon [icon]="faArrowLeft"></fa-icon>
         </a>
       </li>
     </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+          <a appHighlight class="nav-link mx-3" href="#">
+            <fa-icon [icon]="faFolderPlus"></fa-icon>
+          </a>
+      </li>
+    </ul> 
+      
+    
+    
     <!-- Search form for tags -->
     <form class="form-inline my-2 my-lg-0 mr-4">
       <input class="form-control mr-sm-2" type="search" placeholder="Search tag..." aria-label="Search">
