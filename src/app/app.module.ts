@@ -4,12 +4,14 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { CockpitComponent } from './cockpit/cockpit.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { HighlightDirective } from './directives/highlight.directive';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    CockpitComponent
+    CockpitComponent,
+    HighlightDirective
   ],
   imports: [
     BrowserModule,

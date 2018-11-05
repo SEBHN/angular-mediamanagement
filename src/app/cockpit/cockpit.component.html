@@ -1,5 +1,5 @@
 <!-- Cockpit navigation component -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="#">Name</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse"
           data-target="#navbarNav">
@@ -9,7 +9,7 @@
     <!-- Left ul with Home and Element Path -->
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">
+        <a appHighlight class="nav-link" href="#">
           <fa-icon [icon]="faHome"></fa-icon>
         </a>
       </li>
@@ -17,17 +17,17 @@
     <!-- Search form for tags -->
     <form class="form-inline my-2 my-lg-0 mr-4">
       <input class="form-control mr-sm-2" type="search" placeholder="Search tag..." aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
     </form>
     <!-- Right ul with Upload and Sign Out -->
     <ul class="navbar-nav float-right">
       <li class="nav-item mx-2">
-        <a class="nav-link" href="#">
+        <a appHighlight class="nav-link" href="#">
           Upload file <fa-icon [icon]="faCloudUploadAlt" class="ml-1"></fa-icon>
         </a>
       </li>
       <li class="nav-item mx-2">
-        <a class="nav-link" href="#">
+        <a appHighlight class="nav-link" href="#">
           Sign out <fa-icon [icon]="faSignOutAlt" class="ml-1"></fa-icon>
         </a>
       </li>
