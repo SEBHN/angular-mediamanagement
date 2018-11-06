@@ -7,6 +7,7 @@ import { faHome, faCloudUploadAlt, faSignOutAlt, faArrowLeft, faFolderPlus } fro
   styleUrls: ['./cockpit.component.css']
 })
 export class CockpitComponent implements OnInit {
+  // Font Awesome Icons
   faHome = faHome;
   faCloudUploadAlt = faCloudUploadAlt;
   faSignOutAlt = faSignOutAlt;

@@ -1,6 +1,7 @@
 import { Component, Input, EventEmitter, Output, OnInit } from '@angular/core';
 import { Media } from '../shared/media.model';
 import { FileElement } from '../shared/file-element.model';
+import { Folder } from '../shared/folder.model';
 
 /**
  * Single component representing Media and Folder in the view.
@@ -16,7 +17,9 @@ export class FileExplorerComponent implements OnInit {
 
   // @Input() means data is being passed inside this component (via property binding) from parent view
   // ref: https://angular.io/guide/template-syntax
-  @Input() mediaFiles: FileElement[];
+  // @Input() mediaFiles: FileElement[];
+  mediaFiles: FileElement[];
+  displayItems = [];
   @Input() canNavigateUp: string;
   @Input() path: string;
 
@@ -35,10 +38,36 @@ export class FileExplorerComponent implements OnInit {
 
 
 
-  constructor() {}
+  constructor() {
+    // for testing
+    // this.mediaFiles = [];
+    // this.mediaFiles.push(new Folder('Manuel', '/'),
+    //                      new Folder('bogdan', '/'),
+    //                      new Folder('something', '/'),
+    //                      new Folder('notCool', '/'),
+    //                      new Folder('Johanna', '/'));
+
+    // for (let i = 0; i < this.mediaFiles.length; i += 3) {
+    //   this.displayItems.push({ items:  this.mediaFiles.splice(i, i + 3)});
+    // }
+  }
 
   // Lifecycle hook before component gets rendered by Angular
-  ngOnInit() {}
+  ngOnInit() {
+    // for testing
+    this.mediaFiles = [];
+    this.mediaFiles.push(new Folder('Manuel', '/'),
+                         new Folder('bogdan', '/'),
+                         new Folder('something', '/'),
+                         new Folder('notCool', '/'),
+                         new Folder('Johanna', '/'),
+                         new Folder('Lilli', '/'),
+                         new Folder('Jessica', '/'));
+
+    for (let i = 0; i < this.mediaFiles.length; i += 6) {
+      this.displayItems.push({ items: this.mediaFiles.slice(i, i + 6) });
+    }
+  }
 
   // Methods to send off the occured events
 
