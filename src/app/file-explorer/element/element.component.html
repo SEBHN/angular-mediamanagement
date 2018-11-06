@@ -1,7 +1,5 @@
-<div class="card border-warning mb-3" style="max-width: 10rem;">
-  <div class="card-header bg-transparent border-warning">{{ element.name }}</div>
-  <div class="card-body text-warning">
-    Preview
-  </div>
-  <div class="card-footer bg-transparent border-warning">Tags: </div>
-</div>
+<button appHighlight class="btn btn-transparent my-3">
+    <fa-icon [icon]="faFolder" class="fa-3x"></fa-icon>
+    <p class="lead">{{ element.name }}</p>
+    <span *ngFor="let tag of element.tags" class="badge badge-warning">{{ tag.getName() }}</span>
+</button>

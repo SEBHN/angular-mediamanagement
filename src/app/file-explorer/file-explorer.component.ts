@@ -2,6 +2,7 @@ import { Component, Input, EventEmitter, Output, OnInit } from '@angular/core';
 import { Media } from '../shared/media.model';
 import { FileElement } from '../shared/file-element.model';
 import { Folder } from '../shared/folder.model';
+import { Tag } from '../shared/tag.model';
 
 /**
  * Single component representing Media and Folder in the view.
@@ -63,6 +64,19 @@ export class FileExplorerComponent implements OnInit {
                          new Folder('Johanna', '/'),
                          new Folder('Lilli', '/'),
                          new Folder('Jessica', '/'));
+
+    // test Tags
+    this.mediaFiles[1].addTag(new Tag('MVS'));
+    this.mediaFiles[1].addTag(new Tag('Video'));
+    this.mediaFiles[3].addTag(new Tag('THI'));
+    this.mediaFiles[5].addTag(new Tag('YouTube collection'));
+    
+    // let folder4 = <Folder> this.mediaFiles[3];
+    // folder2.addTag(new Tag('THI'));
+    // let folder5 = <Folder> this.mediaFiles[4];
+    // folder2.addTag(new Tag('YouTube collection'));
+    // let folder6 = <Folder> this.mediaFiles[5];
+    // folder2.addTag(new Tag('cats'));
 
     for (let i = 0; i < this.mediaFiles.length; i += 6) {
       this.displayItems.push({ items: this.mediaFiles.slice(i, i + 6) });

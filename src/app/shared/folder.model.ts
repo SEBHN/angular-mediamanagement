@@ -14,4 +14,14 @@ export class Folder implements FileElement {
     this.isFolder = true;
     this.tags = [];
   }
+
+  addTag(tag: Tag): void {
+    this.tags.push(tag);
+  }
+
+  removeTag(tag: Tag): void {
+    // get Array index of tag
+    const index: number = this.tags.indexOf(tag);
+    this.tags.splice(index, 1);
+  }
 }
