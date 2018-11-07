@@ -40,17 +40,7 @@ export class FileExplorerComponent implements OnInit {
 
 
   constructor() {
-    // for testing
-    // this.mediaFiles = [];
-    // this.mediaFiles.push(new Folder('Manuel', '/'),
-    //                      new Folder('bogdan', '/'),
-    //                      new Folder('something', '/'),
-    //                      new Folder('notCool', '/'),
-    //                      new Folder('Johanna', '/'));
 
-    // for (let i = 0; i < this.mediaFiles.length; i += 3) {
-    //   this.displayItems.push({ items:  this.mediaFiles.splice(i, i + 3)});
-    // }
   }
 
   // Lifecycle hook before component gets rendered by Angular
@@ -71,13 +61,13 @@ export class FileExplorerComponent implements OnInit {
     this.mediaFiles[3].addTag(new Tag('THI'));
     this.mediaFiles[5].addTag(new Tag('YouTube collection'));
     
-    // let folder4 = <Folder> this.mediaFiles[3];
-    // folder2.addTag(new Tag('THI'));
-    // let folder5 = <Folder> this.mediaFiles[4];
-    // folder2.addTag(new Tag('YouTube collection'));
-    // let folder6 = <Folder> this.mediaFiles[5];
-    // folder2.addTag(new Tag('cats'));
-
+    /** WHEN COMPONENT IS BEING INITIALIZED
+     * Algorithm to distribute all elements in a matrix. In the grid system a row
+     * (of Bootstrap 4) has 12 columns. Here we take chunk of 6 items and push them
+     * AS ARRAY 'items' to the displayItems array.
+     * In the FileExplorer HTML template we use 2 *ngFor loops (2 verschachtelte for-Schleifen)
+     * on displayItems to feed the view.
+     */
     for (let i = 0; i < this.mediaFiles.length; i += 6) {
       this.displayItems.push({ items: this.mediaFiles.slice(i, i + 6) });
     }

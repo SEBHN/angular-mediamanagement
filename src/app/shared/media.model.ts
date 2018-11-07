@@ -37,4 +37,12 @@ export class Media implements FileElement {
   getId(): string {
     return this.id;
   }
+
+  addTag(tag: Tag) {
+    
+  }
+
+  removeTag(tag: Tag) {
+
+  }
 }
