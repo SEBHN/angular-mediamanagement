@@ -25,9 +25,8 @@ export class FileExplorerComponent implements OnInit {
 
   // @Input() means data is being passed inside this component (via property binding) from parent view
   // ref: https://angular.io/guide/template-syntax
-  @Input()
-  loadFiles: FileElement[];
   displayItems = [];
+  @Input()
   mediaFiles: FileElement[];
   @Input()
   canNavigateUp: string;
@@ -56,11 +55,11 @@ export class FileExplorerComponent implements OnInit {
   @Output()
   navigatedUp = new EventEmitter();
 
-  private fileService: FilesService;
+  // private fileService: FilesService;
 
-  constructor(fileService: FilesService) {
-    this.fileService = fileService;
-  }
+  // constructor(fileService: FilesService) {
+  //   this.fileService = fileService;
+  // }
 
   // Lifecycle hook before component gets rendered by Angular
   ngOnInit() {
@@ -71,15 +70,18 @@ export class FileExplorerComponent implements OnInit {
      * In the FileExplorer HTML template we use 2 *ngFor loops (2 verschachtelte for-Schleifen)
      * on displayItems to feed the view.
      */
-    for (let i = 0; i < this.loadFiles.length; i += 6) {
-      this.displayItems.push({ items: this.loadFiles.slice(i, i + 6) });
+    for (let i = 0; i < this.mediaFiles.length; i += 6) {
+      this.displayItems.push({ items: this.mediaFiles.slice(i, i + 6) });
     }
   }
 
+  /**
+   * Used to update displayItems Array to have the 
+   */
   updateUi() {
     this.displayItems = [];
-    for (let i = 0; i < this.loadFiles.length; i += 6) {
-      this.displayItems.push({ items: this.loadFiles.slice(i, i + 6) });
+    for (let i = 0; i < this.mediaFiles.length; i += 6) {
+      this.displayItems.push({ items: this.mediaFiles.slice(i, i + 6) });
     }
   }
 
