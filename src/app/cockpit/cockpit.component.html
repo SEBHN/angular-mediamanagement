@@ -32,7 +32,8 @@
     <!-- Right ul with Upload and Sign Out -->
     <ul class="navbar-nav float-right">
       <li class="nav-item mx-2">
-        <a appHighlight class="nav-link">
+        <a appHighlight class="nav-link" (click)="fileInput.click()">
+          <input  style="display: none" type="file" (change)="onFileChanged($event)"  #fileInput>
           Upload file <fa-icon [icon]="faCloudUploadAlt" class="ml-1"></fa-icon>
         </a>
       </li>
