@@ -28,37 +28,34 @@ export class UploadMediaComponent implements OnInit {
     }
 
     onUpload() {
-        var media = this.getMediaData(this.selectedFile);
-        this.postMetaData(media);
-        this.postFile(this.selectedFile, media.file);
+        if(this.selectedFile != null){
+            var media = this.getMediaData(this.selectedFile);
+            this.postMetaData(media);
+            this.postFile(this.selectedFile, media.file);
+        }
     }
 
     postMetaData(media: Media) {
         console.log(JSON.stringify(media));
         this.http.post(this.getPostMediaUrl(), JSON.stringify(media), {
             reportProgress: true,
-            observe: 'events',
+            observe: 'response',
             headers: this.getHeaders()
         })
-            .subscribe(event => {
-                console.log(event); // handle event here
-            });
+            .subscribe(response => console.log(response.body), error1 => console.log(error1.toString()));
     }
 
     postFile(file: File, fileID: String) {
-        console.log("POST FILE");
         let formData = new FormData();
         formData.append('file', file);
 
         this.http.post(this.getPostFileUrl("3"), formData, {
             reportProgress: true,
-            observe: 'events',
+            observe: 'response',
         })
-            .subscribe(event => {
-                console.log(event); // handle event here
-                console.log(event.type.toString());
-            });
-}
+            .subscribe(response => console.log(response.body), error1 => console.log(error1.toString()));
+
+    }
 
     getPostMediaUrl(): String {
         // TODO: User ID später aus der User Klasse nehmen
