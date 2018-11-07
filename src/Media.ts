@@ -2,7 +2,7 @@ import {Tag} from "./Tag";
 
 export class Media {
 
-    constructor(private id: String, private name: String, private file: String, private fileExtension: String, private filePath: String, private tags : Tag[]) {
+    constructor(public id: String, public name: String, public file: String, public fileExtension: String, public filePath: String, public tags : Tag[]) {
     }
 
 
