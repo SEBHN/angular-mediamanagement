@@ -1,6 +1,6 @@
-<app-cockpit (folderCreated)="onFolderCreated($event)"></app-cockpit>
+<app-cockpit (folderCreated)="addFolder($event)"></app-cockpit>
 <br>
 <br>
 <br>
-<app-file-explorer></app-file-explorer>
+<app-file-explorer [loadFiles]="fileElements" #fileExplorer></app-file-explorer>
 

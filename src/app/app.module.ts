@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
+
 import { AppComponent } from './app.component';
 import { CockpitComponent } from './cockpit/cockpit.component';
 import { FileExplorerComponent } from './file-explorer/file-explorer.component';
@@ -13,12 +14,12 @@ import { ModalModule } from 'ngx-bootstrap';
 
 @NgModule({
   declarations: [
-    AppComponent,
     CockpitComponent,
     FileExplorerComponent,
     HighlightDirective,
     ElementComponent,
-    CreateFolderComponent
+    CreateFolderComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
