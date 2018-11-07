@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UploadMediaService} from "./upload-media.service";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {Media} from "../../Media";
 import {Tag} from "../../Tag";
 
@@ -22,19 +22,14 @@ export class UploadMediaComponent implements OnInit {
     onFileChanged(event) {
         this.selectedFile = event.target.files[0];
         this.fileName = this.selectedFile.name;
-        this.fileName = this.selectedFile.type;
-        console.log(JSON.stringify(this.selectedFile.name));
-        console.log(JSON.stringify(this.selectedFile.type));
-    }
-
-    onUpload() {
-        if(this.selectedFile != null){
+        if (this.selectedFile != null) {
             var media = this.getMediaData(this.selectedFile);
             this.postMetaData(media);
             this.postFile(this.selectedFile, media.file);
         }
     }
 
+    // REST call to post the media Data (meta data)
     postMetaData(media: Media) {
         console.log(JSON.stringify(media));
         this.http.post(this.getPostMediaUrl(), JSON.stringify(media), {
@@ -42,51 +37,64 @@ export class UploadMediaComponent implements OnInit {
             observe: 'response',
             headers: this.getHeaders()
         })
-            .subscribe(response => console.log(response.body), error1 => console.log(error1.toString()));
+            .subscribe(response => console.log(response), error1 => console.log(error1));
     }
 
+    // REST call to post a file
     postFile(file: File, fileID: String) {
         let formData = new FormData();
         formData.append('file', file);
-
+        // TODO: hardcoded fileID ersetzen, sobald Backend richtige Daten liefert
         this.http.post(this.getPostFileUrl("3"), formData, {
             reportProgress: true,
             observe: 'response',
         })
-            .subscribe(response => console.log(response.body), error1 => console.log(error1.toString()));
-
+            .subscribe(response => this.validateResponse(response), error1 => console.log(error1));
     }
 
+    // this Method will called, if the respons doesnt have errors.
+    validateResponse(response: HttpResponse) {
+        console.log(response.status);
+        this.selectedFile = null; // set the selected file to null
+    }
+
+    // returns the post Meta Data URL after it replaces the {userID} field
     getPostMediaUrl(): String {
         // TODO: User ID später aus der User Klasse nehmen
         var url = this.postMediaUrl.replace("{userID}", "999");
         return url;
     }
 
+    // returns the post File URL after it replaces the {userID} field and {id} field
     getPostFileUrl(fileID: String): String {
         var url = this.postFileUrl.replace("{userID}", "999");
         var url = url.replace("{id}", fileID);
         return url;
     }
 
+    // creates an media object from the file that the user selects
     getMediaData(file: File): Media {
         var id = Math.random().toString(36).substr(2, 20);
         var fileID = Math.random().toString(36).substr(2, 20);
-        var extension;
-        var fileName = file.name;
+        var extension = this.getExtension();
+        var media = new Media(id, file.name, fileID, extension, "", [new Tag("")]);
+        return media;
+    }
+
+    getExtension(): String {
+        var fileName = this.selectedFile.name;
         var countDots = fileName.replace(/[^.]/g, "").length;
+        var extension;
         if (countDots < 1) {
-            extension = "undefined";
+            return extension = "undefined";
         }
         else if (countDots == 1) {
-            extension = "." + fileName.split('.').pop();
+            return extension = "." + fileName.split('.').pop();
         }
         else {
             var file_name_array = fileName.split(".");
-            extension = "." + file_name_array[file_name_array.length - 1];
+            return extension = "." + file_name_array[file_name_array.length - 1];
         }
-        var media = new Media(id, file.name, fileID, extension, "", [new Tag("")]);
-        return media;
     }
 
     getHeaders(): HttpHeaders {
@@ -97,5 +105,4 @@ export class UploadMediaComponent implements OnInit {
 
     ngOnInit() {
     }
-
 }
