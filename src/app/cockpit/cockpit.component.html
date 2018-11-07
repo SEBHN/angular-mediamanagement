@@ -58,10 +58,12 @@
       <div class="input-group-prepend">
         <span class="input-group-text"><fa-icon [icon]="faFolderPlus"></fa-icon></span>
       </div>
-      <input type="text" class="form-control" placeholder="Folder name">
+      <input type="text" class="form-control" placeholder="Folder name" #folderNameInput>
     </div>
     <div class="input-group mb-3 justify-content-center">
-      <button type="button" class="btn btn-outline-success mx-3">Create</button>
+      <button type="button" class="btn btn-outline-success mx-3"
+              (click)="onOpenCreateFolderDialog(folderNameInput.value)">Create</button>
+
       <button type="button" class="btn btn-outline-danger mx-3"
               (click)="modalRef.hide()">Close</button>
     </div>

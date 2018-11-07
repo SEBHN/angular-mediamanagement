@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { faHome,
          faCloudUploadAlt,
          faSignOutAlt,
@@ -7,6 +7,7 @@ import { faHome,
 
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { Folder } from '../shared/folder.model';
 
 @Component({
   selector: 'app-cockpit',
@@ -21,8 +22,11 @@ export class CockpitComponent implements OnInit {
   faArrowLeft = faArrowLeft;
   faFolderPlus = faFolderPlus;
 
+  // Injected by ngx bootstrap
   modalRef: BsModalRef;
   private modalService: BsModalService;
+
+  @Output() folderCreated = new EventEmitter<Folder>();
 
   constructor(modalService: BsModalService) {
     this.modalService = modalService;
@@ -35,4 +39,9 @@ export class CockpitComponent implements OnInit {
   ngOnInit() {
   }
 
+  onOpenCreateFolderDialog(folderName: string) {
+    if (folderName !== '') {
+      this.folderCreated.emit(new Folder(folderName, "/"));
+    }
+  }
 }
