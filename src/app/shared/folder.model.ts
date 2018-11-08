@@ -3,6 +3,7 @@ import { Tag } from "./tag.model";
 
 export class Folder implements FileElement {
 
+  id: string;
   name: string;
   isFolder: boolean;
   path: string;

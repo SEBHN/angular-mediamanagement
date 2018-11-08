@@ -6,12 +6,12 @@ import { FileElement } from "./file-element.model";
  */
 export class Media implements FileElement {
 
+  id: string;
   name: string;
   isFolder: boolean;
   path: string;
   tags: Tag[];
 
-  private id: string;
   private file: string;
   private fileExtension: string;
   

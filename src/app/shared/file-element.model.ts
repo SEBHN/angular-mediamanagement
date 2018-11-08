@@ -4,6 +4,8 @@ import { Tag } from "./tag.model";
  * Represents Folder and Media.
  */
 export interface FileElement {
+  
+  id: string;
   name: string;
   isFolder: boolean;
   path: string;
