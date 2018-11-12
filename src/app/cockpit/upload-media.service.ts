@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Media} from "../../Media";
-import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {Tag} from "../../Tag";
 
 @Injectable({
@@ -25,22 +25,21 @@ export class UploadMediaService {
             observe: 'response',
             headers: this.getHeaders()
         })
-            .subscribe(response => this.validateMetaDataResponse(response), error1 => console.log(error1));
+            .subscribe(response => this.metaDataResponse(response), error1 => console.log(error1));
     }
 
     // REST call to post a file
-    postFile(fileID: string) {
+    postFile(id: string) {
         let formData = new FormData();
         formData.append('file', this.selectedFile);
-        // TODO: hardcoded fileID ersetzen, sobald Backend richtige Daten liefert
-        this.http.post(this.getPostFileUrl(fileID), formData, {
+        this.http.post(this.getPostFileUrl(id), formData, {
             reportProgress: true,
             observe: 'response',
         })
-            .subscribe(response => this.validateResponse(response), error1 => console.log(error1));
+            .subscribe(response => this.fileUploadResponse(response), error1 => this.fileUploadError(error1));
     }
 
-    validateMetaDataResponse(response: HttpResponse<any>) {
+    metaDataResponse(response: HttpResponse<any>) {
         if(response.status == 200){
             console.log(response);
             this.postFile(response.body["id"]);
@@ -48,11 +47,15 @@ export class UploadMediaService {
     }
 
     // this Method will called, if the respons doesnt have errors.
-    validateResponse(response: HttpResponse<any>) {
+    fileUploadResponse(response: HttpResponse<any>) {
         console.log(response);
         this.selectedFile = null; // set the selected file to null
     }
 
+    fileUploadError(error: HttpErrorResponse){
+        console.log(error);
+        this.selectedFile = null;
+    }
 
     // returns the post Meta Data URL after it replaces the {userID} field
     getPostMediaUrl(): string {
@@ -70,14 +73,13 @@ export class UploadMediaService {
 
     // creates an media object from the file that the user selects
     getMediaData(file: File): Media {
-        var extension = this.getExtension();
+        var extension = this.getExtension(file);
         var media = new Media("", file.name, "", extension, "", [new Tag("")]);
         return media;
     }
 
-    getExtension(): string {
-        //TODO: check file extensions
-        var fileName = this.selectedFile.name;
+    getExtension(file: File): string {
+        var fileName = file.name;
         var countDots = fileName.replace(/[^.]/g, "").length;
         var extension;
         if (countDots < 1) {

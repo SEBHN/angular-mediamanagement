@@ -35,7 +35,6 @@ export class CockpitComponent implements OnInit {
 
     @Output() folderCreated = new EventEmitter<Folder>();
 
-    fileName: string;
     selectedFile: File;
     postMediaUrl = "/users/{userID}/media/";
     postFileUrl = "/users/{userID}/media/{id}/upload";
@@ -51,11 +50,8 @@ export class CockpitComponent implements OnInit {
 
     onFileChanged(event) {
         this.selectedFile = event.target.files[0];
-        this.fileName = this.selectedFile.name;
         this.uploadMediaService.selectedFile = this.selectedFile;
-        if (this.uploadMediaService.selectedFile != null) {
-            this.uploadMediaService.postMetaData(this.selectedFile);
-        }
+        this.uploadMediaService.postMetaData(this.selectedFile);
     }
 
     ngOnInit() {
