@@ -12,22 +12,22 @@ export class Media implements FileElement {
   path: string;
   tags: Tag[];
 
-  private file: string;
+  private fileId: string;
   private fileExtension: string;
   
 
-  constructor(id: string, name: string, file: string,
+  constructor(id: string, name: string, fileId: string,
     fileExtension: string) {
       this.id = id;
       this.name = name;
       this.isFolder = false;
       this.tags = [];
-      this.file = file;
+      this.fileId = fileId;
       this.fileExtension = fileExtension;
   }
 
-  getFile(): string {
-    return this.file;
+  getFileId(): string {
+    return this.fileId;
   }
 
   getFileExtension(): string {

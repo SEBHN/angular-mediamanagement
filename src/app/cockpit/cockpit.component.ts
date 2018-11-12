@@ -7,9 +7,6 @@ import {
     faFolderPlus
 } from '@fortawesome/free-solid-svg-icons';
 
-import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
-import {Media} from "../../Media";
-import {Tag} from "../../Tag";
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {Folder} from '../shared/folder.model';
@@ -36,8 +33,6 @@ export class CockpitComponent implements OnInit {
     @Output() folderCreated = new EventEmitter<Folder>();
 
     selectedFile: File;
-    postMediaUrl = "/users/{userID}/media/";
-    postFileUrl = "/users/{userID}/media/{id}/upload";
 
     constructor(modalService: BsModalService, uploadMediaService: UploadMediaService) {
         this.modalService = modalService;
@@ -48,6 +43,7 @@ export class CockpitComponent implements OnInit {
         this.modalRef = this.modalService.show(template);
     }
 
+    // if the user selects a file this method will call
     onFileChanged(event) {
         this.selectedFile = event.target.files[0];
         this.uploadMediaService.selectedFile = this.selectedFile;
