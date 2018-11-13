@@ -10,7 +10,8 @@ import {
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {Folder} from '../shared/folder.model';
-import {UploadMediaService} from "./upload-media.service";
+import {UploadMediaService} from "../services/upload-media.service";
+import { FilesService } from '../services/files-service.service';
 
 @Component({
     selector: 'app-cockpit',
@@ -29,14 +30,17 @@ export class CockpitComponent implements OnInit {
     modalRef: BsModalRef;
     private modalService: BsModalService;
     private uploadMediaService: UploadMediaService;
+    private fileService: FilesService;
 
     @Output() folderCreated = new EventEmitter<Folder>();
 
     selectedFile: File;
 
-    constructor(modalService: BsModalService, uploadMediaService: UploadMediaService) {
+    constructor(modalService: BsModalService, uploadMediaService: UploadMediaService,
+        fileService: FilesService) {
         this.modalService = modalService;
         this.uploadMediaService = uploadMediaService;
+        this.fileService = fileService;
     }
 
     openModal(template: TemplateRef<any>) {
@@ -55,7 +59,7 @@ export class CockpitComponent implements OnInit {
 
     onOpenCreateFolderDialog(folderName: string) {
         if (folderName !== '') {
-            this.folderCreated.emit(new Folder(folderName, "/"));
+            this.fileService.createFolder(new Folder(folderName, "/"));
         }
     }
 }
