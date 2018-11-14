@@ -46,7 +46,7 @@ export class FilesService implements IFileService {
   }
 
   getAll(): FileElement[] {
-    return Array.from(this.map.values());
+    return Array.from(this.map.values()).slice();
   }
 
   // Use it to clone objects
