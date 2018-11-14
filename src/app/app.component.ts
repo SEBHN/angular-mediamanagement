@@ -11,7 +11,7 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 export class AppComponent implements OnInit {
   faArrowLeft = faArrowLeft;
 
-  private fileElements = new Map<string, FileElement>();
+  private fileElements: FileElement[];
   public fileService: FilesService;
 
   constructor(fileService: FilesService) {
@@ -20,13 +20,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.fileService.fileElementsChanged
-            .subscribe((updatedFileElements: Map<string, FileElement>) => {
+            .subscribe((updatedFileElements: FileElement[]) => {
               this.fileElements = updatedFileElements;
             });
     this.fileElements = this.fileService.getAll();
-  }
-
-  getFileElements(): FileElement[] {
-    return Array.from(this.fileElements.values());
   }
 }
