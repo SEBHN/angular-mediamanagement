@@ -15,10 +15,6 @@ export class Media implements FileElement {
     fileId: string;
     fileExtension: string;
 
-
-    constructor() {
-    }
-
     constructor(id: string, name: string, fileId: string,
                 fileExtension: string) {
         this.id = id;

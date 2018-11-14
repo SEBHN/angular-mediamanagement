@@ -50,7 +50,7 @@ export class UploadMediaService {
     // this Method will called, if the respons doesnt have errors.
     fileUploadResponse(response: HttpResponse<any>) {
         console.log(response);
-        var media = new Media();
+        var media = {} as Media;
         media.id = response.body["id"];
         media.name = response.body["name"];
         media.fileId = response.body["fileId"];
@@ -59,7 +59,7 @@ export class UploadMediaService {
         media.tags = response.body["tags"];
         media.isFolder = false;
         this.fileService.createFolder(media);
-        this.selectedFile = null; // set the selected file to null
+        this.selectedFile = null;
     }
 
     fileUploadError(error: HttpErrorResponse) {
