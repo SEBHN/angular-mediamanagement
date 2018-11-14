@@ -6,12 +6,12 @@ export class Folder implements FileElement {
   id: string;
   name: string;
   isFolder: boolean;
-  path: string;
+  filePath: string;
   tags: Tag[];
 
   constructor(name: string, path: string) {
     this.name = name;
-    this.path = path;
+    this.filePath = path;
     this.isFolder = true;
     this.tags = [];
   }

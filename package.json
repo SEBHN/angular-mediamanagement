@@ -28,7 +28,8 @@
     "ngx-bootstrap": "^3.1.1",
     "rxjs": "^6.3.3",
     "uuid": "^3.3.2",
-    "zone.js": "~0.8.26"
+    "zone.js": "~0.8.26",
+    "node_modules": "latest"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.10.0",

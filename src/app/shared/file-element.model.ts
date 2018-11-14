@@ -8,10 +8,11 @@ export interface FileElement {
   id: string;
   name: string;
   isFolder: boolean;
-  path: string;
+  filePath: string;
   tags: Tag[];
   
   addTag(tag: Tag);
 
   removeTag(tag: Tag);
+
 }

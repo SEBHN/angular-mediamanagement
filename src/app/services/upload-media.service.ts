@@ -1,12 +1,14 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {Media} from "../shared/media.model";
+import {FilesService} from "./files-service.service";
 
 @Injectable({
     providedIn: 'root'
 })
 export class UploadMediaService {
 
+    fileService: FilesService;
     selectedFile: File;
     postMediaUrl = "/users/{userID}/media/";
     postFileUrl = "/users/{userID}/media/{id}/upload";
@@ -39,7 +41,7 @@ export class UploadMediaService {
     }
 
     metaDataResponse(response: HttpResponse<any>) {
-        if(response.status == 200){
+        if (response.status == 200) {
             console.log(response);
             this.postFile(response.body["id"]);
         }
@@ -48,10 +50,19 @@ export class UploadMediaService {
     // this Method will called, if the respons doesnt have errors.
     fileUploadResponse(response: HttpResponse<any>) {
         console.log(response);
+        var media = new Media();
+        media.id = response.body["id"];
+        media.name = response.body["name"];
+        media.fileId = response.body["fileId"];
+        media.fileExtension = response.body["fileExtension"];
+        media.filePath = response.body["filePath"];
+        media.tags = response.body["tags"];
+        media.isFolder = false;
+        this.fileService.createFolder(media);
         this.selectedFile = null; // set the selected file to null
     }
 
-    fileUploadError(error: HttpErrorResponse){
+    fileUploadError(error: HttpErrorResponse) {
         console.log(error);
         this.selectedFile = null;
     }

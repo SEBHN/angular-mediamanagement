@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FileElement } from 'src/app/shared/file-element.model';
 import { faFolder } from '@fortawesome/free-solid-svg-icons';
+import { faFile} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-element',
@@ -10,6 +11,7 @@ import { faFolder } from '@fortawesome/free-solid-svg-icons';
 export class ElementComponent implements OnInit {
 
   faFolder = faFolder;
+  faFile = faFile;
 
   @Input() element: FileElement;
 

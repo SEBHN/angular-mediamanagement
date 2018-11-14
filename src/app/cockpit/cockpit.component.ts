@@ -56,6 +56,9 @@ export class CockpitComponent implements OnInit {
 
     // if the user selects a file this method will call
     onFileChanged(event) {
+        if(this.uploadMediaService.fileService == null){
+            this.uploadMediaService.fileService = this.fileService;
+        }
         this.selectedFile = event.target.files[0];
         this.uploadMediaService.selectedFile = this.selectedFile;
         this.uploadMediaService.postMetaData(this.selectedFile);

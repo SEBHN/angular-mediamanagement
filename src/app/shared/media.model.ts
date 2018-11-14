@@ -6,43 +6,46 @@ import { FileElement } from "./file-element.model";
  */
 export class Media implements FileElement {
 
-  id: string;
-  name: string;
-  isFolder: boolean;
-  path: string;
-  tags: Tag[];
+    id: string;
+    name: string;
+    isFolder: boolean;
+    filePath: string;
+    tags: Tag[];
 
-  private fileId: string;
-  private fileExtension: string;
-  
+    fileId: string;
+    fileExtension: string;
 
-  constructor(id: string, name: string, fileId: string,
-    fileExtension: string) {
-      this.id = id;
-      this.name = name;
-      this.isFolder = false;
-      this.tags = [];
-      this.fileId = fileId;
-      this.fileExtension = fileExtension;
-  }
 
-  getFileId(): string {
-    return this.fileId;
-  }
+    constructor() {
+    }
 
-  getFileExtension(): string {
-    return this.fileExtension;
-  }
+    constructor(id: string, name: string, fileId: string,
+                fileExtension: string) {
+        this.id = id;
+        this.name = name;
+        this.isFolder = false;
+        this.tags = [];
+        this.fileId = fileId;
+        this.fileExtension = fileExtension;
+    }
 
-  getId(): string {
-    return this.id;
-  }
+    getFileId(): string {
+        return this.fileId;
+    }
 
-  addTag(tag: Tag) {
-    
-  }
+    getFileExtension(): string {
+        return this.fileExtension;
+    }
 
-  removeTag(tag: Tag) {
+    getId(): string {
+        return this.id;
+    }
 
-  }
+    addTag(tag: Tag) {
+
+    }
+
+    removeTag(tag: Tag) {
+
+    }
 }
