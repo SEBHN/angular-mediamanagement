@@ -1,7 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { FileElement } from '../shared/file-element.model';
-
-
 import { v4 } from 'node_modules/uuid';
 import { Folder } from '../shared/folder.model';
 
@@ -9,7 +7,7 @@ import { Folder } from '../shared/folder.model';
 
 export interface IFileService {
   add(fileElement: FileElement);
-
+  remove(id: string);
 }
 
 @Injectable({
@@ -23,18 +21,23 @@ export class FilesService implements IFileService {
   fileElementsChanged = new EventEmitter<FileElement[]>();
 
   constructor() {
-    this.map.set(v4(), new Folder("test", "/"));
-    this.map.set(v4(), new Folder("interesting", "/"));
-    this.map.set(v4(), new Folder("something", "/"));
-    this.map.set(v4(), new Folder("notCool", "/"));
-    this.map.set(v4(), new Folder("dodge", "/"));
-    this.map.set(v4(), new Folder("impossibru", "/"));
-    this.map.set(v4(), new Folder("heyhey", "/"));
+    this.add(new Folder("test", "/"));
+    this.add(new Folder("interesting", "/"));
+    this.add(new Folder("something", "/"));
+    this.add(new Folder("notCool", "/"));
+    this.add(new Folder("dodge", "/"));
+    this.add(new Folder("impossibru", "/"));
+    this.add(new Folder("heyhey", "/"));
    }
 
   add(fileElement: FileElement): void {
     fileElement.id = v4();
     this.map.set(fileElement.id, this.clone(fileElement));
+  }
+
+  remove(id: string): void {
+    this.map.delete(id);
+    this.fileElementsChanged.emit(this.getAll());
   }
 
   createFolder(folder: Folder): void {
@@ -43,7 +46,7 @@ export class FilesService implements IFileService {
   }
 
   getAll(): FileElement[] {
-    return Array.from(this.map.values()).slice();
+    return Array.from(this.map.values());
   }
 
   // Use it to clone objects

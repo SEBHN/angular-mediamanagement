@@ -80,7 +80,7 @@ export class FileExplorerComponent implements OnInit {
   // Methods to send off the occured events
 
   deleteElement(element: FileElement) {
-    this.elementRemoved.emit(element);
+    this.fileService.remove(element.id);
   }
 
   navigateDown(element: FileElement) {

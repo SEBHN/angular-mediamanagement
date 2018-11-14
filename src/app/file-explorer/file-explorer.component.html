@@ -10,11 +10,11 @@
     </div>
 </div>
 <context-menu>
-    <ng-template contextMenuItem (execute)="showMessage($event)">
+    <ng-template contextMenuItem let-item (execute)="showMessage($event)">
         <fa-icon class="d-inline mr-2 text-dark" [icon]="faEdit"></fa-icon>
         <p class="lead d-inline text-dark">Rename</p>
     </ng-template>
-    <ng-template contextMenuItem (execute)="showMessage($event)">
+    <ng-template contextMenuItem let-item (execute)="deleteElement($event.item)">
         <fa-icon class="d-inline mr-2 text-danger" [icon]="faTrashAlt"></fa-icon>
         <p class="lead text-danger d-inline">Remove</p>
     </ng-template>
