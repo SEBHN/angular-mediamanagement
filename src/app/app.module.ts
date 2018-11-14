@@ -10,6 +10,7 @@ import {HighlightDirective} from './directives/highlight.directive';
 import {ElementComponent} from './file-explorer/element/element.component';
 import {CreateFolderComponent} from './cockpit/modals/create-folder/create-folder.component';
 import {ModalModule} from 'ngx-bootstrap';
+import { ContextMenuModule } from 'ngx-contextmenu';
 
 
 @NgModule({
@@ -25,7 +26,10 @@ import {ModalModule} from 'ngx-bootstrap';
         BrowserModule,
         HttpClientModule,
         FontAwesomeModule,
-        ModalModule.forRoot()
+        ModalModule.forRoot(),
+        ContextMenuModule.forRoot({
+            useBootstrap4: true,
+        })
     ],
     providers: [],
     bootstrap: [AppComponent]
