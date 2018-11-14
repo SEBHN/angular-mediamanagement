@@ -7,7 +7,7 @@
           data-toggle="collapse" data-target="#navbarNav" (click)="toggleNavbar()">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" [ngClass]="{'show': navbarOpen}" id="navbarNav">
+  <div class="collapse navbar-collapse text-center" [ngClass]="{'show': navbarOpen}" id="navbarNav">
     <!-- Create New Folder Element -->
     <ul class="navbar-nav ml-auto">
       <li class="nav-item active">
@@ -18,15 +18,15 @@
     </ul>
 
     <!-- Search form for tags -->
-    <form class="form-inline my-2 my-lg-0 mr-4">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search tag..." aria-label="Search">
+    <form class="form-inline my-lg-0 mx-3">
+      <input class="form-control mr-sm-2 my-2" type="search" placeholder="Search tag..." aria-label="Search">
       <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
     </form>
     <!-- Right ul with Upload and Sign Out -->
-    <ul class="navbar-nav float-right">
+    <ul class="navbar-nav py-2">
       <li class="nav-item mx-2">
         <a appHighlight class="nav-link" (click)="fileInput.click()">
-          <input  style="display: none" type="file" (change)="onFileChanged($event)"  #fileInput>
+          <input  style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
           Upload file <fa-icon [icon]="faCloudUploadAlt" class="ml-1"></fa-icon>
         </a>
       </li>

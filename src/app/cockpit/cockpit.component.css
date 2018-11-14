@@ -1,3 +1,10 @@
 a {
   cursor: pointer;
 }
+
+/* Medium devices (tablets, less than 992px) */
+@media (max-width: 991.98px) { 
+  .form-inline {
+    display: block;
+  }
+}
