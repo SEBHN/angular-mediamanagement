@@ -3,20 +3,13 @@
   <a appHighlight class="navbar-brand" href="#">
     <fa-icon [icon]="faHome"></fa-icon>
   </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+  <button class="navbar-toggler" type="button"
+          data-toggle="collapse" data-target="#navbarNav" (click)="toggleNavbar()">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <!-- Left ul with Home and Element Path -->
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a appHighlight class="nav-link">
-          <fa-icon [icon]="faArrowLeft"></fa-icon>
-        </a>
-      </li>
-    </ul>
+  <div class="collapse navbar-collapse" [ngClass]="{'show': navbarOpen}" id="navbarNav">
     <!-- Create New Folder Element -->
-    <ul class="navbar-nav">
+    <ul class="navbar-nav ml-auto">
       <li class="nav-item active">
         <a appHighlight role="button" class="nav-link mx-3 cursor-pointer" (click)="openModal(createFolder)">
           <fa-icon [icon]="faFolderPlus"></fa-icon>

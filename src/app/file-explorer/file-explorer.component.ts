@@ -22,7 +22,7 @@ export class FileExplorerComponent implements OnInit {
 
   // @Input() means data is being passed inside this component (via property binding) from parent view
   // ref: https://angular.io/guide/template-syntax
-  displayItems = []; //TODO: update from service
+  displayItems = [];
   @Input() mediaFiles: FileElement[];
   @Input() canNavigateUp: string;
   @Input() path: string;
@@ -48,7 +48,7 @@ export class FileExplorerComponent implements OnInit {
 
   // Lifecycle hook before component gets rendered by Angular
   ngOnInit() {
-    /** WHEN COMPONENT DETECTS CHANGE IN @Input
+    /*
      * Algorithm to distribute all elements in a matrix. In the grid system a row
      * (of Bootstrap 4) has 12 columns. Here we take chunk of 6 items and push them
      * AS ARRAY 'items' to the displayItems array.

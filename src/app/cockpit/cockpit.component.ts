@@ -26,6 +26,9 @@ export class CockpitComponent implements OnInit {
     faArrowLeft = faArrowLeft;
     faFolderPlus = faFolderPlus;
 
+    // navbar toggle
+    private navbarOpen: boolean = false;
+
     // Injected by ngx bootstrap
     modalRef: BsModalRef;
     private modalService: BsModalService;
@@ -45,6 +48,10 @@ export class CockpitComponent implements OnInit {
 
     openModal(template: TemplateRef<any>) {
         this.modalRef = this.modalService.show(template);
+    }
+
+    toggleNavbar(): void {
+        this.navbarOpen = !this.navbarOpen;
     }
 
     // if the user selects a file this method will call

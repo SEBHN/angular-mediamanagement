@@ -1,6 +1,7 @@
 import { Component, OnInit} from "@angular/core";
 import { FileElement } from "./shared/file-element.model";
 import { FilesService } from "./services/files-service.service";
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: "app-root",
@@ -8,6 +9,8 @@ import { FilesService } from "./services/files-service.service";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent implements OnInit {
+  faArrowLeft = faArrowLeft;
+
   private fileElements: FileElement[];
   public fileService: FilesService;
 
