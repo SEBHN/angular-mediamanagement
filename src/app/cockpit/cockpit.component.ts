@@ -69,7 +69,7 @@ export class CockpitComponent implements OnInit {
 
     onOpenCreateFolderDialog(folderName: string) {
         if (folderName !== '') {
-            this.fileService.createFolder(new Folder(folderName, "/"));
+            this.fileService.createFile(new Folder(folderName, "/"));
         }
     }
 }

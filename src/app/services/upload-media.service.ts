@@ -58,7 +58,7 @@ export class UploadMediaService {
         media.filePath = response.body["filePath"];
         media.tags = response.body["tags"];
         media.isFolder = false;
-        this.fileService.createFolder(media);
+        this.fileService.createFile(media);
         this.selectedFile = null;
     }
 

@@ -1,7 +1,23 @@
 <div class="container mt-4">
     <div class="row" *ngFor="let row of displayItems">
         <ng-container *ngFor="let item of row.items">
-            <app-element class="col-xs-12 col-md-2" [element]="item"></app-element>
+            <app-element class="col-xs-12 col-md-2"
+                         [element]="item"
+                         [contextMenu]="basicMenu"
+                         [contextMenuSubject]="item">
+            </app-element>
         </ng-container>
     </div>
 </div>
+<context-menu>
+    <ng-template contextMenuItem let-item (execute)="showMessage($event)">
+        <fa-icon class="d-inline mr-2 text-dark" [icon]="faEdit"></fa-icon>
+        <p class="lead d-inline text-dark">Rename</p>
+    </ng-template>
+    <ng-template contextMenuItem let-item (execute)="deleteElement($event.item)">
+        <fa-icon class="d-inline mr-2 text-danger" [icon]="faTrashAlt"></fa-icon>
+        <p class="lead text-danger d-inline">Remove</p>
+    </ng-template>
+</context-menu>
+
+

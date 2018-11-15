@@ -3,11 +3,14 @@ import {
   Input,
   EventEmitter,
   Output,
-  OnInit
+  OnInit,
+  ViewChild
 } from "@angular/core";
 import { Media } from "../shared/media.model";
 import { FileElement } from "../shared/file-element.model";
 import { FilesService } from "../services/files-service.service";
+import { ContextMenuComponent } from "ngx-contextmenu";
+import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 /**
  * Single component representing Media and Folder in the view.
@@ -18,6 +21,10 @@ import { FilesService } from "../services/files-service.service";
   styleUrls: ["./file-explorer.component.css"]
 })
 export class FileExplorerComponent implements OnInit {
+  // Context menu icons
+  faEdit = faEdit;
+  faTrashAlt = faTrashAlt;
+  
   // We need decorators like @Input and @Output to make elements bindable.
 
   // @Input() means data is being passed inside this component (via property binding) from parent view
@@ -39,6 +46,9 @@ export class FileExplorerComponent implements OnInit {
   // navigation for folders
   @Output() navigatedDown = new EventEmitter<FileElement>();
   @Output() navigatedUp = new EventEmitter();
+
+  // Enables context menu for every item in FileExplorer
+  @ViewChild(ContextMenuComponent) public basicMenu: ContextMenuComponent;
 
   private fileService: FilesService;
 
@@ -70,7 +80,7 @@ export class FileExplorerComponent implements OnInit {
   // Methods to send off the occured events
 
   deleteElement(element: FileElement) {
-    this.elementRemoved.emit(element);
+    this.fileService.remove(element.id);
   }
 
   navigateDown(element: FileElement) {
