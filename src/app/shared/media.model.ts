@@ -10,6 +10,7 @@ export class Media implements FileElement {
     name: string;
     isFolder: boolean;
     filePath: string;
+    ownerId: string;
     tags: Tag[];
 
     fileId: string;
@@ -23,6 +24,7 @@ export class Media implements FileElement {
         this.tags = [];
         this.fileId = fileId;
         this.fileExtension = fileExtension;
+        this.ownerId = "";
     }
 
     getFileId(): string {

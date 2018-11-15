@@ -41,10 +41,8 @@ export class UploadMediaService {
     }
 
     metaDataResponse(response: HttpResponse<any>) {
-        if (response.status == 200) {
-            console.log(response);
-            this.postFile(response.body["id"]);
-        }
+        console.log(response);
+        this.postFile(response.body["id"]);
     }
 
     // this Method will called, if the respons doesnt have errors.
