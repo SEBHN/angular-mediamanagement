@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpResponse} from "@angular/common/http";
+import {HttpClient, HttpResponse} from "@angular/common/http";
 import {Media} from "../shared/media.model";
 import {FileElement} from "../shared/file-element.model";
 import {FilesService} from "./files-service.service";
@@ -9,10 +9,9 @@ import {FilesService} from "./files-service.service";
 })
 export class GetMediaService {
 
-    fileService: FilesService;
     getMediaFromUser = "/users/{userID}/media/";
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private fileService: FilesService) {
     }
 
     getAllMediaFromUser() {
@@ -38,7 +37,7 @@ export class GetMediaService {
                 media.filePath = res[i]["filePath"];
                 media.tags = res[i]["tags"];
                 media.isFolder = false;
-                this.fileService.createFolder(media);
+                this.fileService.createFile(media);
             }
         }
     }

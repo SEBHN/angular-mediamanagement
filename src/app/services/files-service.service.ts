@@ -37,8 +37,8 @@ export class FilesService implements IFileService {
         this.map.set(fileElement.id, this.clone(fileElement));
     }
 
-    createFolder(folder: Folder): void {
-        this.add(folder);
+    createFile(file: FileElement): void {
+        this.add(file);
         this.fileElementsChanged.emit(this.getAll());
     }
 
