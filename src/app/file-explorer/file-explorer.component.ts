@@ -11,6 +11,7 @@ import { FileElement } from "../shared/file-element.model";
 import { FilesService } from "../services/files-service.service";
 import { ContextMenuComponent } from "ngx-contextmenu";
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import {DeleteMediaService} from "../services/delete-media.service";
 
 /**
  * Single component representing Media and Folder in the view.
@@ -51,9 +52,11 @@ export class FileExplorerComponent implements OnInit {
   @ViewChild(ContextMenuComponent) public basicMenu: ContextMenuComponent;
 
   private fileService: FilesService;
+  private deleteMediaService: DeleteMediaService;
 
-  constructor(fileService: FilesService) {
+  constructor(fileService: FilesService, deleteMediaService: DeleteMediaService) {
     this.fileService = fileService;
+    this.deleteMediaService = deleteMediaService;
   }
 
   // Lifecycle hook before component gets rendered by Angular
@@ -79,8 +82,8 @@ export class FileExplorerComponent implements OnInit {
 
   // Methods to send off the occured events
 
-  deleteElement(element: FileElement) {
-    this.fileService.remove(element.id);
+  deleteElement(media: Media) {
+    this.deleteMediaService.deleteMedia(media.id);
   }
 
   navigateDown(element: FileElement) {
