@@ -19,7 +19,7 @@ export class UploadMediaService {
     // REST call to post the media Data (meta data)
     postMetaData(selectedFile: File) {
         this.selectedFile = selectedFile;
-        var media = this.getMediaData(selectedFile);
+        var media = this.getMediaData(selectedFile, "999"); // Todo: get owner ID from user class
         console.log(JSON.stringify(media), undefined, '\t');
         this.http.post(this.getPostMediaUrl(), JSON.stringify(media), {
             reportProgress: true,
@@ -49,13 +49,8 @@ export class UploadMediaService {
     fileUploadResponse(response: HttpResponse<any>) {
         console.log(response);
         var media = {} as Media;
-        media.id = response.body["id"];
-        media.name = response.body["name"];
-        media.fileId = response.body["fileId"];
-        media.fileExtension = response.body["fileExtension"];
-        media.filePath = response.body["filePath"];
-        media.tags = response.body["tags"];
-        media.isFolder = false;
+        media = JSON.parse(JSON.stringify(response.body));
+        console.log(JSON.stringify(media));
         this.fileService.createFile(media);
         this.selectedFile = null;
     }
@@ -80,9 +75,12 @@ export class UploadMediaService {
     }
 
     // creates an media object from the file that the user selects
-    getMediaData(file: File): Media {
+    getMediaData(file: File, ownerId: string): Media {
         var extension = this.getExtension(file);
-        var media = new Media("", file.name, "", extension);
+        var media = {} as Media;
+        media.name = file.name;
+        media.fileExtension = extension;
+        media.ownerId = ownerId;
         return media;
     }
 
