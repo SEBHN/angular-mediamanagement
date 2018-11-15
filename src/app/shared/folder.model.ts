@@ -7,6 +7,7 @@ export class Folder implements FileElement {
   name: string;
   isFolder: boolean;
   filePath: string;
+  ownerId: string;
   tags: Tag[];
 
   constructor(name: string, path: string) {
