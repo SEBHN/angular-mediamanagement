@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { FileElement } from '../shared/file-element.model';
 import { v4 } from 'node_modules/uuid';
 import { Folder } from '../shared/folder.model';
+import {Media} from "../shared/media.model";
 
 
 
@@ -30,7 +31,9 @@ export class FilesService implements IFileService {
    }
 
   add(fileElement: FileElement): void {
-    fileElement.id = v4(); // -> backend generated id (This is so that we see dummy files)
+    if(fileElement.id == null){
+        fileElement.id = v4();
+    }
     this.map.set(fileElement.id, this.clone(fileElement));
   }
 
@@ -52,5 +55,12 @@ export class FilesService implements IFileService {
   // Use it to clone objects
   clone(fileElement: FileElement): FileElement {
     return JSON.parse(JSON.stringify(fileElement));
+  }
+
+  addAllFiles(mediaArray: Media[]){
+      for(var media of mediaArray){
+        this.add(media);
+      }
+      this.fileElementsChanged.emit(this.getAll());
   }
 }

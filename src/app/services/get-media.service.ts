@@ -25,21 +25,11 @@ export class GetMediaService {
     getMediaResponse(response: HttpResponse<any>) {
         console.log(response);
         var res: FileElement[] = JSON.parse(JSON.stringify(response.body));
-        console.log(res);
 
-        for (var i = 0; i < res.length; i++) {
-            if (res[i]["name"] != null) {
-                var media = {} as Media;
-                media.id = res[i]["id"];
-                media.name = res[i]["name"];
-                media.fileId = res[i]["fileId"];
-                media.fileExtension = res[i]["fileExtension"];
-                media.filePath = res[i]["filePath"];
-                media.tags = res[i]["tags"];
-                media.isFolder = false;
-                this.fileService.createFile(media);
-            }
-        }
+        var mediaArray = {} as Media[];
+        mediaArray = JSON.parse(JSON.stringify(response.body));
+        console.log(mediaArray);
+        this.fileService.addAllFiles(mediaArray);
     }
 
     // returns the post Meta Data URL after it replaces the {userID} field
