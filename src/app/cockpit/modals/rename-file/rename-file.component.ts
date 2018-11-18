@@ -1,15 +1,18 @@
-import { Component, TemplateRef } from '@angular/core';
+import { Component, TemplateRef, Input, ViewChild } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { FileElement } from 'src/app/shared/file-element.model';
  
 @Component({
   selector: 'app-rename-file',
-  templateUrl: '../../cockpit.component.html'
+  templateUrl: './rename-file.component.html'
 })
 export class RenameFileComponent {
+  faEdit = faEdit;
 
-  private file: FileElement;
+   private file: FileElement;
+   @ViewChild('renameFile') renameModal: TemplateRef<any>;
 
   // injeted by ngx-bootstrap
   modalRef: BsModalRef;
@@ -19,7 +22,8 @@ export class RenameFileComponent {
     this.modalService = modalService;
   }
  
-  openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
+  openModal(selectedFile: FileElement) {
+    this.file = selectedFile;
+    this.modalRef = this.modalService.show(this.renameModal);
   }
 }
