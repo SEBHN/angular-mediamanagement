@@ -28,16 +28,13 @@ export class CockpitComponent implements OnInit {
     private navbarOpen: boolean = false;
 
     private uploadMediaService: UploadMediaService;
-    private fileService: FilesService;
 
     @Output() folderCreated = new EventEmitter<Folder>();
 
     selectedFile: File;
 
-    constructor(uploadMediaService: UploadMediaService,
-                fileService: FilesService) {
+    constructor(uploadMediaService: UploadMediaService) {
         this.uploadMediaService = uploadMediaService;
-        this.fileService = fileService;
     }
 
     toggleNavbar(): void {
@@ -52,11 +49,5 @@ export class CockpitComponent implements OnInit {
     }
 
     ngOnInit() {
-    }
-
-    onOpenCreateFolderDialog(folderName: string): void {
-        if (folderName !== '') {
-            this.fileService.createFolder(new Folder(folderName, "/"));
-        }
     }
 }
