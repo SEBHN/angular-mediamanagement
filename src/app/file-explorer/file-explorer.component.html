@@ -9,8 +9,9 @@
         </ng-container>
     </div>
 </div>
+
 <context-menu>
-    <ng-template contextMenuItem let-item (execute)="showMessage($event)">
+    <ng-template contextMenuItem let-item (execute)="renameModal.openModal($event.item)">
         <fa-icon class="d-inline mr-2 text-dark" [icon]="faEdit"></fa-icon>
         <p class="lead d-inline text-dark">Rename</p>
     </ng-template>
@@ -20,4 +21,4 @@
     </ng-template>
 </context-menu>
 
-
+<app-rename-file #renameModal></app-rename-file>

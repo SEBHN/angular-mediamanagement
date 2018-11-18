@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
             .subscribe((updatedFileElements: FileElement[]) => {
                 this.fileElements = updatedFileElements;
             });
-        this.getMediaService.getAllMediaFromUser();
+        this.getMediaService.getAllMediaFromUser('999'); //TODO: user management
         this.fileElements = this.fileService.getAll();
     }
 }

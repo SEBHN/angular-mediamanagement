@@ -31,10 +31,16 @@ export class FilesService implements IFileService {
    }
 
   add(fileElement: FileElement): void {
-    if(fileElement.id == null){
+    if(fileElement.id == null) {
         fileElement.id = v4();
     }
     this.map.set(fileElement.id, this.clone(fileElement));
+  }
+
+  addMany(mediaArray: Media[]): void {
+    mediaArray.forEach((media) => {
+      this.createFile(media);
+    });
   }
 
   remove(id: string): void {
@@ -47,6 +53,10 @@ export class FilesService implements IFileService {
     this.fileElementsChanged.emit(this.getAll());
 }
 
+  rename(id: string, updatedName: string): void {
+    this.map.get(id).name = updatedName;
+  }
+
   getAll(): FileElement[] {
     console.log(Array.from(this.map.values()).length);
     return Array.from(this.map.values()).slice();
@@ -55,12 +65,5 @@ export class FilesService implements IFileService {
   // Use it to clone objects
   clone(fileElement: FileElement): FileElement {
     return JSON.parse(JSON.stringify(fileElement));
-  }
-
-  addAllFiles(mediaArray: Media[]){
-      for(var media of mediaArray){
-        this.add(media);
-      }
-      this.fileElementsChanged.emit(this.getAll());
   }
 }
