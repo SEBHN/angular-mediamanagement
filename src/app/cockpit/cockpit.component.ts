@@ -1,4 +1,4 @@
-import {Component, OnInit, TemplateRef, ViewChild, ElementRef, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {
     faHome,
     faCloudUploadAlt,
@@ -7,8 +7,6 @@ import {
     faFolderPlus
 } from '@fortawesome/free-solid-svg-icons';
 
-import {BsModalService} from 'ngx-bootstrap/modal';
-import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {Folder} from '../shared/folder.model';
 import {UploadMediaService} from "../services/upload-media.service";
 import { FilesService } from '../services/files-service.service';
@@ -29,9 +27,6 @@ export class CockpitComponent implements OnInit {
     // navbar toggle
     private navbarOpen: boolean = false;
 
-    // Injected by ngx bootstrap
-    modalRef: BsModalRef;
-    private modalService: BsModalService;
     private uploadMediaService: UploadMediaService;
     private fileService: FilesService;
 
@@ -39,15 +34,10 @@ export class CockpitComponent implements OnInit {
 
     selectedFile: File;
 
-    constructor(modalService: BsModalService, uploadMediaService: UploadMediaService,
-        fileService: FilesService) {
-        this.modalService = modalService;
+    constructor(uploadMediaService: UploadMediaService,
+                fileService: FilesService) {
         this.uploadMediaService = uploadMediaService;
         this.fileService = fileService;
-    }
-
-    openModal(template: TemplateRef<any>) {
-        this.modalRef = this.modalService.show(template);
     }
 
     toggleNavbar(): void {
@@ -55,7 +45,7 @@ export class CockpitComponent implements OnInit {
     }
 
     // if the user selects a file this method will call
-    onFileChanged(event) {
+    onFileChanged(event): void {
         this.selectedFile = event.target.files[0];
         this.uploadMediaService.selectedFile = this.selectedFile;
         this.uploadMediaService.postMetaData(this.selectedFile);
@@ -64,7 +54,7 @@ export class CockpitComponent implements OnInit {
     ngOnInit() {
     }
 
-    onOpenCreateFolderDialog(folderName: string) {
+    onOpenCreateFolderDialog(folderName: string): void {
         if (folderName !== '') {
             this.fileService.createFolder(new Folder(folderName, "/"));
         }
