@@ -45,6 +45,10 @@ export class FilesService implements IFileService {
     this.fileElementsChanged.emit(this.getAll());
   }
 
+  rename(id: string, updatedName: string): void {
+    this.map.get(id).name = updatedName;
+  }
+
   getAll(): FileElement[] {
     return Array.from(this.map.values()).slice();
   }

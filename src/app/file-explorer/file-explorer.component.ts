@@ -96,8 +96,4 @@ export class FileExplorerComponent implements OnInit {
   moveElement(element: FileElement, moveTo: FileElement) {
     this.elementMoved.emit({ element, moveTo });
   }
-
-  onOpenRenameDialog(element: FileElement): void {
-    console.log(element.name);
-  }
 }
