@@ -55,6 +55,7 @@ export class FilesService implements IFileService {
 
   rename(id: string, updatedName: string): void {
     this.map.get(id).name = updatedName;
+    //TODO: later update / replace whole FileElement
   }
 
   getAll(): FileElement[] {
