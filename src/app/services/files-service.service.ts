@@ -56,7 +56,7 @@ export class FilesService implements IFileService {
 
   createFile(file: FileElement): void {
     this.add(file);
-    this.fileElementsChanged.emit(this.getAll());
+    this.fileElementsChanged.emit(this.queryInFolder(this.currentRootId ? this.currentRootId : 'root'));
   }
 
   get(id: string): FileElement {
@@ -80,7 +80,7 @@ export class FilesService implements IFileService {
   }
 
   getCurrentRootId(): string {
-    return this.currentRootId;
+   return this.currentRootId
   }
 
   // Use it to clone objects
