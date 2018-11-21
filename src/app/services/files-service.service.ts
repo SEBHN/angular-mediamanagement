@@ -23,6 +23,7 @@ export class FilesService implements IFileService {
   private map = new Map<string, FileElement>();
   // event for updating the UI
   fileElementsChanged = new EventEmitter<FileElement[]>();
+  // needed to create file in the current root
   private currentRootId: string;
 
   constructor() {

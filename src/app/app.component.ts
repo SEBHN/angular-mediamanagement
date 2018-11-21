@@ -37,6 +37,7 @@ export class AppComponent implements OnInit {
         this.currentRoot = folder;
         this.updateElementQuery();
         this.canNavigateUp = true;
+        this.currentPath = this.pushToPath(this.currentPath, folder);
     }
 
     navigateUp() {
@@ -50,6 +51,7 @@ export class AppComponent implements OnInit {
             this.currentRoot = this.filesService.get(this.currentRoot.ownerId);
             this.updateElementQuery();
         }
+        this.currentPath = this.popFromPath(this.currentPath);
     }
 
     updateElementQuery() {
@@ -59,5 +61,19 @@ export class AppComponent implements OnInit {
 
     getCurrentRoot(): FileElement {
         return this.currentRoot;
+    }
+
+    pushToPath(path: string, element: Folder): string {
+        let p = path ? path : '';
+        p += `${element.name} / `;
+        return p;
+    }
+
+    popFromPath(path: string): string {
+        let p = path ? path : '';
+        let split = p.split('/');
+        split.splice(split.length - 2, 1);
+        p = split.join('/');
+        return p;
     }
 }

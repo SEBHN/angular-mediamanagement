@@ -5,16 +5,14 @@
                    (navigatedDown)="navigateToFolder($event)"></app-file-explorer>
 
 <!-- Footer to show navigation -->
-<footer class="footer">
+<footer class="footer" *ngIf="canNavigateUp">
     <!-- Left Arrow with Element Path -->
     <ol class="breadcrumb bg-dark text-white">
-      <li class="breadcrumb-item" *ngIf="canNavigateUp">
+      <li class="breadcrumb-item">
         <a appHighlight class="nav-link" (click)="navigateUp()">
           <fa-icon [icon]="faArrowLeft"></fa-icon>
         </a>
       </li>
-      <li class="breadcrumb-item active mt-2 text-white" aria-current="page">Musik</li>
-      <li class="breadcrumb-item active mt-2 text-white" aria-current="page">Eminem</li>
-      <li class="breadcrumb-item active mt-2 text-white" aria-current="page">Recovery</li>
+      <li class="breadcrumb-item active mt-2 text-white" aria-current="page">{{ currentPath }}</li>
     </ol>
 </footer>
