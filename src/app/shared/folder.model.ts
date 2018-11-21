@@ -10,9 +10,10 @@ export class Folder implements FileElement {
   ownerId: string;
   tags: Tag[];
 
-  constructor(name: string, path: string) {
+  constructor(name: string, path: string, ownerId: string) {
     this.name = name;
     this.filePath = path;
+    this.ownerId = ownerId;
     this.isFolder = true;
     this.tags = [];
   }

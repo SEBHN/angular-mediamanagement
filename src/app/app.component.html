@@ -1,14 +1,15 @@
 <app-cockpit></app-cockpit>
 <br>
 <br>
-<app-file-explorer [mediaFiles]="fileElements"></app-file-explorer>
+<app-file-explorer [mediaFiles]="fileElements"
+                   (navigatedDown)="navigateToFolder($event)"></app-file-explorer>
 
 <!-- Footer to show navigation -->
-<footer class="footer" aria-label="breadcrumb">
+<footer class="footer">
     <!-- Left Arrow with Element Path -->
     <ol class="breadcrumb bg-dark text-white">
-      <li class="breadcrumb-item">
-        <a appHighlight class="nav-link">
+      <li class="breadcrumb-item" *ngIf="canNavigateUp">
+        <a appHighlight class="nav-link" (click)="navigateUp()">
           <fa-icon [icon]="faArrowLeft"></fa-icon>
         </a>
       </li>

@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FileElement } from 'src/app/shared/file-element.model';
 import { faFolder } from '@fortawesome/free-solid-svg-icons';
 import { faFile} from "@fortawesome/free-solid-svg-icons";
+import { FilesService } from 'src/app/services/files-service.service';
 
 @Component({
   selector: 'app-element',
@@ -14,10 +15,16 @@ export class ElementComponent implements OnInit {
   faFile = faFile;
 
   @Input() element: FileElement;
+  @Output() navigated = new EventEmitter<FileElement>();
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  onNavigate(file: FileElement): void {
+    if (file.isFolder) {
+      this.navigated.emit(file);
+    }
+  }
 }

@@ -32,8 +32,9 @@ export class FileExplorerComponent implements OnInit {
   // ref: https://angular.io/guide/template-syntax
   displayItems = [];
   @Input() mediaFiles: FileElement[];
-  @Input() canNavigateUp: string;
-  @Input() path: string;
+  canNavigateUp: string;
+  path: string;
+
 
   // @Output() means this component passes data to outside (to its parent component) (via event binding)
   // ref: https://coursetro.com/posts/code/59/Angular-4-Event-Binding
@@ -46,7 +47,6 @@ export class FileExplorerComponent implements OnInit {
   @Output() elementMoved = new EventEmitter< {element: FileElement, moveTo: FileElement }>();
   // navigation for folders
   @Output() navigatedDown = new EventEmitter<FileElement>();
-  @Output() navigatedUp = new EventEmitter();
 
   // Enables context menu for every item in FileExplorer
   @ViewChild(ContextMenuComponent) public basicMenu: ContextMenuComponent;
@@ -77,25 +77,19 @@ export class FileExplorerComponent implements OnInit {
                       for (let i = 0; i < this.mediaFiles.length; i += 6) {
                         this.displayItems.push({ items: updatedFileElements.slice(i, i + 6) });
                       }
-                    });
+                    });   
   }
 
   // Methods to send off the occured events
 
-  deleteElement(media: Media) {
+  deleteElement(media: Media): void {
     this.deleteMediaService.deleteMedia(media.id);
   }
 
-  navigateDown(element: FileElement) {
-    if (element! instanceof Media) {
-      this.navigatedDown.emit(element);
-    }
+  navigateDown(file: FileElement): void {
+    this.navigatedDown.emit(file);
   }
-
-  navigateUp() {
-    this.navigatedUp.emit();
-  }
-
+  
   moveElement(element: FileElement, moveTo: FileElement) {
     this.elementMoved.emit({ element, moveTo });
   }

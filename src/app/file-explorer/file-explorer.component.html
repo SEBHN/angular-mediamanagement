@@ -4,7 +4,8 @@
             <app-element class="col-xs-12 col-md-2"
                          [element]="item"
                          [contextMenu]="basicMenu"
-                         [contextMenuSubject]="item">
+                         [contextMenuSubject]="item"
+                         (navigated)="navigateDown($event)">
             </app-element>
         </ng-container>
     </div>

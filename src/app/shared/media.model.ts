@@ -17,14 +17,14 @@ export class Media implements FileElement {
     fileExtension: string;
 
     constructor(id: string, name: string, fileId: string,
-                fileExtension: string) {
+                fileExtension: string, ownerId: string) {
         this.id = id;
         this.name = name;
         this.isFolder = false;
         this.tags = [];
         this.fileId = fileId;
         this.fileExtension = fileExtension;
-        this.ownerId = "";
+        this.ownerId = ownerId;
     }
 
     getFileId(): string {

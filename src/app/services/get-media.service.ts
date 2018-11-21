@@ -20,6 +20,6 @@ export class GetMediaService {
                 let mediaArray: Media[] = JSON.parse(JSON.stringify(response.body));
                 console.log(mediaArray);
                 this.fileService.addMany(mediaArray);
-            }, err => new Error(err.message));
+            }, err => console.log(new Error(err.message)));
     }
 }

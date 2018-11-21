@@ -3,6 +3,9 @@ import {FileElement} from "./shared/file-element.model";
 import {FilesService} from "./services/files-service.service";
 import {faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 import {GetMediaService} from "./services/get-media.service";
+import { Folder } from "./shared/folder.model";
+import { element } from "@angular/core/src/render3";
+
 
 @Component({
     selector: "app-root",
@@ -10,23 +13,51 @@ import {GetMediaService} from "./services/get-media.service";
     styleUrls: ["./app.component.css"]
 })
 export class AppComponent implements OnInit {
+    
     faArrowLeft = faArrowLeft;
+    private currentRoot: FileElement;
 
     private fileElements: FileElement[];
-    public fileService: FilesService;
-    private getMediaService: GetMediaService;
+    private canNavigateUp: boolean = false;
+    private currentPath: string;
 
-    constructor(fileService: FilesService, getMediaService: GetMediaService) {
-        this.fileService = fileService;
-        this.getMediaService = getMediaService;
+    constructor(private filesService: FilesService, private getMediaService: GetMediaService) {
     }
 
     ngOnInit() {
-        this.fileService.fileElementsChanged
-            .subscribe((updatedFileElements: FileElement[]) => {
-                this.fileElements = updatedFileElements;
-            });
+        this.fileElements = this.filesService.getAll();
         this.getMediaService.getAllMediaFromUser('1337'); //TODO: user management
-        this.fileElements = this.fileService.getAll();
+    }
+
+    /**
+     * Navigate down. Gets invoked via event binding from template.
+     * @param folder the folder to navigate into
+     */
+    navigateToFolder(folder: FileElement): void {
+        this.currentRoot = folder;
+        this.updateElementQuery();
+        this.canNavigateUp = true;
+    }
+
+    navigateUp() {
+        if (this.currentRoot && this.currentRoot.ownerId === 'root') {
+            // on navigating up we reach the top root
+            this.currentRoot = null;
+            this.updateElementQuery();
+            this.canNavigateUp = false;
+        } else {
+            // move to upper root
+            this.currentRoot = this.filesService.get(this.currentRoot.ownerId);
+            this.updateElementQuery();
+        }
+    }
+
+    updateElementQuery() {
+        this.filesService.fileElementsChanged
+            .emit(this.filesService.queryInFolder(this.currentRoot ? this.currentRoot.id : 'root'));
+    }
+
+    getCurrentRoot(): FileElement {
+        return this.currentRoot;
     }
 }

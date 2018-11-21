@@ -7,8 +7,12 @@ import {Media} from "../shared/media.model";
 
 
 export interface IFileService {
-  add(fileElement: FileElement);
-  remove(id: string);
+  createFile(fileElement: FileElement): void;
+  remove(id: string): void;
+  getAll(): FileElement[];
+  get(id: string): FileElement;
+  rename(id: string, updatedName: string): void;
+  queryInFolder(folderId: string);
 }
 
 @Injectable({
@@ -19,15 +23,17 @@ export class FilesService implements IFileService {
   private map = new Map<string, FileElement>();
   // event for updating the UI
   fileElementsChanged = new EventEmitter<FileElement[]>();
+  private currentRootId: string;
 
   constructor() {
-    this.add(new Folder("test", "/"));
-    this.add(new Folder("interesting", "/"));
-    this.add(new Folder("something", "/"));
-    this.add(new Folder("notCool", "/"));
-    this.add(new Folder("dodge", "/"));
-    this.add(new Folder("impossibru", "/"));
-    this.add(new Folder("heyhey", "/"));
+    this.add(new Folder('interesting', '/', 'root'));
+    this.add(new Folder('something', '/', 'root'));
+    this.add(new Folder('notCool', '/', 'root'));
+    this.add(new Folder('dodge', '/', 'root'));
+    this.add(new Folder('impossibru', '/', 'root'));
+    this.add(new Folder('heyhey', '/', 'root'));
+    this.add(new Folder('girls', '/', 'root'));
+    this.add(new Folder('boys', '/', 'root'));
    }
 
   add(fileElement: FileElement): void {
@@ -45,22 +51,36 @@ export class FilesService implements IFileService {
 
   remove(id: string): void {
     this.map.delete(id);
-    this.fileElementsChanged.emit(this.getAll());
+    this.fileElementsChanged.emit();
   }
 
   createFile(file: FileElement): void {
     this.add(file);
     this.fileElementsChanged.emit(this.getAll());
-}
+  }
+
+  get(id: string): FileElement {
+    return this.map.get(id);
+  }
 
   rename(id: string, updatedName: string): void {
     this.map.get(id).name = updatedName;
     //TODO: later update / replace whole FileElement
   }
 
+  queryInFolder(folderId: string): FileElement[] {
+    this.currentRootId = folderId;
+    return Array.from(this.getAll()
+        .filter(element => element.ownerId === folderId))
+        .slice();
+  }
+
   getAll(): FileElement[] {
-    console.log(Array.from(this.map.values()).length);
     return Array.from(this.map.values()).slice();
+  }
+
+  getCurrentRootId(): string {
+    return this.currentRootId;
   }
 
   // Use it to clone objects
