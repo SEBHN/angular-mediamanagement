@@ -35,6 +35,10 @@ module.exports = function (config) {
           '--no-sandbox',
           '--remote-debugging-port=9222'
         ]
+      },
+      ChromeDebugging: {
+        base: 'Chrome',
+        flags: [ '--remote-debugging-port=9222' ]
       }
     },
     singleRun: false
@@ -43,6 +47,7 @@ module.exports = function (config) {
   
   if (process.env.CI_SERVER) { // isGitlab
     configuration.browsers = ['ChromeHeadless'];
+    configuration.singleRun = true
   }
   config.set(configuration);
 };
