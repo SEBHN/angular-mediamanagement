@@ -6,7 +6,6 @@ stages:
   
 before_script:
   - npm install
-  - npm --prefix ./functions install
   
 app-build:
   stage: build
@@ -19,4 +18,4 @@ app-build:
 unit-tests:
   stage: test
   script:
-    - ng test
+    - npm test
