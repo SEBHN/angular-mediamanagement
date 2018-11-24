@@ -17,7 +17,7 @@ export class GetMediaService {
             observe: 'response'
         })
             .subscribe((response: HttpResponse<any>) => {
-                let mediaArray: Media[] = JSON.parse(JSON.stringify(response.body));
+                let mediaArray: Media[] = JSON.parse(JSON.stringify(response.body["media"]));
                 console.log(mediaArray);
                 this.fileService.addMany(mediaArray);
             }, err => new Error(err.message));
