@@ -1,6 +1,5 @@
-
 # SpringFrontend
-[![pipeline status](https://git.it.hs-heilbronn.de/bkyuchuk/angular-7-mvs/badges/develop/pipeline.svg)]
+![pipeline status](https://git.it.hs-heilbronn.de/bkyuchuk/angular-7-mvs/badges/develop/pipeline.svg)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.2.
 
