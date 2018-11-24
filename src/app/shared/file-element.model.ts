@@ -9,7 +9,7 @@ export interface FileElement {
   name: string;
   isFolder: boolean;
   filePath: string;
-  ownerId: string;
+  creatorId: string;
   tags: Tag[];
   
   addTag(tag: Tag);

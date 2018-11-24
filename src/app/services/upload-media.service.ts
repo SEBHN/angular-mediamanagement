@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse} from "@angular/common/http";
+import {HttpClient, HttpResponse} from "@angular/common/http";
 import {Media} from "../shared/media.model";
 import {FilesService} from "./files-service.service";
 
@@ -8,86 +8,52 @@ import {FilesService} from "./files-service.service";
 })
 export class UploadMediaService {
 
-    fileService: FilesService;
     selectedFile: File;
-    postMediaUrl = "/users/{userID}/media/";
-    postFileUrl = "/users/{userID}/media/{id}/upload";
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private filesService: FilesService) {
     }
 
-    // REST call to post the media Data (meta data)
-    postMetaData(selectedFile: File) {
+    // POST File Metadata
+    postMetaData(selectedFile: File, userId: string = '8'): void {
         this.selectedFile = selectedFile;
-        var media = this.getMediaData(selectedFile, "999"); // Todo: get owner ID from user class
-        console.log(JSON.stringify(media), undefined, '\t');
-        this.http.post(this.getPostMediaUrl(), JSON.stringify(media), {
+        var media = this.getMediaData(selectedFile, userId); // Todo: get owner ID from user class
+        this.http.post(`/users/${userId}/media/`, JSON.stringify(media), {
             reportProgress: true,
             observe: 'response',
-            headers: this.getHeaders()
+            headers: {
+                'Content-Type': 'application/json'
+            }
         })
-            .subscribe(response => this.metaDataResponse(response), error1 => console.log(error1));
+            .subscribe((response: HttpResponse<any>) => {
+                this.postFile(userId, response.body["id"]);
+            }, error => console.log(new Error(error.message)));
     }
 
-    // REST call to post a file
-    postFile(id: string) {
+    // POST
+    postFile(userId: string, fileId: string): void {
         let formData = new FormData();
         formData.append('file', this.selectedFile);
-        this.http.post(this.getPostFileUrl(id), formData, {
+        this.http.post(`/users/${userId}/media/${fileId}/upload`, formData, {
             reportProgress: true,
             observe: 'response',
         })
-            .subscribe(response => this.fileUploadResponse(response), error1 => this.fileUploadError(error1));
-    }
-
-    metaDataResponse(response: HttpResponse<any>) {
-        console.log(response);
-        this.postFile(response.body["id"]);
-    }
-
-    // this Method will called, if the respons doesnt have errors.
-    fileUploadResponse(response: HttpResponse<any>) {
-        console.log(response);
-        var media = {} as Media;
-        media = JSON.parse(JSON.stringify(response.body));
-        console.log(JSON.stringify(media));
-        this.fileService.createFile(media);
-        this.selectedFile = null;
-    }
-
-    fileUploadError(error: HttpErrorResponse) {
-        console.log(error);
-        this.selectedFile = null;
-    }
-
-    // returns the post Meta Data URL after it replaces the {userID} field
-    getPostMediaUrl(): string {
-        // TODO: replace the userID placeholder with the userID from user class
-        var url = this.postMediaUrl.replace("{userID}", "999");
-        return url;
-    }
-
-    // returns the post File URL after it replaces the {userID} field and {id} field
-    getPostFileUrl(id: string): string {
-        var url = this.postFileUrl.replace("{userID}", "999");
-        var url = url.replace("{id}", id);
-        return url;
+            .subscribe((response: HttpResponse<any>) => {
+                let media = JSON.parse(JSON.stringify(response.body));
+                this.filesService.createFile(media);
+                this.selectedFile = null;
+                console.log(media);
+            }, (error) => console.log(new Error(error.message)));
     }
 
     // creates an media object from the file that the user selects
-    getMediaData(file: File, ownerId: string): Media {
-        var extension = this.getExtension(file);
-        var media = {} as Media;
-        media.name = file.name;
-        media.fileExtension = extension;
-        media.ownerId = ownerId;
-        return media;
+    getMediaData(file: File, creatorId: string): Media {
+        return new Media(null, file.name, null, this.getExtension(file), creatorId);
     }
 
     getExtension(file: File): string {
-        var fileName = file.name;
-        var countDots = fileName.replace(/[^.]/g, "").length;
-        var extension;
+        let fileName = file.name;
+        let countDots = fileName.replace(/[^.]/g, "").length;
+        let extension;
         if (countDots < 1) {
             return extension = "undefined";
         }
@@ -98,11 +64,5 @@ export class UploadMediaService {
             var file_name_array = fileName.split(".");
             return extension = "." + file_name_array[file_name_array.length - 1];
         }
-    }
-
-    getHeaders(): HttpHeaders {
-        let headers = new HttpHeaders();
-        headers = headers.append('Content-Type', 'application/json');
-        return headers;
     }
 }

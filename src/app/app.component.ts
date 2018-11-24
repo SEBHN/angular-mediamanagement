@@ -4,7 +4,6 @@ import {FilesService} from "./services/files-service.service";
 import {faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 import {GetMediaService} from "./services/get-media.service";
 import { Folder } from "./shared/folder.model";
-import { element } from "@angular/core/src/render3";
 
 
 @Component({
@@ -25,8 +24,8 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.getMediaService.getAllMediaFromUser('8'); //TODO: user management
         this.fileElements = this.filesService.getAll();
-        this.getMediaService.getAllMediaFromUser('1337'); //TODO: user management
     }
 
     /**
@@ -41,17 +40,17 @@ export class AppComponent implements OnInit {
     }
 
     navigateUp() {
-        if (this.currentRoot && this.currentRoot.ownerId === 'root') {
-            // on navigating up we reach the top root
-            this.currentRoot = null;
-            this.updateElementQuery();
-            this.canNavigateUp = false;
-        } else {
-            // move to upper root
-            this.currentRoot = this.filesService.get(this.currentRoot.ownerId);
-            this.updateElementQuery();
-        }
-        this.currentPath = this.popFromPath(this.currentPath);
+        // if (this.currentRoot && this.currentRoot.ownerId === 'root') {
+        //     // on navigating up we reach the top root
+        //     this.currentRoot = null;
+        //     this.updateElementQuery();
+        //     this.canNavigateUp = false;
+        // } else {
+        //     // move to upper root
+        //     this.currentRoot = this.filesService.get(this.currentRoot.ownerId);
+        //     this.updateElementQuery();
+        // }
+        // this.currentPath = this.popFromPath(this.currentPath);
     }
 
     updateElementQuery() {

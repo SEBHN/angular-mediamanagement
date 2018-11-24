@@ -73,6 +73,7 @@ export class FileExplorerComponent implements OnInit {
     }
     this.fileService.fileElementsChanged
                     .subscribe((updatedFileElements: FileElement[]) => {
+                      this.mediaFiles = updatedFileElements;
                       this.displayItems = [];
                       for (let i = 0; i < this.mediaFiles.length; i += 6) {
                         this.displayItems.push({ items: updatedFileElements.slice(i, i + 6) });

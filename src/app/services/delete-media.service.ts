@@ -31,7 +31,7 @@ export class DeleteMediaService {
     // returns the delete media URL after it replaces the {userID} field and {id} field
     getDeleteMediaUrl(mediaId: string): string {
         // TODO: replace the userID placeholder with the userID from user class
-        var url = this.deleteMediaUrl.replace("{userID}", "999");
+        var url = this.deleteMediaUrl.replace("{userID}", "8");
         var url = url.replace("{id}", mediaId);
         return url;
     }

@@ -7,13 +7,13 @@ export class Folder implements FileElement {
   name: string;
   isFolder: boolean;
   filePath: string;
-  ownerId: string;
+  creatorId: string;
   tags: Tag[];
 
-  constructor(name: string, path: string, ownerId: string) {
+  constructor(name: string, path: string, creatorId: string) {
     this.name = name;
     this.filePath = path;
-    this.ownerId = ownerId;
+    this.creatorId = creatorId;
     this.isFolder = true;
     this.tags = [];
   }

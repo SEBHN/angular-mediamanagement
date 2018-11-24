@@ -12,7 +12,7 @@ export interface IFileService {
   getAll(): FileElement[];
   get(id: string): FileElement;
   rename(id: string, updatedName: string): void;
-  queryInFolder(folderId: string);
+  //queryInFolder(folderId: string);
 }
 
 @Injectable({
@@ -27,14 +27,14 @@ export class FilesService implements IFileService {
   private currentRootId: string;
 
   constructor() {
-    this.add(new Folder('interesting', '/', 'root'));
-    this.add(new Folder('something', '/', 'root'));
-    this.add(new Folder('notCool', '/', 'root'));
-    this.add(new Folder('dodge', '/', 'root'));
-    this.add(new Folder('impossibru', '/', 'root'));
-    this.add(new Folder('heyhey', '/', 'root'));
-    this.add(new Folder('girls', '/', 'root'));
-    this.add(new Folder('boys', '/', 'root'));
+    // this.add(new Folder('interesting', '/', 'root'));
+    // this.add(new Folder('something', '/', 'root'));
+    // this.add(new Folder('notCool', '/', 'root'));
+    // this.add(new Folder('dodge', '/', 'root'));
+    // this.add(new Folder('impossibru', '/', 'root'));
+    // this.add(new Folder('heyhey', '/', 'root'));
+    // this.add(new Folder('girls', '/', 'root'));
+    // this.add(new Folder('boys', '/', 'root'));
    }
 
   add(fileElement: FileElement): void {
@@ -44,8 +44,8 @@ export class FilesService implements IFileService {
     this.map.set(fileElement.id, this.clone(fileElement));
   }
 
-  addMany(mediaArray: Media[]): void {
-    mediaArray.forEach((media) => {
+  addMany(filesArray: FileElement[]): void {
+    filesArray.forEach((media) => {
       this.createFile(media);
     });
   }
@@ -57,7 +57,8 @@ export class FilesService implements IFileService {
 
   createFile(file: FileElement): void {
     this.add(file);
-    this.fileElementsChanged.emit(this.queryInFolder(this.currentRootId ? this.currentRootId : 'root'));
+    //this.fileElementsChanged.emit(this.queryInFolder(this.currentRootId ? this.currentRootId : 'root'));
+    this.fileElementsChanged.emit(this.getAll());
   }
 
   get(id: string): FileElement {
@@ -69,12 +70,12 @@ export class FilesService implements IFileService {
     //TODO: later update / replace whole FileElement
   }
 
-  queryInFolder(folderId: string): FileElement[] {
-    this.currentRootId = folderId;
-    return Array.from(this.getAll()
-        .filter(element => element.ownerId === folderId))
-        .slice();
-  }
+  // queryInFolder(folderId: string): FileElement[] {
+  //   this.currentRootId = folderId;
+  //   return Array.from(this.getAll()
+  //       .filter(element => element.ownerId === folderId))
+  //       .slice();
+  // }
 
   getAll(): FileElement[] {
     return Array.from(this.map.values()).slice();

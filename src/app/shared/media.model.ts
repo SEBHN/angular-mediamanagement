@@ -10,21 +10,21 @@ export class Media implements FileElement {
     name: string;
     isFolder: boolean;
     filePath: string;
-    ownerId: string;
+    creatorId: string;
     tags: Tag[];
 
     fileId: string;
     fileExtension: string;
 
     constructor(id: string, name: string, fileId: string,
-                fileExtension: string, ownerId: string) {
+                fileExtension: string, creatorId: string) {
         this.id = id;
         this.name = name;
         this.isFolder = false;
         this.tags = [];
         this.fileId = fileId;
         this.fileExtension = fileExtension;
-        this.ownerId = ownerId;
+        this.creatorId = creatorId;
     }
 
     getFileId(): string {
