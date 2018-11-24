@@ -4,13 +4,17 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FileExplorerComponent} from './file-explorer/file-explorer.component'
 import { CockpitComponent } from './cockpit/cockpit.component'
 import { CreateFolderComponent } from './cockpit/modals/create-folder/create-folder.component'
+import { ElementComponent } from './file-explorer/element/element.component'
+import { ContextMenuModule } from 'ngx-contextmenu';
+import { RenameFileComponent } from './cockpit/modals/rename-file/rename-file.component'
+import { HttpClientModule } from "@angular/common/http";
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [FontAwesomeModule],
+      imports: [FontAwesomeModule, ContextMenuModule, HttpClientModule],
       declarations: [
-        AppComponent, CockpitComponent, FileExplorerComponent, CreateFolderComponent
+        AppComponent, CockpitComponent, FileExplorerComponent, CreateFolderComponent, ElementComponent, RenameFileComponent
       ],
     }).compileComponents();
   }));
