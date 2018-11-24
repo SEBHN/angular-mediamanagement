@@ -1,13 +1,16 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FileExplorerComponent} from './file-explorer/file-explorer.component'
+import { CockpitComponent } from './cockpit/cockpit.component'
+import { CreateFolderComponent } from './cockpit/modals/create-folder/create-folder.component'
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [FontAwesomeModule],
       declarations: [
-        AppComponent
+        AppComponent, CockpitComponent, FileExplorerComponent, CreateFolderComponent
       ],
     }).compileComponents();
   }));
