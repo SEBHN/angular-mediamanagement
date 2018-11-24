@@ -8,14 +8,28 @@ import { ElementComponent } from './file-explorer/element/element.component'
 import { ContextMenuModule } from 'ngx-contextmenu';
 import { RenameFileComponent } from './cockpit/modals/rename-file/rename-file.component'
 import { HttpClientModule } from "@angular/common/http";
+import { ModalModule } from 'ngx-bootstrap';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [FontAwesomeModule, ContextMenuModule, HttpClientModule],
-      declarations: [
-        AppComponent, CockpitComponent, FileExplorerComponent, CreateFolderComponent, ElementComponent, RenameFileComponent
+      imports: [
+        FontAwesomeModule, 
+        ContextMenuModule, 
+        HttpClientModule, 
+        ModalModule.forRoot(), 
+        ContextMenuModule.forRoot({
+          useBootstrap4: true,
+        })
       ],
+      declarations: [
+        AppComponent, 
+        CockpitComponent, 
+        FileExplorerComponent, 
+        CreateFolderComponent, 
+        ElementComponent, 
+        RenameFileComponent
+      ]
     }).compileComponents();
   }));
 
