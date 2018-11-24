@@ -1,4 +1,4 @@
-image: trion/ng-cli-karma
+image: dxjoke/docker-angular-ci-build:develop
 stages:
   - build
   - test
