@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CockpitComponent } from './cockpit.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 describe('CockpitComponent', () => {
   let component: CockpitComponent;
@@ -8,7 +9,8 @@ describe('CockpitComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CockpitComponent ]
+      declarations: [ CockpitComponent ],
+      imports: [FontAwesomeModule]
     })
     .compileComponents();
   }));
