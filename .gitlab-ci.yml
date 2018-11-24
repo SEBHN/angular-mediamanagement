@@ -1,4 +1,4 @@
-image: dxjoke/docker-angular-ci-build:develop
+image: dxjoke/docker-angular-ci-build
 stages:
   - build
   - test
