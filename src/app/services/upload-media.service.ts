@@ -13,7 +13,8 @@ export class UploadMediaService {
     postMediaUrl = "/users/{userID}/media/";
     postFileUrl = "/users/{userID}/media/{id}/upload";
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, fileService: FilesService) {
+        this.fileService = fileService;
     }
 
     // REST call to post the media Data (meta data)
