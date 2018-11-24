@@ -1,4 +1,4 @@
-image: juristr/angular-ci-build:1.0.0
+image: trion/ng-cli-karma
 stages:
   - build
   - test
