@@ -13,7 +13,7 @@ export class FetchService {
     }
 
     getCurrentFilesForUser(userId: string, currentPath: string) {
-        var encodedCurrentPath = encodeURIComponent(currentPath)
+        let encodedCurrentPath = encodeURIComponent(currentPath)
         this.http.get(`/users/${userId}/folders/${encodedCurrentPath}/media/`, {
             reportProgress: true,
             observe: 'response'
