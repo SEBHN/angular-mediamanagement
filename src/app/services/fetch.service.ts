@@ -13,12 +13,10 @@ export class FetchService {
     }
 
     getCurrentFilesForUser(userId: string, currentPath: string) {
-        this.http.get(`/users/${userId}/media/`, {
+        var encodedCurrentPath = encodeURIComponent(currentPath)
+        this.http.get(`/users/${userId}/folders/${encodedCurrentPath}/media/`, {
             reportProgress: true,
-            observe: 'response',
-            params: {
-                'folder': currentPath
-            }
+            observe: 'response'
         })
             .subscribe((response: HttpResponse<any>) => {
                 // parse arrived response
