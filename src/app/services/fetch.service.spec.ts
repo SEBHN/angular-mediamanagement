@@ -1,15 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DeleteMediaService } from './delete-media.service';
+import { FetchService } from './fetch.service';
 import { HttpClientModule } from "@angular/common/http";
 
-describe('DeleteMediaService', () => {
+describe('FetchService', () => {
   beforeEach(() => TestBed.configureTestingModule({imports: [
     HttpClientModule
   ],}));
 
   it('should be created', () => {
-    const service: DeleteMediaService = TestBed.get(DeleteMediaService);
+    const service: FetchService = TestBed.get(FetchService);
     expect(service).toBeTruthy();
   });
 });

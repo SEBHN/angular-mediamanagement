@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ElementComponent } from './element.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 describe('ElementComponent', () => {
   let component: ElementComponent;
@@ -8,6 +9,7 @@ describe('ElementComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [FontAwesomeModule],
       declarations: [ ElementComponent ]
     })
     .compileComponents();

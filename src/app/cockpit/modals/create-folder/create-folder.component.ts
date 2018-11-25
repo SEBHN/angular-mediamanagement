@@ -29,8 +29,8 @@ export class CreateFolderComponent {
 
   onCreateFolder(folderName: string): void {
     if (folderName !== '') {
-      this.filesService.createFile(new Folder(folderName, '/',
-        this.filesService.getCurrentRootId() ? this.filesService.getCurrentRootId() : 'root'));
+      // this.filesService.createFile(new Folder(folderName, '/',
+      //   this.filesService.getCurrentRootId() ? this.filesService.getCurrentRootId() : 'root'));
     }
   }
 }

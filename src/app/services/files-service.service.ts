@@ -1,8 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { FileElement } from '../shared/file-element.model';
 import { v4 } from 'node_modules/uuid';
-import { Folder } from '../shared/folder.model';
-import {Media} from "../shared/media.model";
 
 
 
@@ -23,31 +21,33 @@ export class FilesService implements IFileService {
   private map = new Map<string, FileElement>();
   // event for updating the UI
   fileElementsChanged = new EventEmitter<FileElement[]>();
-  // needed to create file in the current root
-  private currentRootId: string;
+  currentPath: string;
 
   constructor() {
-    // this.add(new Folder('interesting', '/', 'root'));
-    // this.add(new Folder('something', '/', 'root'));
-    // this.add(new Folder('notCool', '/', 'root'));
-    // this.add(new Folder('dodge', '/', 'root'));
-    // this.add(new Folder('impossibru', '/', 'root'));
-    // this.add(new Folder('heyhey', '/', 'root'));
-    // this.add(new Folder('girls', '/', 'root'));
-    // this.add(new Folder('boys', '/', 'root'));
+
    }
 
   add(fileElement: FileElement): void {
-    if(fileElement.id == null) {
-        fileElement.id = v4();
+    // incoming folder
+    if (fileElement.id == null) {
+      // check by name if folder is in memory
+      let match = this.getAll().find(element => element.name === fileElement.name);
+      if (typeof match === 'undefined') {
+        // folder doesn't exist in memory
+        fileElement.id = v4(); // generate random uuid
+        this.map.set(fileElement.id, this.clone(fileElement));
+      } // if folder is in memory - do nothing
+    } else {
+      // handle media files
+      this.map.set(fileElement.id, this.clone(fileElement));
     }
-    this.map.set(fileElement.id, this.clone(fileElement));
   }
 
   addMany(filesArray: FileElement[]): void {
     filesArray.forEach((media) => {
       this.createFile(media);
     });
+    console.log(this.map);
   }
 
   remove(id: string): void {
@@ -57,8 +57,7 @@ export class FilesService implements IFileService {
 
   createFile(file: FileElement): void {
     this.add(file);
-    //this.fileElementsChanged.emit(this.queryInFolder(this.currentRootId ? this.currentRootId : 'root'));
-    this.fileElementsChanged.emit(this.getAll());
+    this.fileElementsChanged.emit(this.getAllForPath(this.currentPath));
   }
 
   get(id: string): FileElement {
@@ -70,19 +69,14 @@ export class FilesService implements IFileService {
     //TODO: later update / replace whole FileElement
   }
 
-  // queryInFolder(folderId: string): FileElement[] {
-  //   this.currentRootId = folderId;
-  //   return Array.from(this.getAll()
-  //       .filter(element => element.ownerId === folderId))
-  //       .slice();
-  // }
+  getAllForPath(path: string): FileElement[] {
+    return Array.from(this.getAll()
+        .filter(element => element.filePath === path))
+        .slice();
+  }
 
   getAll(): FileElement[] {
     return Array.from(this.map.values()).slice();
-  }
-
-  getCurrentRootId(): string {
-   return this.currentRootId
   }
 
   // Use it to clone objects
