@@ -5,7 +5,7 @@
                    (navigatedDown)="navigateToFolder($event)"></app-file-explorer>
 
 <!-- Footer to show navigation -->
-<footer class="footer" *ngIf="canNavigateUp">
+<footer class="footer" *ngIf="currentPath">
     <!-- Left Arrow with Element Path -->
     <ol class="breadcrumb bg-dark text-white">
       <li class="breadcrumb-item">
