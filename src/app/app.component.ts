@@ -39,16 +39,6 @@ export class AppComponent implements OnInit {
     }
 
     navigateUp() {
-        // if (this.currentRoot && this.currentRoot.ownerId === 'root') {
-        //     // on navigating up we reach the top root
-        //     this.updateElementQuery();
-        //     this.canNavigateUp = false;
-        // } else {
-        //     // move to upper root
-        //     this.currentRoot = this.filesService.get(this.currentRoot.ownerId);
-        //     this.updateElementQuery();
-        // }
-        // this.currentPath = this.popFromPath(this.currentPath);
         if (this.currentPath === '/') {
             this.canNavigateUp = false;
             this.updateQuery();

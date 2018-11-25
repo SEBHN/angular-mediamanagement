@@ -4,7 +4,6 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { faFolderPlus } from '@fortawesome/free-solid-svg-icons';
 import { FilesService } from 'src/app/services/files-service.service';
 import { Folder } from 'src/app/shared/folder.model';
-import { AppComponent } from 'src/app/app.component';
  
 @Component({
   selector: 'app-create-folder',

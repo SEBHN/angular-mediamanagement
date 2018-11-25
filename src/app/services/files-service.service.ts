@@ -10,7 +10,6 @@ export interface IFileService {
   getAll(): FileElement[];
   get(id: string): FileElement;
   rename(id: string, updatedName: string): void;
-  //queryInFolder(folderId: string);
 }
 
 @Injectable({
@@ -23,9 +22,7 @@ export class FilesService implements IFileService {
   fileElementsChanged = new EventEmitter<FileElement[]>();
   currentPath: string;
 
-  constructor() {
-
-   }
+  constructor() {}
 
   add(fileElement: FileElement): void {
     // incoming folder
@@ -47,7 +44,6 @@ export class FilesService implements IFileService {
     filesArray.forEach((media) => {
       this.createFile(media);
     });
-    console.log(this.map);
   }
 
   remove(id: string): void {
