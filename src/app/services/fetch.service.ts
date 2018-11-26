@@ -3,6 +3,9 @@ import {HttpClient, HttpResponse} from "@angular/common/http";
 import {FilesService} from "./files-service.service";
 import { FileElement } from '../shared/file-element.model';
 import { Media } from '../shared/media.model';
+import { environment } from '../../environments/environment';
+
+const API_URL = environment.API_URL;
 
 @Injectable({
     providedIn: 'root'
@@ -13,8 +16,8 @@ export class FetchService {
     }
 
     getCurrentFilesForUser(userId: string, currentPath: string) {
-        let encodedCurrentPath = encodeURIComponent(currentPath)
-        this.http.get(`/users/${userId}/folders/${encodedCurrentPath}/media/`, {
+        const encodedCurrentPath = encodeURIComponent(currentPath);
+        this.http.get(API_URL + `/users/${userId}/folders/${encodedCurrentPath}/media/`, {
             reportProgress: true,
             observe: 'response'
         })
