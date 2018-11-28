@@ -10,7 +10,7 @@ import { Media } from "../shared/media.model";
 import { FileElement } from "../shared/file-element.model";
 import { FilesService } from "../services/files-service.service";
 import { ContextMenuComponent } from "ngx-contextmenu";
-import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrashAlt, faCloudDownloadAlt } from '@fortawesome/free-solid-svg-icons';
 import {DeleteMediaService} from "../services/delete-media.service";
 import {DownloadMediaService} from '../services/download-media.service';
 
@@ -26,6 +26,7 @@ export class FileExplorerComponent implements OnInit {
   // Context menu icons
   faEdit = faEdit;
   faTrashAlt = faTrashAlt;
+  faDownload = faCloudDownloadAlt;
   
   // We need decorators like @Input and @Output to make elements bindable.
 
