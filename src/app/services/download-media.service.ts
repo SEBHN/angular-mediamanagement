@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Media} from '../shared/media.model';
 import {saveAs} from 'file-saver';
-import {Http, ResponseContentType} from '@angular/http';
 import {HttpClient} from '@angular/common/http';
 
 
