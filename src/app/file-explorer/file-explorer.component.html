@@ -12,6 +12,10 @@
 </div>
 
 <context-menu>
+    <ng-template contextMenuItem let-item (execute)="downloadElement($event.item)">
+            <fa-icon class="d-inline mr-2 text-dark" [icon]="faEdit"></fa-icon>
+            <p class="lead d-inline text-dark">Download</p>
+        </ng-template>
     <ng-template contextMenuItem let-item (execute)="renameModal.openModal($event.item)">
         <fa-icon class="d-inline mr-2 text-dark" [icon]="faEdit"></fa-icon>
         <p class="lead d-inline text-dark">Rename</p>
