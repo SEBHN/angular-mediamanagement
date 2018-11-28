@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpResponse} from "@angular/common/http";
 import {FilesService} from "./files-service.service";
+import {environment} from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -31,7 +32,7 @@ export class DeleteMediaService {
     // returns the delete media URL after it replaces the {userID} field and {id} field
     getDeleteMediaUrl(mediaId: string): string {
         // TODO: replace the userID placeholder with the userID from user class
-        var url = this.deleteMediaUrl.replace("{userID}", "8");
+        var url = this.deleteMediaUrl.replace("{userID}", environment.currentUserId);
         var url = url.replace("{id}", mediaId);
         return url;
     }
