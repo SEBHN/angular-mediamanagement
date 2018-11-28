@@ -27,9 +27,7 @@ export class DownloadMediaService {
 }
 
 private downloadUrlBuilder(id: string): string {
-    var url = this.downloadMediaUrl.replace("{userId}", "1337");
-    var url = url.replace("{id}", id);
-    return url;
+    return this.downloadMediaUrl.replace('{userId}', '1337').replace('{id}', id);
 }
 
 }
