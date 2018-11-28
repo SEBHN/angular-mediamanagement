@@ -16,17 +16,15 @@ export class DownloadMediaService {
   saveToFileSystem(blob, filename) {
     console.log(blob);
     saveAs(blob, filename);
-}
-
-
+  }
 
   downloadMedia(media: Media) {
     this.http.get(this.downloadUrlBuilder(media.id), { responseType: 'blob' })
     .subscribe(data => this.saveToFileSystem(data, media.name), error1 => console.log(error1));
-}
+  }
 
-private downloadUrlBuilder(id: string): string {
+  private downloadUrlBuilder(id: string): string {
     return this.downloadMediaUrl.replace('{userId}', '1337').replace('{id}', id);
-}
+  }
 
 }
