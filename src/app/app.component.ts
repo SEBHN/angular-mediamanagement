@@ -4,6 +4,7 @@ import {FilesService} from "./services/files-service.service";
 import { FetchService } from "./services/fetch.service";
 import {faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 import { Folder } from "./shared/folder.model";
+import {environment} from '../environments/environment';
 
 
 @Component({
@@ -50,7 +51,7 @@ export class AppComponent implements OnInit {
 
     updateQuery(): void {
         this.filesService.currentPath = this.currentPath;
-        this.fetchService.getCurrentFilesForUser('8', this.currentPath); //TODO: user management
+        this.fetchService.getCurrentFilesForUser(environment.currentUserId, this.currentPath); //TODO: user management
     }
 
     pushToPath(element: Folder): void {

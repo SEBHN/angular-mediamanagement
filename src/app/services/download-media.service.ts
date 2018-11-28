@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Media} from '../shared/media.model';
 import {saveAs} from 'file-saver';
 import {HttpClient} from '@angular/common/http';
+import {environment} from '../../environments/environment';
 
 
 @Injectable({
@@ -24,7 +25,7 @@ export class DownloadMediaService {
   }
 
   private downloadUrlBuilder(id: string): string {
-    return this.downloadMediaUrl.replace('{userId}', '1337').replace('{id}', id);
+    return this.downloadMediaUrl.replace('{userId}', environment.currentUserId).replace('{id}', id);
   }
 
 }
