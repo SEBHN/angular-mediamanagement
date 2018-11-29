@@ -8,7 +8,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import {Folder} from '../shared/folder.model';
-import {UploadMediaService} from "../services/upload-media.service";
+import {UploadMediaService} from '../services/upload-media.service';
 import { FilesService } from '../services/files-service.service';
 
 @Component({
@@ -25,7 +25,7 @@ export class CockpitComponent implements OnInit {
     faFolderPlus = faFolderPlus;
 
     // navbar toggle
-    private navbarOpen: boolean = false;
+    private navbarOpen = false;
 
     private uploadMediaService: UploadMediaService;
 
@@ -49,5 +49,9 @@ export class CockpitComponent implements OnInit {
     }
 
     ngOnInit() {
+    }
+
+    isNavbarOpen() {
+        return this.navbarOpen;
     }
 }
