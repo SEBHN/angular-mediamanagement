@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {Media} from "../shared/media.model";
 import {FilesService} from "./files-service.service";
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,7 @@ export class UpdateMediaService {
     }
     // returns the post File URL after it replaces the {userID} field and {id} field
     putMediaUrlBuilder(id: string): string {
-        var url = this.putMediaUrl.replace("{userId}", "999");
+        var url = this.putMediaUrl.replace("{userId}", environment.currentUserId);
         var url = url.replace("{id}", id);
         return url;
     }

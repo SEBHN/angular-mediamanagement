@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpResponse} from "@angular/common/http";
 import {Media} from "../shared/media.model";
 import {FilesService} from "./files-service.service";
+import {environment} from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -14,7 +15,7 @@ export class UploadMediaService {
     }
 
     // POST File Metadata
-    postMetaData(selectedFile: File, userId: string = '8'): void {
+    postMetaData(selectedFile: File, userId: string = environment.currentUserId): void {
         this.selectedFile = selectedFile;
         var media = this.getMediaData(selectedFile, userId); // Todo: get owner ID from user class
         this.http.post(`/users/${userId}/media/`, JSON.stringify(media), {

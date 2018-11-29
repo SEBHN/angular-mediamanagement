@@ -10,8 +10,9 @@ import { Media } from "../shared/media.model";
 import { FileElement } from "../shared/file-element.model";
 import { FilesService } from "../services/files-service.service";
 import { ContextMenuComponent } from "ngx-contextmenu";
-import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrashAlt, faCloudDownloadAlt } from '@fortawesome/free-solid-svg-icons';
 import {DeleteMediaService} from "../services/delete-media.service";
+import {DownloadMediaService} from '../services/download-media.service';
 
 /**
  * Single component representing Media and Folder in the view.
@@ -25,6 +26,7 @@ export class FileExplorerComponent implements OnInit {
   // Context menu icons
   faEdit = faEdit;
   faTrashAlt = faTrashAlt;
+  faDownload = faCloudDownloadAlt;
   
   // We need decorators like @Input and @Output to make elements bindable.
 
@@ -53,10 +55,12 @@ export class FileExplorerComponent implements OnInit {
 
   private fileService: FilesService;
   private deleteMediaService: DeleteMediaService;
+  private downloadMediaService: DownloadMediaService;
 
-  constructor(fileService: FilesService, deleteMediaService: DeleteMediaService) {
+  constructor(fileService: FilesService, deleteMediaService: DeleteMediaService, downloadMediaService: DownloadMediaService) {
     this.fileService = fileService;
     this.deleteMediaService = deleteMediaService;
+    this.downloadMediaService = downloadMediaService;
   }
 
   // Lifecycle hook before component gets rendered by Angular
@@ -93,5 +97,9 @@ export class FileExplorerComponent implements OnInit {
   
   moveElement(element: FileElement, moveTo: FileElement) {
     this.elementMoved.emit({ element, moveTo });
+  }
+
+  downloadElement(media: Media): void {
+    this.downloadMediaService.downloadMedia(media);
   }
 }
