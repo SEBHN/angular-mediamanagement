@@ -5,29 +5,29 @@ import {
   Output,
   OnInit,
   ViewChild
-} from "@angular/core";
-import { Media } from "../shared/media.model";
-import { FileElement } from "../shared/file-element.model";
-import { FilesService } from "../services/files-service.service";
-import { ContextMenuComponent } from "ngx-contextmenu";
+} from '@angular/core';
+import { Media } from '../shared/media.model';
+import { FileElement } from '../shared/file-element.model';
+import { FilesService } from '../services/files-service.service';
+import { ContextMenuComponent } from 'ngx-contextmenu';
 import { faEdit, faTrashAlt, faCloudDownloadAlt } from '@fortawesome/free-solid-svg-icons';
-import {DeleteMediaService} from "../services/delete-media.service";
+import {DeleteMediaService} from '../services/delete-media.service';
 import {DownloadMediaService} from '../services/download-media.service';
 
 /**
  * Single component representing Media and Folder in the view.
  */
 @Component({
-  selector: "app-file-explorer",
-  templateUrl: "./file-explorer.component.html",
-  styleUrls: ["./file-explorer.component.css"]
+  selector: 'app-file-explorer',
+  templateUrl: './file-explorer.component.html',
+  styleUrls: ['./file-explorer.component.css']
 })
 export class FileExplorerComponent implements OnInit {
   // Context menu icons
   faEdit = faEdit;
   faTrashAlt = faTrashAlt;
   faDownload = faCloudDownloadAlt;
-  
+
   // We need decorators like @Input and @Output to make elements bindable.
 
   // @Input() means data is being passed inside this component (via property binding) from parent view
@@ -82,7 +82,7 @@ export class FileExplorerComponent implements OnInit {
                       for (let i = 0; i < this.mediaFiles.length; i += 6) {
                         this.displayItems.push({ items: updatedFileElements.slice(i, i + 6) });
                       }
-                    });   
+                    });
   }
 
   // Methods to send off the occured events
@@ -94,7 +94,7 @@ export class FileExplorerComponent implements OnInit {
   navigateDown(file: FileElement): void {
     this.navigatedDown.emit(file);
   }
-  
+
   moveElement(element: FileElement, moveTo: FileElement) {
     this.elementMoved.emit({ element, moveTo });
   }
