@@ -2,6 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ElementComponent } from './element.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { Media } from '../../shared/media.model';
+import { Folder } from '../../shared/folder.model';
 
 describe('ElementComponent', () => {
   let component: ElementComponent;
@@ -24,4 +26,31 @@ describe('ElementComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  describe('onNavigate()', () => {
+      const file = new Media('anId', 'aName', 'aFileId', '.txt', '1337');
+      const folder = new Folder('aFolder', '/im/in/here/send/help', '1337');
+
+      it('should emit navigatedToFile with media', (done) => {
+          component.navigatedToFile.subscribe(subscribedFile => {
+              expect(subscribedFile).toBe(file);
+              done();
+          });
+          component.navigated.subscribe(() => fail('Is not a folder'));
+
+          component.onNavigate(file);
+      });
+
+      it('should emit navigated with folder', (done) => {
+          component.navigated.subscribe(subscribedFolder => {
+              expect(subscribedFolder).toBe(folder);
+              done();
+          });
+          component.navigatedToFile.subscribe(() => fail('Is not a file'));
+
+          component.onNavigate(folder);
+      });
+  });
+
+
 });
