@@ -10,22 +10,14 @@ import {environment} from '../../environments/environment';
 })
 export class DownloadMediaService {
 
-  downloadMediaUrl = '/users/{userId}/media/{id}/download';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  saveToFileSystem(blob, filename) {
-    console.log(blob);
-    saveAs(blob, filename);
+  downloadMedia(media: Media, userId: string): void {
+    this.http.get(`/users/${userId}/media/${media.id}/download`,
+     { responseType: 'blob' })
+    .subscribe((data) => {
+      saveAs(data, media.name);
+    }, error => console.log(new Error(error.message)));
   }
-
-  downloadMedia(media: Media) {
-    this.http.get(this.downloadUrlBuilder(media.id), { responseType: 'blob' })
-    .subscribe(data => this.saveToFileSystem(data, media.name), error1 => console.log(error1));
-  }
-
-  private downloadUrlBuilder(id: string): string {
-    return this.downloadMediaUrl.replace('{userId}', environment.currentUserId).replace('{id}', id);
-  }
-
 }
