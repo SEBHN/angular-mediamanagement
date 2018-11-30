@@ -32,13 +32,13 @@ describe('ElementComponent', () => {
       const folder = new Folder('aFolder', '/im/in/here/send/help', '1337');
 
       it('should emit navigatedToFile with media', (done) => {
-          component.navigatedToFile.subscribe(subscribedFile => {
+          component.fileDownloaded.subscribe(subscribedFile => {
               expect(subscribedFile).toBe(file);
               done();
           });
           component.navigated.subscribe(() => fail('Is not a folder'));
 
-          component.onNavigate(file);
+          component.onDoubleClick(file);
       });
 
       it('should emit navigated with folder', (done) => {
@@ -46,11 +46,9 @@ describe('ElementComponent', () => {
               expect(subscribedFolder).toBe(folder);
               done();
           });
-          component.navigatedToFile.subscribe(() => fail('Is not a file'));
+          component.fileDownloaded.subscribe(() => fail('Is not a file'));
 
-          component.onNavigate(folder);
+          component.onDoubleClick(folder);
       });
   });
-
-
 });
