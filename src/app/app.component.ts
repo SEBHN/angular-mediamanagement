@@ -13,15 +13,15 @@ import {environment} from '../environments/environment';
     styleUrls: ["./app.component.css"]
 })
 export class AppComponent implements OnInit {
-    
+
     faArrowLeft = faArrowLeft;
 
     private fileElements: FileElement[];
-    private canNavigateUp: boolean = false;
+    private canNavigateUp = false;
     private currentPath: string;
 
     constructor(private filesService: FilesService, private fetchService: FetchService) {
-        this.currentPath = '/'
+        this.currentPath = '/';
     }
 
     ngOnInit() {
@@ -63,4 +63,13 @@ export class AppComponent implements OnInit {
         split.splice(split.length - 2, 1);
         this.currentPath = split.join('/');
     }
+
+    getFileElements(): FileElement[] {
+        return this.fileElements;
+    }
+
+    getCurrentPath(): string {
+        return this.currentPath;
+    }
+
 }
