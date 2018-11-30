@@ -100,7 +100,7 @@ export class FileExplorerComponent implements OnInit {
     this.elementMoved.emit({ element, moveTo });
   }
 
-  downloadElement(media: Media, userId: string): void {
+  downloadElement(media: Media): void {
     this.downloadMediaService.downloadMedia(media, environment.currentUserId);
   }
 }
