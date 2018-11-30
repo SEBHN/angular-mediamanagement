@@ -4,6 +4,7 @@ import {faEdit} from '@fortawesome/free-solid-svg-icons';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {Media} from "../../../shared/media.model";
 import {UpdateMediaService} from "../../../services/update-media.service";
+import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'app-rename-file',
@@ -35,6 +36,6 @@ export class RenameFileComponent {
             console.log(name);
         }
         this.file.name = name;
-        this.updateMediaService.putMedia(this.file);
+        this.updateMediaService.putMedia(this.file, environment.currentUserId); //TODO: later user management
     }
 }
