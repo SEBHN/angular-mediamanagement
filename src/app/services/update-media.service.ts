@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {Media} from "../shared/media.model";
 import {FilesService} from "./files-service.service";
 import {environment} from '../../environments/environment';
@@ -13,7 +13,7 @@ export class UpdateMediaService {
 
     // Media Metadata POST
     putMedia(media: Media, userId: string): void {
-        this.http.put(`/users/${userId}/media/${media.id}`, JSON.stringify(media), {
+        this.http.put(`${environment.API_URL}/users/${userId}/media/${media.id}`, JSON.stringify(media), {
             reportProgress: true,
             observe: 'response',
             headers: {

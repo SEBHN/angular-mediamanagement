@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpResponse} from "@angular/common/http";
-import {FilesService} from "./files-service.service";
+import {HttpClient, HttpResponse} from '@angular/common/http';
+import {FilesService} from './files-service.service';
 import {environment} from '../../environments/environment';
 
 @Injectable({
@@ -11,13 +11,13 @@ export class DeleteMediaService {
     constructor(private http: HttpClient, private fileService: FilesService) {
     }
 
-    deleteMediaUrl = "/users/{userID}/media/{id}";
+    deleteMediaUrl = environment.API_URL + '/users/{userID}/media/{id}';
     tempID: string;
 
     // REST call to delet media
     deleteMedia(mediaId: string) {
         this.tempID = mediaId;
-        this.http.delete(this.getDeleteMediaUrl(mediaId),{
+        this.http.delete(this.getDeleteMediaUrl(mediaId), {
             reportProgress: true,
             observe: 'response'
         })
@@ -32,8 +32,6 @@ export class DeleteMediaService {
     // returns the delete media URL after it replaces the {userID} field and {id} field
     getDeleteMediaUrl(mediaId: string): string {
         // TODO: replace the userID placeholder with the userID from user class
-        var url = this.deleteMediaUrl.replace("{userID}", environment.currentUserId);
-        var url = url.replace("{id}", mediaId);
-        return url;
+        return  this.deleteMediaUrl.replace('{userID}', environment.currentUserId).replace('{id}', mediaId);
     }
 }

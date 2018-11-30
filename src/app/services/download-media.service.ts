@@ -10,11 +10,10 @@ import {environment} from '../../environments/environment';
 })
 export class DownloadMediaService {
 
-
   constructor(private http: HttpClient) {}
 
   downloadMedia(media: Media, userId: string): void {
-    this.http.get(`/users/${userId}/media/${media.id}/download`,
+    this.http.get(`${environment.API_URL}/users/${userId}/media/${media.id}/download`,
      { responseType: 'blob' })
     .subscribe((data) => {
       saveAs(data, media.name);
