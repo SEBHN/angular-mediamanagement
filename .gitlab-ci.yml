@@ -13,7 +13,7 @@ app-build:
     paths:
       - dist/
   script:
-    - npm run build
+    - npm run build -- --prod
 
 unit-tests:
   stage: test
