@@ -17,18 +17,21 @@ export class ElementComponent implements OnInit {
 
   @Input() element: FileElement;
   @Output() navigated = new EventEmitter<FileElement>();
-  @Output() navigatedToFile = new EventEmitter<FileElement>();
+  @Output() fileDownloaded = new EventEmitter<FileElement>();
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  onNavigate(file: FileElement): void {
+  // triggered through double click on a FileElement
+  onDoubleClick(file: FileElement): void {
     if (file.isFolder) {
+      // folder clicked -> navigate into it
       this.navigated.emit(file);
     } else {
-      this.navigatedToFile.emit(file);
+      // file clicked -> download it
+      this.fileDownloaded.emit(file);
     }
   }
 }

@@ -13,6 +13,7 @@ import { ContextMenuComponent } from 'ngx-contextmenu';
 import { faEdit, faTrashAlt, faCloudDownloadAlt } from '@fortawesome/free-solid-svg-icons';
 import {DeleteMediaService} from '../services/delete-media.service';
 import {DownloadMediaService} from '../services/download-media.service';
+import { environment } from 'src/environments/environment';
 
 /**
  * Single component representing Media and Folder in the view.
@@ -99,7 +100,7 @@ export class FileExplorerComponent implements OnInit {
     this.elementMoved.emit({ element, moveTo });
   }
 
-  downloadElement(media: Media): void {
-    this.downloadMediaService.downloadMedia(media);
+  downloadElement(media: Media, userId: string): void {
+    this.downloadMediaService.downloadMedia(media, environment.currentUserId);
   }
 }

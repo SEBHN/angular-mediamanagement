@@ -6,7 +6,7 @@
                          [contextMenu]="basicMenu"
                          [contextMenuSubject]="item"
                          (navigated)="navigateDown($event)"
-                         (navigatedToFile)="downloadElement($event)">
+                         (fileDownloaded)="downloadElement($event)">
             </app-element>
         </ng-container>
     </div>
