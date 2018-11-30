@@ -30,10 +30,8 @@ export class RenameFileComponent {
     }
 
     onRename(name: string): void {
-        console.log(this.file);
         if (name.includes("." + this.file.fileExtension) == false) {
             name = name + "." + this.file.fileExtension;
-            console.log(name);
         }
         this.file.name = name;
         this.updateMediaService.putMedia(this.file, environment.currentUserId); //TODO: later user management
