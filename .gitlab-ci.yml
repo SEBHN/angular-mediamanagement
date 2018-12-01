@@ -32,4 +32,3 @@ deployment:
   only:
     - develop
     - master
-    - deployment
