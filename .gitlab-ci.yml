@@ -10,6 +10,7 @@ app-build:
   artifacts:
     paths:
       - dist/
+    expire_in: 10 mins
   before_script:
     - npm install
   script:
@@ -28,3 +29,7 @@ deployment:
     - app-build
   script:
     - npx ngh --dir=dist/spring-frontend --repo=https://$GH_TOKEN@github.com/SEBHN/mvs.git --name="MVS Publisher" --email=443_3w4md4sjdioa@byom.de
+  only:
+    - develop
+    - master
+    - deployment
