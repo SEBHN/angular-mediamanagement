@@ -23,6 +23,7 @@ export class UpdateMediaService {
         })
             .subscribe((response) => {
                 this.filesService.rename(response.body["id"], response.body["name"]);
+                console.log(response);
             }, error => console.log(new Error(error.message)));
     }
 }

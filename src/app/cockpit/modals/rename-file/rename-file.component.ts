@@ -35,5 +35,6 @@ export class RenameFileComponent {
         }
         this.file.name = name;
         this.updateMediaService.putMedia(this.file, environment.currentUserId); //TODO: later user management
+        this.modalRef.hide();
     }
 }

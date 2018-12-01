@@ -11,7 +11,7 @@
       <div class="input-group-prepend">
         <span class="input-group-text"><fa-icon [icon]="faEdit"></fa-icon></span>
       </div>
-      <input type="text" class="form-control" placeholder="New file name..." #renameInput>
+      <input type="text" class="form-control" value="{{file.name.replace('.' + file.fileExtension, '')}}" #renameInput>
     </div>
     <div class="input-group mb-3 justify-content-center">
       <button type="button" class="btn btn-outline-success mx-3"
