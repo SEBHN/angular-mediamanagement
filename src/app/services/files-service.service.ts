@@ -48,7 +48,7 @@ export class FilesService implements IFileService {
 
   remove(id: string): void {
     this.map.delete(id);
-    this.fileElementsChanged.emit();
+    this.fileElementsChanged.emit(this.getAllForPath(this.currentPath));
   }
 
   createFile(file: FileElement): void {
