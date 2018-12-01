@@ -28,7 +28,7 @@ describe('ElementComponent', () => {
   });
 
   describe('onNavigate()', () => {
-      const file = new Media('anId', 'aName', 'aFileId', '.txt', '1337');
+      const file = new Media('anId', 'aName', 'aFileId', '.txt', '/', '1337');
       const folder = new Folder('aFolder', '/im/in/here/send/help', '1337');
 
       it('should emit navigatedToFile with media', (done) => {
