@@ -39,3 +39,4 @@ deployment:
   only:
     - develop
     - master
+    - extractProductionDeploymentTask
