@@ -10,7 +10,6 @@ import {
 import {Folder} from '../shared/folder.model';
 import {UploadMediaService} from '../services/upload-media.service';
 import { FilesService } from '../services/files-service.service';
-import { AppComponent } from '../app.component';
 
 @Component({
     selector: 'app-cockpit',
