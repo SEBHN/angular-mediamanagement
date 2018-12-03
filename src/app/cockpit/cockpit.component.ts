@@ -9,7 +9,7 @@ import {
 
 import {Folder} from '../shared/folder.model';
 import {UploadMediaService} from '../services/upload-media.service';
-import { FilesService } from '../services/files-service.service';
+import {AppComponent} from "../app.component";
 
 @Component({
     selector: 'app-cockpit',
@@ -33,7 +33,7 @@ export class CockpitComponent implements OnInit {
 
     selectedFile: File;
 
-    constructor(uploadMediaService: UploadMediaService) {
+    constructor(uploadMediaService: UploadMediaService, private app: AppComponent) {
         this.uploadMediaService = uploadMediaService;
     }
 
@@ -53,5 +53,9 @@ export class CockpitComponent implements OnInit {
 
     isNavbarOpen() {
         return this.navbarOpen;
+    }
+
+     navigateUp(){
+        this.app.navigateUp();
     }
 }
