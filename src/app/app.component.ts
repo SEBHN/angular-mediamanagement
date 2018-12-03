@@ -1,9 +1,9 @@
 import {Component, OnInit} from "@angular/core";
 import {FileElement} from "./shared/file-element.model";
 import {FilesService} from "./services/files-service.service";
-import { FetchService } from "./services/fetch.service";
+import {FetchService} from "./services/fetch.service";
 import {faArrowLeft} from '@fortawesome/free-solid-svg-icons';
-import { Folder } from "./shared/folder.model";
+import {Folder} from "./shared/folder.model";
 import {environment} from '../environments/environment';
 
 
@@ -25,6 +25,7 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
+        console.log(this.filesService.memoryMap);
         this.updateQuery();
         this.fileElements = this.filesService.getAllForPath(this.currentPath);
     }
@@ -51,7 +52,12 @@ export class AppComponent implements OnInit {
 
     updateQuery(): void {
         this.filesService.currentPath = this.currentPath;
-        this.fetchService.getCurrentFilesForUser(environment.currentUserId, this.currentPath); //TODO: user management
+        if (this.filesService.memoryMap.has(this.currentPath) == false) {
+            this.fetchService.getCurrentFilesForUser(environment.currentUserId, this.currentPath); //TODO: user management
+        } else {
+            this.filesService.addMany(this.filesService.memoryMap.get(this.currentPath));
+        }
+        console.log(this.filesService.memoryMap);
     }
 
     pushToPath(element: Folder): void {

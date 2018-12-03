@@ -28,6 +28,7 @@ export class UploadMediaService {
             }
         })
             .subscribe((response: HttpResponse<any>) => {
+                console.log(response);
                 this.postFile(userId, response.body['id']);
             }, error => console.log(new Error(error.message)));
     }
@@ -42,6 +43,7 @@ export class UploadMediaService {
         })
             .subscribe((response: HttpResponse<any>) => {
                 const media = JSON.parse(JSON.stringify(response.body));
+                this.filesService.memoryMap.get(this.filesService.currentPath).push(media);
                 this.filesService.createFile(media);
                 this.selectedFile = null;
                 console.log(media);
