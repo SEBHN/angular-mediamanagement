@@ -19,7 +19,7 @@ export class UploadMediaService {
     // POST File Metadata
     postMetaData(selectedFile: File, userId: string = environment.currentUserId): void {
         this.selectedFile = selectedFile;
-        const media = this.getMediaData(selectedFile, this.filesService.currentPath, userId); // Todo: get owner ID from user class
+        const media = this.getMediaData(selectedFile, this.filesService.getCurrentPath(), userId); // Todo: get owner ID from user class
         this.http.post(API_URL + `/users/${userId}/media/`, JSON.stringify(media), {
             reportProgress: true,
             observe: 'response',
