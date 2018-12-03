@@ -29,7 +29,7 @@ export class CreateFolderComponent {
 
   onCreateFolder(folderName: string): void {
     if (folderName !== '') {
-      this.filesService.createFile(new Folder(folderName, this.filesService.currentPath, environment.currentUserId)); //TODO: User management
+      this.filesService.createFile(new Folder(folderName, this.filesService.getCurrentPath(), environment.currentUserId)); //TODO: User management
     }
     this.modalRef.hide();
   }

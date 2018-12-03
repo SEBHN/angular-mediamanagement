@@ -81,6 +81,10 @@ export class FilesService implements IFileService {
     return Array.from(this.map.values()).slice();
   }
 
+  getCurrentPath(): string {
+    return this.currentPath;
+  }
+
   setCurrentPath(path: string): void {
     this.currentPath = path;
     this.applicationPathChanged.emit(path);
