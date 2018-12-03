@@ -20,9 +20,15 @@ export class FilesService implements IFileService {
   private map = new Map<string, FileElement>();
   // event for updating the UI
   fileElementsChanged = new EventEmitter<FileElement[]>();
-  currentPath: string;
+  applicationPathChanged = new EventEmitter<string>();
+  private currentPath: string;
 
-  constructor() {}
+  constructor() {
+    this.applicationPathChanged
+      .subscribe((applicationPath) => {
+        this.currentPath = applicationPath;
+      });
+  }
 
   add(fileElement: FileElement): void {
     // incoming folder
@@ -73,6 +79,11 @@ export class FilesService implements IFileService {
 
   getAll(): FileElement[] {
     return Array.from(this.map.values()).slice();
+  }
+
+  setCurrentPath(path: string): void {
+    this.currentPath = path;
+    this.applicationPathChanged.emit(path);
   }
 
   // Use it to clone objects

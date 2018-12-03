@@ -9,7 +9,8 @@ import {
 
 import {Folder} from '../shared/folder.model';
 import {UploadMediaService} from '../services/upload-media.service';
-import {AppComponent} from "../app.component";
+import { FilesService } from '../services/files-service.service';
+import { AppComponent } from '../app.component';
 
 @Component({
     selector: 'app-cockpit',
@@ -27,13 +28,11 @@ export class CockpitComponent implements OnInit {
     // navbar toggle
     private navbarOpen = false;
 
-    private uploadMediaService: UploadMediaService;
-
     @Output() folderCreated = new EventEmitter<Folder>();
 
     selectedFile: File;
 
-    constructor(uploadMediaService: UploadMediaService, private app: AppComponent) {
+    constructor(private uploadMediaService: UploadMediaService, private filesService: FilesService) {
         this.uploadMediaService = uploadMediaService;
     }
 
@@ -55,7 +54,10 @@ export class CockpitComponent implements OnInit {
         return this.navbarOpen;
     }
 
-     navigateUp(){
-        this.app.navigateUp();
+    toRoot(): void {
+        // reset application path
+        this.filesService.setCurrentPath('/');
+        // update UI for given application path
+        this.filesService.fileElementsChanged.emit(this.filesService.getAllForPath('/'));
     }
 }

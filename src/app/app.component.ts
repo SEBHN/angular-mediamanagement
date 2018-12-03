@@ -25,7 +25,13 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
+        // load initial data
         this.updateQuery();
+        // listen for change in application path
+        this.filesService.applicationPathChanged
+            .subscribe((applicationPath) => {
+                this.currentPath = applicationPath;
+            });
         this.fileElements = this.filesService.getAllForPath(this.currentPath);
     }
 
@@ -50,8 +56,10 @@ export class AppComponent implements OnInit {
     }
 
     updateQuery(): void {
-        this.filesService.currentPath = this.currentPath;
-        this.fetchService.getCurrentFilesForUser(environment.currentUserId, this.currentPath); //TODO: user management
+        // emit path changed event here because updateQuery() gets called in navigate methods
+        this.filesService.applicationPathChanged.emit(this.currentPath);
+        this.fetchService.getCurrentFilesForUser(environment.currentUserId, //TODO: user management
+            this.currentPath);
     }
 
     pushToPath(element: Folder): void {
@@ -71,5 +79,4 @@ export class AppComponent implements OnInit {
     getCurrentPath(): string {
         return this.currentPath;
     }
-
 }
