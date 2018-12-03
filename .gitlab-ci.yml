@@ -35,6 +35,8 @@ deployment:
   dependencies:
     - app-build-production
   script:
+    - ls dist/
+    - ls dist/spring-frontend/
     - npx ngh --dir=dist/spring-frontend --repo=https://$GH_TOKEN@github.com/SEBHN/mvs.git --name="MVS Publisher" --email=443_3w4md4sjdioa@byom.de
   only:
     - develop
