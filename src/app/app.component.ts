@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log(this.filesService.memoryMap);
+        //console.log(this.filesService.memoryMap);
         this.updateQuery();
         this.fileElements = this.filesService.getAllForPath(this.currentPath);
     }
@@ -52,12 +52,24 @@ export class AppComponent implements OnInit {
 
     updateQuery(): void {
         this.filesService.currentPath = this.currentPath;
-        if (this.filesService.memoryMap.has(this.currentPath) == false) {
-            this.fetchService.getCurrentFilesForUser(environment.currentUserId, this.currentPath); //TODO: user management
+
+        // Emin
+        // if (this.filesService.memoryMap.has(this.currentPath) == false) {
+        //     this.fetchService.getCurrentFilesForUser(environment.currentUserId, this.currentPath); //TODO: user management
+        // } else {
+        //     this.filesService.addMany(this.filesService.memoryMap.get(this.currentPath));
+        // }
+        // console.log(this.filesService.memoryMap);
+
+        // Bogdan
+        // check if service has data from current application path
+        if (!this.filesService.getMap().has(this.currentPath)) {
+            // need to fetch from backend
+            this.fetchService.getCurrentFilesForUser(environment.currentUserId, this.currentPath);
         } else {
-            this.filesService.addMany(this.filesService.memoryMap.get(this.currentPath));
+            // data exists - get files with current path from service
+            this.fileElements = this.filesService.getAllForPath(this.currentPath);
         }
-        console.log(this.filesService.memoryMap);
     }
 
     pushToPath(element: Folder): void {
@@ -77,5 +89,4 @@ export class AppComponent implements OnInit {
     getCurrentPath(): string {
         return this.currentPath;
     }
-
 }

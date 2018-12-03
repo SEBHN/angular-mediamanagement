@@ -16,13 +16,13 @@ export class FetchService {
     }
 
     getCurrentFilesForUser(userId: string, currentPath: string) {
+        console.debug(`Fetching data for user ${userId} and path ${currentPath}`);
         const encodedCurrentPath = encodeURIComponent(currentPath);
         this.http.get(API_URL + `/users/${userId}/folders/${encodedCurrentPath}/media/`, {
             reportProgress: true,
             observe: 'response'
         })
             .subscribe((response: HttpResponse<any>) => {
-                console.log(response);
                 // parse arrived response
                 let responseObj = JSON.parse(JSON.stringify(response.body));
                 let filesArray: FileElement[] = [];
@@ -41,9 +41,9 @@ export class FetchService {
                     filesArray.push(media);
                 });
                 // feed files service with data
-                this.filesService.memoryMap.set(this.filesService.currentPath, filesArray);
+                //this.filesService.memoryMap.set(this.filesService.currentPath, filesArray);
                 this.filesService.addMany(filesArray);
-                console.log(this.filesService.memoryMap);
+                //console.log(this.filesService.memoryMap);
             }, err => console.log(new Error(err.message)));
     }
 }

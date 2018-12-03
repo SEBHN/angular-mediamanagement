@@ -1,7 +1,6 @@
 import {Injectable, EventEmitter} from '@angular/core';
 import {FileElement} from '../shared/file-element.model';
 import {v4} from 'node_modules/uuid';
-import {Media} from "../shared/media.model";
 
 
 export interface IFileService {
@@ -22,11 +21,11 @@ export interface IFileService {
 export class FilesService implements IFileService {
     // map containing all file elements with their ids
     private map = new Map<string, FileElement>();
+    // map used for caching data to reduce network traffic
+    //private cache = new Map<string, FileElement[]>();
     // event for updating the UI
     fileElementsChanged = new EventEmitter<FileElement[]>();
     currentPath: string;
-
-    public memoryMap = new Map<string, FileElement[]>();
 
     constructor() {
     }
@@ -54,22 +53,22 @@ export class FilesService implements IFileService {
     }
 
     remove(id: string): void {
-        this.deleteFromMemory(id);
+        //this.removeFromCache(id);
         this.map.delete(id);
         this.fileElementsChanged.emit(this.getAllForPath(this.currentPath));
     }
 
-    deleteFromMemory(id: string) {
-        var index;
-        for (var i = 0; i < this.memoryMap.get(this.currentPath).length; i++) {
-            if (this.memoryMap.get(this.currentPath)[i].id == id) {
-                index = i;
-            }
-        }
-        // put the media to the last pos of the array to simple delete with pop()
-        this.memoryMap.get(this.currentPath).push(this.memoryMap.get(this.currentPath).splice(index, 1)[0]);
-        this.memoryMap.get(this.currentPath).pop();
-    }
+    // removeFromCache(id: string): void {
+    //     var index;
+    //     for (var i = 0; i < this.cache.get(this.currentPath).length; i++) {
+    //         if (this.cache.get(this.currentPath)[i].id == id) {
+    //             index = i;
+    //         }
+    //     }
+    //     // put the media to the last pos of the array to simple delete with pop()
+    //     this.cache.get(this.currentPath).push(this.cache.get(this.currentPath).splice(index, 1)[0]);
+    //     this.cache.get(this.currentPath).pop();
+    // }
 
     createFile(file: FileElement): void {
         this.add(file);
@@ -84,11 +83,11 @@ export class FilesService implements IFileService {
         //TODO: later update / replace whole FileElement
         this.map.get(id).name = updatedName;
 
-        for (var i = 0; i < this.memoryMap.get(this.currentPath).length; i++) {
-            if (this.memoryMap.get(this.currentPath)[i].id == id) {
-                this.memoryMap.get(this.currentPath)[i].name = updatedName;
-            }
-        }
+        // for (var i = 0; i < this.memoryMap.get(this.currentPath).length; i++) {
+        //     if (this.memoryMap.get(this.currentPath)[i].id == id) {
+        //         this.memoryMap.get(this.currentPath)[i].name = updatedName;
+        //     }
+        // }
     }
 
     getAllForPath(path: string): FileElement[] {
@@ -101,7 +100,11 @@ export class FilesService implements IFileService {
         return Array.from(this.map.values()).slice();
     }
 
-// Use it to clone objects
+    getMap(): Map<string, FileElement> {
+        return this.map;
+    }
+
+    // Use it to clone objects
     clone(fileElement: FileElement): FileElement {
         return JSON.parse(JSON.stringify(fileElement));
     }
