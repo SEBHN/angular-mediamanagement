@@ -1,7 +1,6 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { FileElement } from 'src/app/shared/file-element.model';
-import { faFolder } from '@fortawesome/free-solid-svg-icons';
-import { faFile} from '@fortawesome/free-solid-svg-icons';
+import { faFolder, faFile } from '@fortawesome/free-solid-svg-icons';
 import { FilesService } from 'src/app/services/files-service.service';
 
 @Component({
