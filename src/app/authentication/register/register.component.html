@@ -9,7 +9,7 @@
 							<form method="POST" class="my-login-validation" novalidate="">
 								<div class="form-group">
 									<label for="name">Name</label>
-									<input id="name" type="text" class="form-control" name="name" required autofocus>
+									<input id="name" type="text" #nameInput class="form-control" name="name" required autofocus>
 									<div class="invalid-feedback">
 										What's your name?
 									</div>
@@ -17,7 +17,7 @@
 
 								<div class="form-group">
 									<label for="email">E-Mail Address</label>
-									<input id="email" type="email" class="form-control" name="email" required>
+									<input id="email" type="email" #emailInput class="form-control" name="email" required>
 									<div class="invalid-feedback">
 										Your email is invalid
 									</div>
@@ -25,14 +25,15 @@
 
 								<div class="form-group">
 									<label for="password">Password</label>
-									<input id="password" type="password" class="form-control" name="password" required data-eye>
+									<input id="password" type="password" #passwordInput class="form-control" name="password" required data-eye>
 									<div class="invalid-feedback">
 										Password is required
 									</div>
 								</div>
 
 								<div class="form-group m-0">
-									<button type="submit" class="btn btn-warning btn-block">
+									<button type="button" class="btn btn-warning btn-block"
+									 				(click)="onRegister(nameInput.value, emailInput.value, passwordInput.value)">
 										Register
 									</button>
 								</div>

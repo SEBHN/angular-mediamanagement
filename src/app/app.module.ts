@@ -12,7 +12,6 @@ import {HighlightDirective} from './directives/highlight.directive';
 import {ElementComponent} from './file-explorer/element/element.component';
 import {CreateFolderComponent} from './cockpit/modals/create-folder/create-folder.component';
 import { RenameFileComponent } from './cockpit/modals/rename-file/rename-file.component';
-import { AuthenticationComponent } from './authentication/authentication.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './authentication/login/login.component';
 import { RegisterComponent } from './authentication/register/register.component';
@@ -28,7 +27,6 @@ import { RegisterComponent } from './authentication/register/register.component'
         CreateFolderComponent,
         RenameFileComponent,
         AppComponent,
-        AuthenticationComponent,
         LoginComponent,
         RegisterComponent
     ],

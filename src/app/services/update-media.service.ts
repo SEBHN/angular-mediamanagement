@@ -17,8 +17,7 @@ export class UpdateMediaService {
             reportProgress: true,
             observe: 'response',
             headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Methods': ''
+                'Content-Type': 'application/json'
             }
         })
             .subscribe((response) => {
