@@ -25,11 +25,10 @@ import { Folder } from '../shared/folder.model';
   styleUrls: ['./file-explorer.component.css']
 })
 export class FileExplorerComponent implements OnInit {
-  // Context menu icons
+  // Context menu icons and footer icon
   faEdit = faEdit;
   faTrashAlt = faTrashAlt;
   faDownload = faCloudDownloadAlt;
-  // Footer back icon
   faArrowLeft = faArrowLeft;
 
   @Output() folderAdded = new EventEmitter<FileElement>();

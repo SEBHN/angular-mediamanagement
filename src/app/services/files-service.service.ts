@@ -18,13 +18,12 @@ export interface IFileService {
 export class FilesService implements IFileService {
   // map containing all file elements with their ids
   private map = new Map<string, FileElement>();
-
   // event handling
   fileElementsChanged = new EventEmitter<FileElement[]>();
   applicationPathChanged = new EventEmitter<string>();
   navigated = new EventEmitter<FileElement>();
   fileDownloaded = new EventEmitter<FileElement>();
-  
+
   private currentPath: string;
 
   constructor() {
