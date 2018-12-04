@@ -12,6 +12,8 @@ import {HighlightDirective} from './directives/highlight.directive';
 import {ElementComponent} from './file-explorer/element/element.component';
 import {CreateFolderComponent} from './cockpit/modals/create-folder/create-folder.component';
 import { RenameFileComponent } from './cockpit/modals/rename-file/rename-file.component';
+import { AuthenticationComponent } from './authentication/authentication.component';
+import { AppRoutingModule } from './app-routing.module';
 
 
 
@@ -23,7 +25,8 @@ import { RenameFileComponent } from './cockpit/modals/rename-file/rename-file.co
         ElementComponent,
         CreateFolderComponent,
         RenameFileComponent,
-        AppComponent
+        AppComponent,
+        AuthenticationComponent
     ],
     imports: [
         BrowserModule,
@@ -32,7 +35,8 @@ import { RenameFileComponent } from './cockpit/modals/rename-file/rename-file.co
         ModalModule.forRoot(),
         ContextMenuModule.forRoot({
             useBootstrap4: true,
-        })
+        }),
+        AppRoutingModule
     ],
     providers: [],
     bootstrap: [AppComponent]

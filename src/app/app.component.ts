@@ -13,70 +13,10 @@ import {environment} from '../environments/environment';
     styleUrls: ["./app.component.css"]
 })
 export class AppComponent implements OnInit {
-
-    faArrowLeft = faArrowLeft;
-
-    private fileElements: FileElement[];
-    private canNavigateUp = false;
-    private currentPath: string;
-
-    constructor(private filesService: FilesService, private fetchService: FetchService) {
-        this.currentPath = '/';
+    constructor() {
     }
 
     ngOnInit() {
-        // load initial data
-        this.updateQuery();
-        // listen for change in application path
-        this.filesService.applicationPathChanged
-            .subscribe((applicationPath) => {
-                this.currentPath = applicationPath;
-            });
-        this.fileElements = this.filesService.getAllForPath(this.currentPath);
     }
 
-    /**
-     * Navigate down. Gets invoked via event binding from template.
-     * @param folder the folder to navigate into
-     */
-    navigateToFolder(folder: FileElement): void {
-        this.canNavigateUp = true;
-        this.pushToPath(folder);
-        this.updateQuery();
-    }
-
-    navigateUp() {
-        if (this.currentPath === '/') {
-            this.canNavigateUp = false;
-            this.updateQuery();
-        } else {
-            this.popFromPath();
-            this.updateQuery();
-        }
-    }
-
-    updateQuery(): void {
-        // emit path changed event here because updateQuery() gets called in navigate methods
-        this.filesService.applicationPathChanged.emit(this.currentPath);
-        this.fetchService.getCurrentFilesForUser(environment.currentUserId, //TODO: user management
-            this.currentPath);
-    }
-
-    pushToPath(element: Folder): void {
-        this.currentPath += `${element.name}/`;
-    }
-
-    popFromPath(): void {
-        let split = this.currentPath.split('/');
-        split.splice(split.length - 2, 1);
-        this.currentPath = split.join('/');
-    }
-
-    getFileElements(): FileElement[] {
-        return this.fileElements;
-    }
-
-    getCurrentPath(): string {
-        return this.currentPath;
-    }
 }

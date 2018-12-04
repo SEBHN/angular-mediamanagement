@@ -3,7 +3,6 @@ import { FileElement } from 'src/app/shared/file-element.model';
 import { faFolder } from '@fortawesome/free-solid-svg-icons';
 import { faFile} from '@fortawesome/free-solid-svg-icons';
 import { FilesService } from 'src/app/services/files-service.service';
-import { DownloadMediaService } from 'src/app/services/download-media.service';
 
 @Component({
   selector: 'app-element',
@@ -16,10 +15,8 @@ export class ElementComponent implements OnInit {
   faFile = faFile;
 
   @Input() element: FileElement;
-  @Output() navigated = new EventEmitter<FileElement>();
-  @Output() fileDownloaded = new EventEmitter<FileElement>();
 
-  constructor() { }
+  constructor(private filesService: FilesService) { }
 
   ngOnInit() {
   }
@@ -28,10 +25,10 @@ export class ElementComponent implements OnInit {
   onDoubleClick(file: FileElement): void {
     if (file.isFolder) {
       // folder clicked -> navigate into it
-      this.navigated.emit(file);
+      this.filesService.navigated.emit(file);
     } else {
       // file clicked -> download it
-      this.fileDownloaded.emit(file);
+      this.filesService.fileDownloaded.emit(file);
     }
   }
 }
