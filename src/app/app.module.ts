@@ -14,6 +14,8 @@ import {CreateFolderComponent} from './cockpit/modals/create-folder/create-folde
 import { RenameFileComponent } from './cockpit/modals/rename-file/rename-file.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
 import { AppRoutingModule } from './app-routing.module';
+import { LoginComponent } from './authentication/login/login.component';
+import { RegisterComponent } from './authentication/register/register.component';
 
 
 
@@ -26,7 +28,9 @@ import { AppRoutingModule } from './app-routing.module';
         CreateFolderComponent,
         RenameFileComponent,
         AppComponent,
-        AuthenticationComponent
+        AuthenticationComponent,
+        LoginComponent,
+        RegisterComponent
     ],
     imports: [
         BrowserModule,
