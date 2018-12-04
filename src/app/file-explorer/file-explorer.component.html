@@ -2,7 +2,7 @@
 <br>
 <br>
 <div class="container mt-4">
-    <div class="row" *ngFor="let row of displayItems">
+    <div class="row" *ngFor="let row of getDisplayItems()">
         <ng-container *ngFor="let item of row.items">
             <app-element class="col-xs-12 col-md-2"
                          [element]="item"

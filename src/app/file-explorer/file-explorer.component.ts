@@ -87,6 +87,11 @@ export class FileExplorerComponent implements OnInit {
                     });
   }
 
+  // getter for UI
+  getDisplayItems() {
+    return this.displayItems;
+  }
+
   // Methods to send off the occured events
   moveElement(element: FileElement, moveTo: FileElement) {
     this.elementMoved.emit({ element, moveTo });
