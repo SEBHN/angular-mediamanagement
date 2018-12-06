@@ -21,7 +21,12 @@ export class UsersService {
     };
     this.http.post(`${environment.API_URL}/users`, user, httpOptions)
         .subscribe((res: HttpResponse<any>) => {
-          this.router.navigate(['/login']);
+          // redirect user to login if registration was successful
+          if (res.status === 201) {
+            this.router.navigate(['/login']);
+          } else {
+            // TODO: show alert with error?
+          }
         }, error => console.log(new Error(error.message)));
   }
 }
