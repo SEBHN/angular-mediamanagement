@@ -41,7 +41,6 @@ export class FetchService {
                     filesArray.push(media);
                 });
                 // feed files service with data
-                //this.filesService.memoryMap.set(this.filesService.currentPath, filesArray);
                 this.filesService.addMany(filesArray);
                 //console.log(this.filesService.memoryMap);
             }, err => console.log(new Error(err.message)));

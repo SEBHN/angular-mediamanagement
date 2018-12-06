@@ -52,23 +52,15 @@ export class AppComponent implements OnInit {
 
     updateQuery(): void {
         this.filesService.currentPath = this.currentPath;
-
-        // Emin
-        // if (this.filesService.memoryMap.has(this.currentPath) == false) {
-        //     this.fetchService.getCurrentFilesForUser(environment.currentUserId, this.currentPath); //TODO: user management
-        // } else {
-        //     this.filesService.addMany(this.filesService.memoryMap.get(this.currentPath));
-        // }
-        // console.log(this.filesService.memoryMap);
-
-        // Bogdan
-        // check if service has data from current application path
-        if (!this.filesService.getMap().has(this.currentPath)) {
+        let shouldFetch: boolean = this.filesService.getAll().some((file) => {
+            return file.filePath == this.currentPath;
+        });
+        if (!shouldFetch) {
             // need to fetch from backend
             this.fetchService.getCurrentFilesForUser(environment.currentUserId, this.currentPath);
         } else {
             // data exists - get files with current path from service
-            this.fileElements = this.filesService.getAllForPath(this.currentPath);
+            this.filesService.addMany(this.filesService.getAllForPath(this.currentPath));
         }
     }
 

@@ -28,7 +28,6 @@ export class UploadMediaService {
             }
         })
             .subscribe((response: HttpResponse<any>) => {
-                console.log(response);
                 this.postFile(userId, response.body['id']);
             }, error => console.log(new Error(error.message)));
     }

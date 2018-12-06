@@ -21,8 +21,6 @@ export interface IFileService {
 export class FilesService implements IFileService {
     // map containing all file elements with their ids
     private map = new Map<string, FileElement>();
-    // map used for caching data to reduce network traffic
-    //private cache = new Map<string, FileElement[]>();
     // event for updating the UI
     fileElementsChanged = new EventEmitter<FileElement[]>();
     currentPath: string;
@@ -58,18 +56,6 @@ export class FilesService implements IFileService {
         this.fileElementsChanged.emit(this.getAllForPath(this.currentPath));
     }
 
-    // removeFromCache(id: string): void {
-    //     var index;
-    //     for (var i = 0; i < this.cache.get(this.currentPath).length; i++) {
-    //         if (this.cache.get(this.currentPath)[i].id == id) {
-    //             index = i;
-    //         }
-    //     }
-    //     // put the media to the last pos of the array to simple delete with pop()
-    //     this.cache.get(this.currentPath).push(this.cache.get(this.currentPath).splice(index, 1)[0]);
-    //     this.cache.get(this.currentPath).pop();
-    // }
-
     createFile(file: FileElement): void {
         this.add(file);
         this.fileElementsChanged.emit(this.getAllForPath(this.currentPath));
@@ -82,12 +68,6 @@ export class FilesService implements IFileService {
     rename(id: string, updatedName: string): void {
         //TODO: later update / replace whole FileElement
         this.map.get(id).name = updatedName;
-
-        // for (var i = 0; i < this.memoryMap.get(this.currentPath).length; i++) {
-        //     if (this.memoryMap.get(this.currentPath)[i].id == id) {
-        //         this.memoryMap.get(this.currentPath)[i].name = updatedName;
-        //     }
-        // }
     }
 
     getAllForPath(path: string): FileElement[] {

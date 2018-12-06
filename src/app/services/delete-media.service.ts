@@ -25,7 +25,6 @@ export class DeleteMediaService {
     }
 
     deleteMediaResponse(response: HttpResponse<any>) {
-        console.log(response);
         this.fileService.remove(this.tempID);
     }
 
