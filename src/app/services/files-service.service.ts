@@ -1,15 +1,18 @@
-import { Injectable, EventEmitter } from '@angular/core';
-import { FileElement } from '../shared/file-element.model';
-import { v4 } from 'node_modules/uuid';
-
+import {Injectable, EventEmitter} from '@angular/core';
+import {FileElement} from '../shared/file-element.model';
+import {v4} from 'node_modules/uuid';
 
 
 export interface IFileService {
-  createFile(fileElement: FileElement): void;
-  remove(id: string): void;
-  getAll(): FileElement[];
-  get(id: string): FileElement;
-  rename(id: string, updatedName: string): void;
+    createFile(fileElement: FileElement): void;
+
+    remove(id: string): void;
+
+    getAll(): FileElement[];
+
+    get(id: string): FileElement;
+
+    rename(id: string, updatedName: string): void;
 }
 
 @Injectable({
@@ -26,7 +29,9 @@ export class FilesService implements IFileService {
 
   private currentPath: string;
 
+
   constructor() {
+    // listen for path change event (can be triggered from home icon as well!)
     this.applicationPathChanged
       .subscribe((applicationPath) => {
         this.currentPath = applicationPath;
@@ -37,7 +42,7 @@ export class FilesService implements IFileService {
     // incoming folder
     if (fileElement.id == null) {
       // check by name if folder is in memory
-      let match = this.getAll().find(element => element.name === fileElement.name);
+      const match = this.getAll().find(element => element.name === fileElement.name);
       if (typeof match === 'undefined') {
         // folder doesn't exist in memory
         fileElement.id = v4(); // generate random uuid
@@ -71,7 +76,7 @@ export class FilesService implements IFileService {
 
   rename(id: string, updatedName: string): void {
     this.map.get(id).name = updatedName;
-    //TODO: later update / replace whole FileElement
+    // TODO: later update / replace whole FileElement
   }
 
   getAllForPath(path: string): FileElement[] {
@@ -90,7 +95,6 @@ export class FilesService implements IFileService {
 
   setCurrentPath(path: string): void {
     this.currentPath = path;
-    this.applicationPathChanged.emit(path);
   }
 
   // Use it to clone objects

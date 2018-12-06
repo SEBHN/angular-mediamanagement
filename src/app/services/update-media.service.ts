@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Media} from "../shared/media.model";
-import {FilesService} from "./files-service.service";
 import {environment} from '../../environments/environment';
+import { FilesService } from './files-service.service';
+import { Media } from '../shared/media.model';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -17,11 +17,11 @@ export class UpdateMediaService {
             reportProgress: true,
             observe: 'response',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             }
         })
             .subscribe((response) => {
-                this.filesService.rename(response.body["id"], response.body["name"]);
+                this.filesService.rename(response.body['id'], response.body['name']);
             }, error => console.log(new Error(error.message)));
     }
 }

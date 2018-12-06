@@ -1,5 +1,5 @@
-import { FileElement } from "./file-element.model";
-import { Tag } from "./tag.model";
+import { FileElement } from './file-element.model';
+import { Tag } from './tag.model';
 
 export class Folder implements FileElement {
 

@@ -1,5 +1,5 @@
-import { Tag } from "./tag.model";
-import { FileElement } from "./file-element.model";
+import { Tag } from './tag.model';
+import { FileElement } from './file-element.model';
 
 /**
  * Media of any type. Can be placed inside a Folder.

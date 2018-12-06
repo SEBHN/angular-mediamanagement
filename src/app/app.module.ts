@@ -1,7 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {HttpClientModule} from "@angular/common/http";
 import {ModalModule} from 'ngx-bootstrap';
 import { ContextMenuModule } from 'ngx-contextmenu';
 
@@ -15,7 +14,9 @@ import { RenameFileComponent } from './cockpit/modals/rename-file/rename-file.co
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './authentication/login/login.component';
 import { RegisterComponent } from './authentication/register/register.component';
-import { NotFoundComponent } from './authentication/not-found/not-found.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 
 

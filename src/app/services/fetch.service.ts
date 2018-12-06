@@ -1,11 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpResponse} from "@angular/common/http";
-import {FilesService} from "./files-service.service";
+import {HttpClient, HttpResponse} from '@angular/common/http';
+import {FilesService} from './files-service.service';
 import { FileElement } from '../shared/file-element.model';
 import { Media } from '../shared/media.model';
 import { environment } from '../../environments/environment';
-
-const API_URL = environment.API_URL;
 
 @Injectable({
     providedIn: 'root'
@@ -17,14 +15,14 @@ export class FetchService {
 
     getCurrentFilesForUser(userId: string, currentPath: string) {
         const encodedCurrentPath = encodeURIComponent(currentPath);
-        this.http.get(API_URL + `/users/${userId}/folders/${encodedCurrentPath}/media/`, {
+        this.http.get(environment.API_URL + `/users/${userId}/folders/${encodedCurrentPath}/media/`, {
             reportProgress: true,
             observe: 'response'
         })
             .subscribe((response: HttpResponse<any>) => {
                 // parse arrived response
-                let responseObj = JSON.parse(JSON.stringify(response.body));
-                let filesArray: FileElement[] = [];
+                const responseObj = JSON.parse(JSON.stringify(response.body));
+                const filesArray: FileElement[] = [];
                 // if there are no subfolders in the current path
                 // don't iterate
                 if (responseObj.subfolders.length > 0) {

@@ -1,9 +1,9 @@
-import {Component, TemplateRef, Input, ViewChild} from '@angular/core';
+import {Component, TemplateRef, ViewChild} from '@angular/core';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {faEdit} from '@fortawesome/free-solid-svg-icons';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import {Media} from "../../../shared/media.model";
-import {UpdateMediaService} from "../../../services/update-media.service";
+import {Media} from '../../../shared/media.model';
+import {UpdateMediaService} from '../../../services/update-media.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -30,11 +30,11 @@ export class RenameFileComponent {
     }
 
     onRename(name: string): void {
-        if (name.includes("." + this.file.fileExtension) == false) {
-            name = name + "." + this.file.fileExtension;
+        if (name.includes('.' + this.file.fileExtension) === false) {
+            name = name + '.' + this.file.fileExtension;
         }
         this.file.name = name;
-        this.updateMediaService.putMedia(this.file, environment.currentUserId); //TODO: later user management
+        this.updateMediaService.putMedia(this.file, environment.currentUserId); // TODO: later user management
         this.modalRef.hide();
     }
 }

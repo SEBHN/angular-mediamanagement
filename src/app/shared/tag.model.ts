@@ -6,7 +6,7 @@ export class Tag {
     this.name = name;
   }
 
-  getName():string {
+  getName(): string {
     return this.name;
   }
 }

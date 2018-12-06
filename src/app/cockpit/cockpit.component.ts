@@ -55,7 +55,8 @@ export class CockpitComponent implements OnInit {
 
     toRoot(): void {
         // reset application path
-        this.filesService.setCurrentPath('/');
+        // this.filesService.setCurrentPath('/');
+        this.filesService.applicationPathChanged.emit('/');
         // update UI for given application path
         this.filesService.fileElementsChanged.emit(this.filesService.getAllForPath('/'));
     }

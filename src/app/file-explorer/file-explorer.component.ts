@@ -47,7 +47,8 @@ export class FileExplorerComponent implements OnInit {
   private currentPath: string;
   private canNavigateUp: boolean;
 
-  constructor(private filesService: FilesService, private deleteMediaService: DeleteMediaService, private downloadMediaService: DownloadMediaService, private fetchService: FetchService) {
+  constructor(private filesService: FilesService, private deleteMediaService: DeleteMediaService,
+    private downloadMediaService: DownloadMediaService, private fetchService: FetchService) {
     this.currentPath = '/';
     this.canNavigateUp = false;
   }
@@ -59,6 +60,7 @@ export class FileExplorerComponent implements OnInit {
     // listen for change in application path
     this.filesService.applicationPathChanged
       .subscribe((applicationPath) => {
+        console.log('path changed');
         this.currentPath = applicationPath;
     });
     this.mediaFiles = this.filesService.getAllForPath(this.currentPath);
@@ -107,11 +109,18 @@ export class FileExplorerComponent implements OnInit {
   }
 
   // Folder navigation handling
+  // Update UI with file elements for current path
   updateQuery(): void {
-    // emit path changed event here because updateQuery() gets called in navigate methods
     this.filesService.applicationPathChanged.emit(this.currentPath);
-    this.fetchService.getCurrentFilesForUser(environment.currentUserId, //TODO: user management
-        this.currentPath);
+    // check if data is already loaded in the service
+    const shouldFetch: boolean = this.filesService.getAll().some(file => file.filePath === this.currentPath);
+    if (!shouldFetch) {
+        // need to fetch from backend
+        this.fetchService.getCurrentFilesForUser(environment.currentUserId, this.currentPath);
+    } else {
+        // data exists - get files with current path from service
+        this.filesService.addMany(this.filesService.getAllForPath(this.currentPath));
+      }
   }
 
   /**
@@ -140,7 +149,7 @@ export class FileExplorerComponent implements OnInit {
   }
 
   popFromPath(): void {
-    let split = this.currentPath.split('/');
+    const split = this.currentPath.split('/');
     split.splice(split.length - 2, 1);
     this.currentPath = split.join('/');
   }

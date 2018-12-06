@@ -4,7 +4,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { faFolderPlus } from '@fortawesome/free-solid-svg-icons';
 import { FilesService } from 'src/app/services/files-service.service';
 import { Folder } from 'src/app/shared/folder.model';
-import {environment} from "../../../../environments/environment";
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-create-folder',
@@ -22,14 +22,15 @@ export class CreateFolderComponent {
   constructor(modalService: BsModalService, private filesService: FilesService) {
     this.modalService = modalService;
   }
- 
+
   openModal() {
     this.modalRef = this.modalService.show(this.createFolderRef);
   }
 
   onCreateFolder(folderName: string): void {
     if (folderName !== '') {
-      this.filesService.createFile(new Folder(folderName, this.filesService.getCurrentPath(), environment.currentUserId)); //TODO: User management
+      this.filesService.createFile(new Folder(folderName,
+        this.filesService.getCurrentPath(), environment.currentUserId)); // TODO: User management
     }
     this.modalRef.hide();
   }
