@@ -7,7 +7,7 @@ import { RegisterComponent } from "./authentication/register/register.component"
 import { NotFoundComponent } from "./authentication/not-found/not-found.component";
 
 const appRoutes: Routes = [
-  { path: '', component: FileExplorerComponent },
+  { path: '', redirectTo: 'media/management', pathMatch: 'full' },
   { path: 'media', component: FileExplorerComponent, children: [
     { path: 'management', component: CockpitComponent }
   ] },
