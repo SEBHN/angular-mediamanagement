@@ -15,6 +15,7 @@ import { RenameFileComponent } from './cockpit/modals/rename-file/rename-file.co
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './authentication/login/login.component';
 import { RegisterComponent } from './authentication/register/register.component';
+import { NotFoundComponent } from './authentication/not-found/not-found.component';
 
 
 
@@ -28,7 +29,8 @@ import { RegisterComponent } from './authentication/register/register.component'
         RenameFileComponent,
         AppComponent,
         LoginComponent,
-        RegisterComponent
+        RegisterComponent,
+        NotFoundComponent
     ],
     imports: [
         BrowserModule,
