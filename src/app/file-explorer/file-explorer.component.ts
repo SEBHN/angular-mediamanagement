@@ -60,7 +60,6 @@ export class FileExplorerComponent implements OnInit {
     // listen for change in application path
     this.filesService.applicationPathChanged
       .subscribe((applicationPath) => {
-        console.log('path changed');
         this.currentPath = applicationPath;
     });
     this.mediaFiles = this.filesService.getAllForPath(this.currentPath);
