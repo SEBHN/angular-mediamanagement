@@ -1,10 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { ElementComponent } from './element.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Media } from '../../shared/media.model';
 import { Folder } from '../../shared/folder.model';
 import { FilesService } from 'src/app/services/files-service.service';
+import { ContextMenuModule } from 'ngx-contextmenu';
 
 describe('ElementComponent', () => {
   let component: ElementComponent;
@@ -13,23 +15,18 @@ describe('ElementComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [FontAwesomeModule],
-      declarations: [ ElementComponent ]
+      imports: [FontAwesomeModule, RouterTestingModule],
+      declarations: [ ElementComponent ],
+      providers: [FilesService]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ElementComponent);
-    // add service instance for testing
-    TestBed.configureTestingModule({
-      providers: [{
-        useValue: FilesService
-      }]
-    }).compileComponents();
     component = fixture.componentInstance;
-    filesService = TestBed.get(FilesService);
     fixture.detectChanges();
+    filesService = TestBed.get(FilesService);
   });
 
   it('should create', () => {
