@@ -27,13 +27,11 @@ export class CockpitComponent implements OnInit {
     // navbar toggle
     private navbarOpen = false;
 
-    private uploadMediaService: UploadMediaService;
-
     @Output() folderCreated = new EventEmitter<Folder>();
 
     selectedFile: File;
 
-    constructor(uploadMediaService: UploadMediaService) {
+    constructor(private uploadMediaService: UploadMediaService, private filesService: FilesService) {
         this.uploadMediaService = uploadMediaService;
     }
 
@@ -53,5 +51,12 @@ export class CockpitComponent implements OnInit {
 
     isNavbarOpen() {
         return this.navbarOpen;
+    }
+
+    toRoot(): void {
+        // reset application path
+        this.filesService.setCurrentPath('/');
+        // update UI for given application path
+        this.filesService.fileElementsChanged.emit(this.filesService.getAllForPath('/'));
     }
 }

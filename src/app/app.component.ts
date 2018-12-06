@@ -25,8 +25,13 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
-        //console.log(this.filesService.memoryMap);
+        // load initial data
         this.updateQuery();
+        // listen for change in application path
+        this.filesService.applicationPathChanged
+            .subscribe((applicationPath) => {
+                this.currentPath = applicationPath;
+            });
         this.fileElements = this.filesService.getAllForPath(this.currentPath);
     }
 
@@ -51,7 +56,7 @@ export class AppComponent implements OnInit {
     }
 
     updateQuery(): void {
-        this.filesService.currentPath = this.currentPath;
+        this.filesService.applicationPathChanged.emit(this.currentPath);
         let shouldFetch: boolean = this.filesService.getAll().some((file) => {
             return file.filePath == this.currentPath;
         });
