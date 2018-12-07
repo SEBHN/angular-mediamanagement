@@ -34,8 +34,8 @@ import { HttpClientModule } from '@angular/common/http';
         NotFoundComponent
     ],
     imports: [
-        BrowserModule,
         HttpClientModule,
+        BrowserModule,
         FontAwesomeModule,
         ModalModule.forRoot(),
         ContextMenuModule.forRoot({

@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { DeleteMediaService } from './delete-media.service';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule } from '@angular/common/http';
 
 describe('DeleteMediaService', () => {
   beforeEach(() => TestBed.configureTestingModule({imports: [

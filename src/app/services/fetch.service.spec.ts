@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { FetchService } from './fetch.service';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule } from '@angular/common/http';
 
 describe('FetchService', () => {
   beforeEach(() => TestBed.configureTestingModule({imports: [

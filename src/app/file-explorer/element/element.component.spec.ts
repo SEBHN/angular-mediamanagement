@@ -7,6 +7,7 @@ import { Media } from '../../shared/media.model';
 import { Folder } from '../../shared/folder.model';
 import { FilesService } from 'src/app/services/files-service.service';
 import { ContextMenuModule } from 'ngx-contextmenu';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('ElementComponent', () => {
   let component: ElementComponent;
@@ -15,7 +16,7 @@ describe('ElementComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [FontAwesomeModule, RouterTestingModule],
+      imports: [FontAwesomeModule, RouterTestingModule, HttpClientModule],
       declarations: [ ElementComponent ],
       providers: [FilesService]
     })
