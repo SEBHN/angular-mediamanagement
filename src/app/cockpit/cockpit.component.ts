@@ -10,6 +10,7 @@ import {
 import {Folder} from '../shared/folder.model';
 import {UploadMediaService} from '../services/upload-media.service';
 import { FilesService } from '../services/files-service.service';
+import {TagService} from "../services/tag.service";
 
 @Component({
     selector: 'app-cockpit',
@@ -31,7 +32,7 @@ export class CockpitComponent implements OnInit {
 
     selectedFile: File;
 
-    constructor(private uploadMediaService: UploadMediaService, private filesService: FilesService) {
+    constructor(private uploadMediaService: UploadMediaService, private filesService: FilesService, private tagService: TagService) {
         this.uploadMediaService = uploadMediaService;
     }
 
@@ -61,7 +62,7 @@ export class CockpitComponent implements OnInit {
         this.filesService.fileElementsChanged.emit(this.filesService.getAllForPath('/'));
     }
 
-    searchTag(tagName: string):void {
-        console.log(tagName);
+    searchTag(tag: string):void {
+        this.tagService.searchForTag(this.filesService.getCurrentPath(), tag);
     }
 }
