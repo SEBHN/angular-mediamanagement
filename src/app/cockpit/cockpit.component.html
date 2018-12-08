@@ -19,10 +19,10 @@
     </ul>
 
     <!-- Search form for tags -->
-    <form class="form-inline my-lg-0 mx-3">
-      <input class="form-control mr-sm-2 my-2" type="search" placeholder="Search tag..." aria-label="Search">
-      <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    <div class="form-inline my-lg-0 mx-3">
+      <input class="form-control mr-sm-2 my-2" placeholder="Search tag..." aria-label="Search" #searchInput>
+      <button class="btn btn-outline-warning my-2 my-sm-0" (click)="searchTag(searchInput.value)">Search</button>
+    </div>
     <!-- Right ul with Upload and Sign Out -->
     <ul class="navbar-nav py-2">
       <li class="nav-item mx-2">

@@ -60,4 +60,8 @@ export class CockpitComponent implements OnInit {
         // update UI for given application path
         this.filesService.fileElementsChanged.emit(this.filesService.getAllForPath('/'));
     }
+
+    searchTag(tagName: string):void {
+        console.log(tagName);
+    }
 }
