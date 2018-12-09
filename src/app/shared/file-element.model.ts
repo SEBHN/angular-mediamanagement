@@ -11,8 +11,8 @@ export interface FileElement {
   creatorId: string;
   tags: Tag[];
 
-  addTag(tag: Tag);
+  addTag(tag: Tag): void;
 
-  removeTag(tag: Tag);
+  removeTag(tag: Tag): void;
 
 }

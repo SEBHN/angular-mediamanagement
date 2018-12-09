@@ -44,11 +44,11 @@ export class Media implements FileElement {
         return this.id;
     }
 
-    addTag(tag: Tag) {
-
+    addTag(tag: Tag): void {
+        this.tags.push(tag);
     }
 
-    removeTag(tag: Tag) {
-
+    removeTag(tag: Tag): void {
+        throw new Error('Not yet implemented');
     }
 }
