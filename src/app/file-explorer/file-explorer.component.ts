@@ -127,9 +127,13 @@ export class FileExplorerComponent implements OnInit {
    * @param folder the folder to navigate into
    */
   navigateToFolder(folder: FileElement): void {
-    this.canNavigateUp = true;
-    this.pushToPath(folder);
-    this.updateQuery();
+    if (environment.isInstanceOfFolder(folder)) {
+      this.canNavigateUp = true;
+      this.pushToPath(folder);
+      this.updateQuery();
+    } else {
+      // clicked element is not a folder. Show msg?
+    }
   }
 
   navigateUp() {
