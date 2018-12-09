@@ -12,9 +12,9 @@ import { ContextMenuComponent } from 'ngx-contextmenu';
 import { faEdit, faTrashAlt, faCloudDownloadAlt, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import {DeleteMediaService} from '../services/delete-media.service';
 import {DownloadMediaService} from '../services/download-media.service';
-import { environment } from 'src/environments/environment';
 import { FetchService } from '../services/fetch.service';
 import { Folder } from '../shared/folder.model';
+import { environment } from 'src/environments/environment';
 
 /**
  * Single component representing Media and Folder in the view.
@@ -129,7 +129,7 @@ export class FileExplorerComponent implements OnInit {
   navigateToFolder(folder: FileElement): void {
     if (environment.isInstanceOfFolder(folder)) {
       this.canNavigateUp = true;
-      this.pushToPath(folder);
+      this.pushToPath(folder as Folder);
       this.updateQuery();
     } else {
       // clicked element is not a folder. Show msg?
