@@ -4,6 +4,6 @@
             (dblclick)="onDoubleClick(element)">
         <fa-icon [icon]="element.isFolder == true ? faFolder : faFile "class="fa-3x"></fa-icon>
         <p class="lead">{{ element.name }}</p>
-        <span *ngFor="let tag of element.tags" class="badge badge-warning">{{ tag.getName() }}</span>
+        <span *ngFor="let tag of element.tags" class="badge badge-warning">{{ tag.name }}</span>
     </button>
 </div>
