@@ -5,6 +5,7 @@ import { FileElement } from '../shared/file-element.model';
 import { Media } from '../shared/media.model';
 import { environment } from '../../environments/environment';
 import { Folder } from '../shared/folder.model';
+import { Tag } from '../shared/tag.model';
 
 @Injectable({
     providedIn: 'root'
@@ -29,17 +30,22 @@ export class FetchService {
                 if (responseObj.subfolders.length > 0) {
                     // mark all subfolders as such
                     responseObj.subfolders.forEach((subfolder: FileElement) => {
-                        filesArray.push(new Folder(subfolder.name, currentPath, userId));
+                        const folder = new Folder(subfolder.name, currentPath, userId);
+                        // apply type guard
+                        folder.member = 'Folder';
+                        filesArray.push(folder);
                     });
                 }
                 // add all media from response to result array
                 responseObj.media.forEach((media: Media) => {
                     // parse response to frontend media object
                     const mediaFile = new Media(media.id, media.name, media.fileId, media.fileExtension, media.filePath, media.creatorId);
+                    // set type guard
+                    mediaFile.member = 'Media';
                     // if media from response has tags
                     if (media.tags != null) {
                         // add received tags from backend to the specific media
-                        media.tags.forEach(tag => mediaFile.addTag(tag));
+                        media.tags.forEach(tag => mediaFile.addTag(tag.name));
                     }
                     filesArray.push(mediaFile);
                 });
