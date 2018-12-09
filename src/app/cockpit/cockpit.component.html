@@ -8,8 +8,15 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse text-center" [ngClass]="{'show': isNavbarOpen() }" id="navbarNav">
-    <!-- Create New Folder Element -->
+    <!-- Add tag -->
     <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a appHighlight role="button" class="nav-link mx-3 cursor-pointer"
+           (click)="createModal.openModal()">
+          <fa-icon [icon]="faTag"></fa-icon>
+        </a>
+      </li>
+    <!-- Create New Folder Element -->
       <li class="nav-item active">
         <a appHighlight role="button" class="nav-link mx-3 cursor-pointer"
            (click)="createModal.openModal()">

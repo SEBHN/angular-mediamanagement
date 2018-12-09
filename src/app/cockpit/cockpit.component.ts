@@ -4,7 +4,8 @@ import {
     faCloudUploadAlt,
     faSignOutAlt,
     faArrowLeft,
-    faFolderPlus
+    faFolderPlus,
+    faTag
 } from '@fortawesome/free-solid-svg-icons';
 
 import {Folder} from '../shared/folder.model';
@@ -25,6 +26,7 @@ export class CockpitComponent implements OnInit {
     faSignOutAlt = faSignOutAlt;
     faArrowLeft = faArrowLeft;
     faFolderPlus = faFolderPlus;
+    faTag = faTag;
 
     // navbar toggle
     private navbarOpen = false;
