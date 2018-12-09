@@ -1,50 +1,45 @@
 <!-- Cockpit navigation component -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top mb-4">
-  <a appHighlight class="navbar-brand text-white" (click)="toRoot()">
-    <fa-icon [icon]="faHome"></fa-icon>
-  </a>
-  <button class="navbar-toggler" type="button"
-          data-toggle="collapse" data-target="#navbarNav" (click)="toggleNavbar()">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse text-center" [ngClass]="{'show': isNavbarOpen() }" id="navbarNav">
-    <!-- Add tag -->
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item active">
-        <a appHighlight role="button" class="nav-link mx-3 cursor-pointer"
-           (click)="createModal.openModal()">
-          <fa-icon [icon]="faTag"></fa-icon>
-        </a>
-      </li>
-    <!-- Create New Folder Element -->
-      <li class="nav-item active">
-        <a appHighlight role="button" class="nav-link mx-3 cursor-pointer"
-           (click)="createModal.openModal()">
-          <fa-icon [icon]="faFolderPlus"></fa-icon>
-        </a>
-      </li>
-    </ul>
+    <a appHighlight class="navbar-brand text-white" (click)="toRoot()">
+        <fa-icon [icon]="faHome"></fa-icon>
+    </a>
+    <button class="navbar-toggler" type="button"
+            data-toggle="collapse" data-target="#navbarNav" (click)="toggleNavbar()">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse text-center" [ngClass]="{'show': isNavbarOpen() }" id="navbarNav">
+        <!-- Create New Folder Element -->
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a appHighlight role="button" class="nav-link mx-3 cursor-pointer"
+                   (click)="createModal.openModal()">
+                    <fa-icon [icon]="faFolderPlus"></fa-icon>
+                </a>
+            </li>
+        </ul>
 
-    <!-- Search form for tags -->
-    <div class="form-inline my-lg-0 mx-3">
-      <input class="form-control mr-sm-2 my-2" placeholder="Search tag..." aria-label="Search" #searchInput>
-      <button class="btn btn-outline-warning my-2 my-sm-0" (click)="searchTag(searchInput.value)">Search</button>
+        <!-- Search form for tags -->
+        <div class="form-inline my-lg-0 mx-3">
+            <input class="form-control mr-sm-2 my-2" placeholder="Search tag..." aria-label="Search" #searchInput>
+            <button class="btn btn-outline-warning my-2 my-sm-0" (click)="searchTag(searchInput.value)">Search</button>
+        </div>
+        <!-- Right ul with Upload and Sign Out -->
+        <ul class="navbar-nav py-2">
+            <li class="nav-item mx-2">
+                <a appHighlight class="nav-link" (click)="fileInput.click()">
+                    <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
+                    Upload file
+                    <fa-icon [icon]="faCloudUploadAlt" class="ml-1"></fa-icon>
+                </a>
+            </li>
+            <li class="nav-item mx-2">
+                <a appHighlight class="nav-link">
+                    Sign out
+                    <fa-icon [icon]="faSignOutAlt" class="ml-1"></fa-icon>
+                </a>
+            </li>
+        </ul>
     </div>
-    <!-- Right ul with Upload and Sign Out -->
-    <ul class="navbar-nav py-2">
-      <li class="nav-item mx-2">
-        <a appHighlight class="nav-link" (click)="fileInput.click()">
-          <input  style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
-          Upload file <fa-icon [icon]="faCloudUploadAlt" class="ml-1"></fa-icon>
-        </a>
-      </li>
-      <li class="nav-item mx-2">
-        <a appHighlight class="nav-link">
-          Sign out <fa-icon [icon]="faSignOutAlt" class="ml-1"></fa-icon>
-        </a>
-      </li>
-    </ul>
-  </div>
 </nav>
 
 <app-create-folder #createModal></app-create-folder>

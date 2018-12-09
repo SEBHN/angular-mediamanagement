@@ -9,7 +9,7 @@ import { Media } from '../shared/media.model';
 import { FileElement } from '../shared/file-element.model';
 import { FilesService } from '../services/files-service.service';
 import { ContextMenuComponent } from 'ngx-contextmenu';
-import { faEdit, faTrashAlt, faCloudDownloadAlt, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrashAlt, faCloudDownloadAlt, faArrowLeft, faTag } from '@fortawesome/free-solid-svg-icons';
 import {DeleteMediaService} from '../services/delete-media.service';
 import {DownloadMediaService} from '../services/download-media.service';
 import { environment } from 'src/environments/environment';
@@ -30,6 +30,7 @@ export class FileExplorerComponent implements OnInit {
   faTrashAlt = faTrashAlt;
   faDownload = faCloudDownloadAlt;
   faArrowLeft = faArrowLeft;
+  faTag = faTag;
 
   @Output() folderAdded = new EventEmitter<FileElement>();
   @Output() elementRemoved = new EventEmitter<FileElement>();

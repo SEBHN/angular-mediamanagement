@@ -1,0 +1,24 @@
+<!-- Rename File Modal -->
+<ng-template #addTag>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Do you want to add tag to {{ file.name }}?</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><fa-icon [icon]="faTag"></fa-icon></span>
+            </div>
+            <input type="text" class="form-control" placeholder="add tag" #addTagInput>
+        </div>
+        <div class="input-group mb-3 justify-content-center">
+            <button type="button" class="btn btn-outline-success mx-3"
+                    (click)="onAddTag(addTagInput.value)">Add Tag</button>
+
+            <button type="button" class="btn btn-outline-danger mx-3"
+                    (click)="modalRef.hide()">Close</button>
+        </div>
+    </div>
+</ng-template>

@@ -20,6 +20,10 @@
         <fa-icon class="d-inline mr-2 text-dark" [icon]="faDownload"></fa-icon>
         <p class="lead d-inline text-dark">Download</p>
     </ng-template>
+    <ng-template contextMenuItem let-item (execute)="addTag.openModal($event.item)">
+        <fa-icon class="d-inline mr-2 text-dark" [icon]="faTag"></fa-icon>
+        <p class="lead d-inline text-dark">Add Tag</p>
+    </ng-template>
     <ng-template contextMenuItem let-item (execute)="renameModal.openModal($event.item)">
         <fa-icon class="d-inline mr-2 text-dark" [icon]="faEdit"></fa-icon>
         <p class="lead d-inline text-dark">Rename</p>
@@ -31,6 +35,7 @@
 </context-menu>
 
 <app-rename-file #renameModal></app-rename-file>
+<app-add-tag #addTag></app-add-tag>
 
 <!-- Footer to show navigation -->
 <footer class="footer">

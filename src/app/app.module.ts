@@ -16,6 +16,7 @@ import { LoginComponent } from './authentication/login/login.component';
 import { RegisterComponent } from './authentication/register/register.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AddTagComponent } from './cockpit/modals/add-tag/add-tag.component';
 
 
 
@@ -31,7 +32,8 @@ import { HttpClientModule } from '@angular/common/http';
         AppComponent,
         LoginComponent,
         RegisterComponent,
-        NotFoundComponent
+        NotFoundComponent,
+        AddTagComponent
     ],
     imports: [
         HttpClientModule,
