@@ -68,6 +68,10 @@ export class FileExplorerComponent implements OnInit {
     this.filesService.navigated
       .subscribe(folder => this.navigateToFolder(folder));
 
+    // listen for download event
+    this.filesService.fileDownloaded
+      .subscribe((file) => this.downloadElement(file));
+
     /*
      * Algorithm to distribute all elements in a matrix. In the grid system a row
      * (of Bootstrap 4) has 12 columns. Here we take chunk of 6 items and push them
