@@ -11,6 +11,7 @@ import {Folder} from '../shared/folder.model';
 import {UploadMediaService} from '../services/upload-media.service';
 import { FilesService } from '../services/files-service.service';
 import {TagService} from "../services/tag.service";
+import {environment} from "../../environments/environment";
 
 @Component({
     selector: 'app-cockpit',
@@ -63,6 +64,6 @@ export class CockpitComponent implements OnInit {
     }
 
     searchTag(tag: string):void {
-        this.tagService.searchForTag(this.filesService.getCurrentPath(), tag);
+        this.tagService.searchForTag(this.filesService.getCurrentPath(), tag, environment.currentUserId);
     }
 }
