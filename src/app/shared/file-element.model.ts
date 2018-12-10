@@ -10,9 +10,9 @@ export interface FileElement {
   filePath: string;
   creatorId: string;
   tags: Tag[];
+  member: string;
 
-  addTag(tag: Tag);
+  addTag(tag: string): void;
 
-  removeTag(tag: Tag);
-
+  removeTag(tag: Tag): void;
 }

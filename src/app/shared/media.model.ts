@@ -12,6 +12,7 @@ export class Media implements FileElement {
     filePath: string;
     creatorId: string;
     tags: Tag[];
+    member: string; // used only for the typeguard at runtime
 
     fileId: string;
     fileExtension: string;
@@ -44,11 +45,19 @@ export class Media implements FileElement {
         return this.id;
     }
 
-    addTag(tag: Tag) {
-
+    addTag(name: string): void {
+        this.tags.push(new Tag(name));
     }
 
-    removeTag(tag: Tag) {
+    removeTag(tag: Tag): void {
+        throw new Error('Not yet implemented');
+    }
 
+    getTags(): Tag[] {
+        return this.tags;
+    }
+
+    setTags(tags: Tag[]): void {
+        this.tags = tags;
     }
 }

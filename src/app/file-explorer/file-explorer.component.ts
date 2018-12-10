@@ -12,9 +12,9 @@ import { ContextMenuComponent } from 'ngx-contextmenu';
 import { faEdit, faTrashAlt, faCloudDownloadAlt, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import {DeleteMediaService} from '../services/delete-media.service';
 import {DownloadMediaService} from '../services/download-media.service';
-import { environment } from 'src/environments/environment';
 import { FetchService } from '../services/fetch.service';
 import { Folder } from '../shared/folder.model';
+import { environment } from 'src/environments/environment';
 
 /**
  * Single component representing Media and Folder in the view.
@@ -67,6 +67,10 @@ export class FileExplorerComponent implements OnInit {
     // listen for navigation event
     this.filesService.navigated
       .subscribe(folder => this.navigateToFolder(folder));
+
+    // listen for download event
+    this.filesService.fileDownloaded
+      .subscribe((file) => this.downloadElement(file));
 
     /*
      * Algorithm to distribute all elements in a matrix. In the grid system a row
@@ -127,9 +131,13 @@ export class FileExplorerComponent implements OnInit {
    * @param folder the folder to navigate into
    */
   navigateToFolder(folder: FileElement): void {
-    this.canNavigateUp = true;
-    this.pushToPath(folder);
-    this.updateQuery();
+    if (environment.isInstanceOfFolder(folder)) {
+      this.canNavigateUp = true;
+      this.pushToPath(folder as Folder);
+      this.updateQuery();
+    } else {
+      // clicked element is not a folder. Show msg?
+    }
   }
 
   navigateUp() {

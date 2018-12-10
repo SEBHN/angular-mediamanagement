@@ -2,6 +2,9 @@ import { Component, OnInit, Input} from '@angular/core';
 import { FileElement } from 'src/app/shared/file-element.model';
 import { faFolder, faFile } from '@fortawesome/free-solid-svg-icons';
 import { FilesService } from 'src/app/services/files-service.service';
+import { Folder } from 'src/app/shared/folder.model';
+import { Tag } from 'src/app/shared/tag.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-element',
