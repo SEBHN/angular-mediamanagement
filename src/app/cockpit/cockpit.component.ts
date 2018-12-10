@@ -1,4 +1,4 @@
-import {Component, OnInit, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, Output, EventEmitter, ViewChild, ElementRef} from '@angular/core';
 import {
     faHome,
     faCloudUploadAlt,
@@ -30,6 +30,7 @@ export class CockpitComponent implements OnInit {
     private navbarOpen = false;
 
     @Output() folderCreated = new EventEmitter<Folder>();
+    @ViewChild('searchInput') searchInputRef: ElementRef;
 
     selectedFile: File;
 
@@ -66,5 +67,7 @@ export class CockpitComponent implements OnInit {
 
     searchTag(tag: string): void {
         this.tagService.searchForTag(this.filesService.getCurrentPath(), tag, environment.currentUserId);
+        // clear search input *WARNING* not a clean solution, but for now it's okay :(
+        this.searchInputRef.nativeElement.value = '';
     }
 }
