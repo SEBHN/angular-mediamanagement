@@ -27,6 +27,7 @@ export class Media implements FileElement {
         this.fileExtension = fileExtension;
         this.filePath = filePath;
         this.creatorId = creatorId;
+        this.member = 'Media';
     }
 
     getFileId(): string {

@@ -8,6 +8,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RenameFileComponent } from '../cockpit/modals/rename-file/rename-file.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BsModalService, ComponentLoaderFactory, PositioningService } from 'ngx-bootstrap';
+import { AddTagComponent } from '../cockpit/modals/add-tag/add-tag.component';
 
 describe('RegisterComponent', () => {
   let component: FileExplorerComponent;
@@ -15,7 +16,7 @@ describe('RegisterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FileExplorerComponent, ElementComponent, RenameFileComponent ],
+      declarations: [ FileExplorerComponent, ElementComponent, RenameFileComponent, AddTagComponent ],
       imports: [RouterTestingModule, ContextMenuModule, FontAwesomeModule, HttpClientModule],
       providers: [ContextMenuService, BsModalService, ComponentLoaderFactory, PositioningService]
     })
