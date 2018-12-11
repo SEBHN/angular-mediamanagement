@@ -17,6 +17,7 @@ export class Folder implements FileElement {
     this.creatorId = creatorId;
     this.isFolder = true;
     this.tags = [];
+    this.member = 'Folder';
   }
 
   addTag(name: string): void {

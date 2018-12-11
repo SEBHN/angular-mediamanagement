@@ -1,10 +1,11 @@
 import {Component, TemplateRef, ViewChild} from '@angular/core';
-import {faEdit, faTag} from "@fortawesome/free-solid-svg-icons";
-import {BsModalRef, BsModalService} from "ngx-bootstrap";
-import {Media} from "../../../shared/media.model";
-import {UpdateMediaService} from "../../../services/update-media.service";
-import {Tag} from "../../../shared/tag.model";
-import {environment} from "../../../../environments/environment";
+import {faTag} from '@fortawesome/free-solid-svg-icons';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap';
+import {Media} from '../../../shared/media.model';
+import {UpdateMediaService} from '../../../services/update-media.service';
+import {Tag} from '../../../shared/tag.model';
+import {environment} from '../../../../environments/environment';
+import { FileElement } from 'src/app/shared/file-element.model';
 
 @Component({
   selector: 'app-add-tag',
@@ -14,7 +15,7 @@ export class AddTagComponent {
 
     faTag = faTag;
 
-    private file: Media;
+    private file: FileElement;
     @ViewChild('addTag') addTagModal: TemplateRef<any>;
 
     // injeted by ngx-bootstrap
@@ -30,15 +31,13 @@ export class AddTagComponent {
         this.modalRef = this.modalService.show(this.addTagModal);
     }
 
-    onAddTag(newTag: string): void {
-      if(this.file.tags == null){
-          this.file.tags = new Array(Tag);
-          this.file.tags.pop();
+    onAddTag(tagName: string): void {
+      if (this.file.tags == null) {
+          this.file.tags = new Array();
       }
-      if(this.file.tags != null){
-          this.file.tags.push(new Tag(newTag));
-          console.log(this.file);
-          this.updateMediaService.putMedia(this.file, environment.currentUserId);
+      if (this.file.tags != null) {
+          this.file.tags.push(new Tag(tagName));
+          this.updateMediaService.putMedia(this.file as Media, environment.currentUserId);
           this.modalRef.hide();
       }
     }

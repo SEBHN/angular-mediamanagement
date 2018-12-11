@@ -10,6 +10,7 @@ import { RenameFileComponent } from './cockpit/modals/rename-file/rename-file.co
 import { HttpClientModule } from '@angular/common/http';
 import { ModalModule } from 'ngx-bootstrap';
 import { RouterTestingModule } from '@angular/router/testing';
+import { AddTagComponent } from './cockpit/modals/add-tag/add-tag.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -30,7 +31,8 @@ describe('AppComponent', () => {
         FileExplorerComponent,
         CreateFolderComponent,
         ElementComponent,
-        RenameFileComponent
+        RenameFileComponent,
+        AddTagComponent
       ]
     }).compileComponents();
   }));
