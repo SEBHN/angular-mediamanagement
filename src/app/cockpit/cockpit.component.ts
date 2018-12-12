@@ -34,8 +34,6 @@ export class CockpitComponent implements OnInit {
     @Output() folderCreated = new EventEmitter<Folder>();
     @ViewChild('searchInput') searchInputRef: ElementRef;
 
-    selectedFile: File;
-
     constructor(private uploadMediaService: UploadMediaService, private filesService: FilesService,
         private tagService: TagService) {
         this.uploadMediaService = uploadMediaService;
@@ -47,9 +45,10 @@ export class CockpitComponent implements OnInit {
 
     // if the user selects a file this method will call
     onFileChanged(event) {
-        this.selectedFile = event.target.files[0];
-        this.uploadMediaService.selectedFile = this.selectedFile;
-        this.uploadMediaService.postMetaData(this.selectedFile);
+        var selectedFile = event.target.files[0];
+        this.uploadMediaService.selectedFile = selectedFile;
+        this.uploadMediaService.postMetaData(selectedFile);
+        event.target.value = '';
     }
 
     ngOnInit() {
