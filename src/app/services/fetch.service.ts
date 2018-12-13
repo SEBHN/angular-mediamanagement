@@ -47,7 +47,9 @@ export class FetchService {
                         // add received tags from backend to the specific media
                         media.tags.forEach(tag => mediaFile.addTag(tag.name));
                     }
-                    filesArray.push(mediaFile);
+
+                    if(media.fileId != "")
+                        filesArray.push(mediaFile);
                 });
                 // feed files service with data
                 this.filesService.addMany(filesArray);
