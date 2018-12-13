@@ -17,6 +17,7 @@ import { RegisterComponent } from './authentication/register/register.component'
 import { NotFoundComponent } from './not-found/not-found.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AddTagComponent } from './cockpit/modals/add-tag/add-tag.component';
+import { SidebarModule } from 'ng-sidebar';
 
 
 
@@ -43,6 +44,7 @@ import { AddTagComponent } from './cockpit/modals/add-tag/add-tag.component';
         ContextMenuModule.forRoot({
             useBootstrap4: true,
         }),
+        SidebarModule.forRoot(),
         AppRoutingModule
     ],
     providers: [],
