@@ -47,6 +47,7 @@ export class FileExplorerComponent implements OnInit {
   private mediaFiles: FileElement[];
   private currentPath: string;
   private canNavigateUp: boolean;
+  sidebarOpened = false;
 
   constructor(private filesService: FilesService, private deleteMediaService: DeleteMediaService,
     private downloadMediaService: DownloadMediaService, private fetchService: FetchService) {
@@ -164,5 +165,13 @@ export class FileExplorerComponent implements OnInit {
 
   getCurrentPath(): string {
     return this.currentPath;
+  }
+
+  isSidebarOpen() {
+    return this.sidebarOpened;
+  }
+
+  toggleSidebar() {
+    this.sidebarOpened = !this.sidebarOpened;
   }
 }
