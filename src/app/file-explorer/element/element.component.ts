@@ -1,4 +1,4 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { FileElement } from 'src/app/shared/file-element.model';
 import { faFolder, faFile } from '@fortawesome/free-solid-svg-icons';
 import { FilesService } from 'src/app/services/files-service.service';
@@ -17,6 +17,7 @@ export class ElementComponent implements OnInit {
   faFile = faFile;
 
   @Input() element: FileElement;
+  @Output() fileClicked = new EventEmitter<FileElement>();
 
   constructor(private filesService: FilesService) { }
 
@@ -31,6 +32,12 @@ export class ElementComponent implements OnInit {
     } else {
       // file clicked -> download it
       this.filesService.fileDownloaded.emit(file);
+    }
+  }
+
+  onClick(file: FileElement): void {
+    if (!file.isFolder) {
+      this.fileClicked.emit(file);
     }
   }
 }

@@ -1,7 +1,7 @@
 <ng-sidebar-container style = "height: 100vh">
 
     <!-- A sidebar -->
-    <ng-sidebar [(opened)]="sidebarOpened" position="right" closeOnClickOutside=true animate=true keyClose=true>
+    <ng-sidebar [(opened)]="sidebarOpened" position="right" animate=true keyClose=true>
       <p>Sidebar contents</p>
       <button (click)="toggleSidebar()">Toggle sidebar</button>
     </ng-sidebar>
@@ -11,8 +11,6 @@
         <router-outlet></router-outlet>
         <br>
         <br>
-        <button (click)="toggleSidebar()">Toggle sidebar</button>
-
         <div class="container mt-4">
             <div class="row" *ngFor="let row of getDisplayItems()">
                 <ng-container *ngFor="let item of row.items">
@@ -21,7 +19,8 @@
                                 [contextMenu]="basicMenu"
                                 [contextMenuSubject]="item"
                                 (navigated)="navigateDown($event)"
-                                (fileDownloaded)="downloadElement($event)">
+                                (fileDownloaded)="downloadElement($event)"
+                                (fileClicked)="onFileClicked($event)">
                     </app-element>
                 </ng-container>
             </div>

@@ -174,4 +174,10 @@ export class FileExplorerComponent implements OnInit {
   toggleSidebar() {
     this.sidebarOpened = !this.sidebarOpened;
   }
+
+  onFileClicked(element: FileElement) {
+    if (!this.isSidebarOpen()) {
+      this.sidebarOpened = true;
+    }
+  }
 }
