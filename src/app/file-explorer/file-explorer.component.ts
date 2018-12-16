@@ -48,11 +48,13 @@ export class FileExplorerComponent implements OnInit {
   private currentPath: string;
   private canNavigateUp: boolean;
   sidebarOpened = false;
+  private metadata: Map<string, string>;
 
   constructor(private filesService: FilesService, private deleteMediaService: DeleteMediaService,
     private downloadMediaService: DownloadMediaService, private fetchService: FetchService) {
     this.currentPath = '/';
     this.canNavigateUp = false;
+    this.metadata = new Map<string, string>();
   }
 
   // Lifecycle hook before component gets rendered by Angular
@@ -179,5 +181,11 @@ export class FileExplorerComponent implements OnInit {
     if (!this.isSidebarOpen()) {
       this.sidebarOpened = true;
     }
+    const media = this.filesService.get(element.id) as Media;
+    this.metadata = media.fileMetaData;
+  }
+
+  getMetadata(): Map<string, string> {
+    return this.metadata;
   }
 }
