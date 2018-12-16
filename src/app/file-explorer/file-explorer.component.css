@@ -8,4 +8,4 @@ footer {
 a {
   cursor: pointer;
 }
-:host ::ng-deep .ng-sidebar { background-color: white; position: absolute;}
+:host ::ng-deep .ng-sidebar { background-color:rgb(52,58,64); color: white}
