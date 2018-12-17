@@ -4,7 +4,7 @@
     <ng-sidebar [(opened)]="sidebarOpened" position="right" animate=true keyClose=true>
       <p>Sidebar contents</p>
       <div class="map" *ngFor="let map of getMetadata() | keyvalue">
-          key: {{map.keyvalue}} - value: {{map.value}}
+          {{map.key}}: {{map.value}}
       </div>
       <button (click)="toggleSidebar()">Toggle sidebar</button>
     </ng-sidebar>
