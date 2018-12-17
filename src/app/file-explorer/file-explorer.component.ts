@@ -66,6 +66,7 @@ export class FileExplorerComponent implements OnInit {
     this.filesService.applicationPathChanged
       .subscribe((applicationPath) => {
         this.currentPath = applicationPath;
+        this.closeSidebar();
     });
     this.mediaFiles = this.filesService.getAllForPath(this.currentPath);
 
@@ -146,7 +147,6 @@ export class FileExplorerComponent implements OnInit {
   }
 
   navigateUp() {
-    this.closeSidebar();
     if (this.currentPath === '/') {
         this.canNavigateUp = false;
         this.updateQuery();
