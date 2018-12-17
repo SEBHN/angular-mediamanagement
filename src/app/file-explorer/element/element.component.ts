@@ -17,7 +17,7 @@ export class ElementComponent implements OnInit {
   faFile = faFile;
 
   @Input() element: FileElement;
-  @Output() fileClicked = new EventEmitter<FileElement>();
+  @Output() elementClicked = new EventEmitter<FileElement>();
 
   constructor(private filesService: FilesService) { }
 
@@ -36,8 +36,6 @@ export class ElementComponent implements OnInit {
   }
 
   onClick(file: FileElement): void {
-    if (!file.isFolder) {
-      this.fileClicked.emit(file);
-    }
+    this.elementClicked.emit(file);
   }
 }

@@ -15,6 +15,7 @@ import {DownloadMediaService} from '../services/download-media.service';
 import { FetchService } from '../services/fetch.service';
 import { Folder } from '../shared/folder.model';
 import { environment } from 'src/environments/environment';
+import { isDefined } from '@angular/compiler/src/util';
 
 /**
  * Single component representing Media and Folder in the view.
@@ -145,6 +146,7 @@ export class FileExplorerComponent implements OnInit {
   }
 
   navigateUp() {
+    this.closeSidebar();
     if (this.currentPath === '/') {
         this.canNavigateUp = false;
         this.updateQuery();
@@ -177,12 +179,18 @@ export class FileExplorerComponent implements OnInit {
     this.sidebarOpened = !this.sidebarOpened;
   }
 
-  onFileClicked(element: FileElement) {
-    if (!this.isSidebarOpen()) {
-      this.sidebarOpened = true;
+  onClicked(element: FileElement) {
+    if (element.isFolder) {
+      this.closeSidebar();
+      return;
     }
     const media = this.filesService.get(element.id) as Media;
     this.metadata = media.fileMetaData;
+    this.sidebarOpened = this.metadata != null; // open sidebar only when meta data available
+  }
+
+  closeSidebar() {
+    this.sidebarOpened = false;
   }
 
   getMetadata(): Map<string, string> {
