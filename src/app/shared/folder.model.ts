@@ -33,4 +33,8 @@ export class Folder implements FileElement {
   getTags(): Tag[] {
     return this.tags;
   }
+
+  remove(): void{
+    //TODO
+  }
 }
