@@ -27,17 +27,15 @@ export class TagService {
      */
     private getMediaForTag(_tag: string, path: string, userId: string): void {
         const encodedCurrentPath = encodeURIComponent(path);
-        this.http.get(environment.API_URL + `/users/${userId}/folders/${encodedCurrentPath}/taggedMedia/`, {
+        this.http.get(environment.API_URL + `/users/${userId}/folders/${encodedCurrentPath}/taggedMedia?tag=${_tag}`, {
             reportProgress: true,
             observe: 'response'
         })
             .subscribe((response: HttpResponse<any>) => {
                 // filter out media files without tags
                 const mediaWithTags: Media[] = response.body.filter(file => file.tags != null);
-                // filter out media files with irrelevent tags
-                const result: Media[] = mediaWithTags.filter(media => media.tags.some(tag => tag.name === _tag));
                 // update UI with file elements only containing specified tag
-                this.fileService.fileElementsChanged.emit(result);
+                this.fileService.fileElementsChanged.emit(mediaWithTags);
             }, err => console.log(new Error(err.message)));
     }
 }
