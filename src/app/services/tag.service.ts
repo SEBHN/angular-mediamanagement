@@ -25,9 +25,16 @@ export class TagService {
      * @param userId the current user id
      * @author Emin
      */
-    private getMediaForTag(_tag: string, path: string, userId: string): void {
+    private getMediaForTag(_tags: string, path: string, userId: string): void {
         const encodedCurrentPath = encodeURIComponent(path);
-        this.http.get(environment.API_URL + `/users/${userId}/folders/${encodedCurrentPath}/taggedMedia?tag=${_tag}`, {
+        var tagAarray = _tags.split(',')
+        
+        var tagsSearchUri = '?tag='+tagAarray[0]
+        var withoutFirst = tagAarray.filter(obj => obj !== tagAarray[0]);
+        for(let tag of withoutFirst) {
+            tagsSearchUri = tagsSearchUri + '&tag=' + tag.trim();
+        }
+        this.http.get(environment.API_URL + `/users/${userId}/folders/${encodedCurrentPath}/taggedMedia${tagsSearchUri}`, {
             reportProgress: true,
             observe: 'response'
         })
