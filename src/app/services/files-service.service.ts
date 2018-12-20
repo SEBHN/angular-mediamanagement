@@ -65,6 +65,10 @@ export class FilesService implements IFileService {
     this.fileElementsChanged.emit(this.getAllForPath(this.currentPath));
   }
 
+  reload(): void {
+    this.fileElementsChanged.emit(this.getAllForPath(this.currentPath));
+  }
+
   createFile(file: FileElement): void {
     this.add(file);
     this.fileElementsChanged.emit(this.getAllForPath(this.currentPath));

@@ -11,9 +11,9 @@ import {FilesService} from './files-service.service';
 
 
 export interface IFolderService {
-  remove(folder: Folder, userId: string): void;
+  remove(media: Media, userId: string): void;
 
-  rename(folder: Folder,  userId:string, path: string, updatedName: string): void;
+  rename(media: Media,  userId:string, path: string, updatedName: string): void;
 }
 
 
@@ -26,16 +26,22 @@ export class FoldersServiceService implements IFolderService{
   
   constructor(private fileService: FilesService, private http: HttpClient) { }
 
-  remove(folder: Folder, userId: string): void {
-    const encodedFolderPath = encodeURIComponent(folder.filePath);
+  remove(media: Media, userId: string): void {
+    let path = '';
+    if (media.filePath.length > 0 ) {
+      path = media.filePath + '/' + media.name;
+    } else {path = media.name; }
+    path = media.filePath + media.name;
+    const encodedFolderPath = encodeURIComponent(path);
         this.http.delete(environment.API_URL + `/users/${userId}/folders/${encodedFolderPath}`, {
             reportProgress: true,
             observe: 'response'
-        });
+        })
+        .subscribe(response => this.fileService.remove(media.id), error1 => console.log(error1));
   }
 
-  rename(folder: Folder, userId:string, path: string, updatedName: string): void {
-    const encodedCurrentPath = encodeURIComponent(folder.filePath);
+  rename(media: Media, userId: string, path: string, updatedName: string): void {
+    const encodedCurrentPath = encodeURIComponent(media.filePath + '/' + media.name);
     this.http.put(environment.API_URL + `/users/${userId}/folders/${encodedCurrentPath}`, updatedName,  {
         reportProgress: true,
         observe: 'response'
@@ -43,7 +49,6 @@ export class FoldersServiceService implements IFolderService{
     .subscribe((response: HttpResponse<any>) => {
       // filter out media files without tags
       const mediaInFolder: Media[] = response.body;
-      
       // update UI with file elements only containing specified tag
       this.fileService.fileElementsChanged.emit();
   }, err => console.log(new Error(err.message)));

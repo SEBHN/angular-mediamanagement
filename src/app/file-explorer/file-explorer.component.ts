@@ -15,6 +15,8 @@ import {DownloadMediaService} from '../services/download-media.service';
 import { FetchService } from '../services/fetch.service';
 import { Folder } from '../shared/folder.model';
 import { environment } from 'src/environments/environment';
+import { FoldersServiceService } from '../services/folers-service.service';
+import { createElementCssSelector } from '@angular/compiler';
 
 /**
  * Single component representing Media and Folder in the view.
@@ -49,7 +51,7 @@ export class FileExplorerComponent implements OnInit {
   private canNavigateUp: boolean;
 
   constructor(private filesService: FilesService, private deleteMediaService: DeleteMediaService,
-    private downloadMediaService: DownloadMediaService, private fetchService: FetchService) {
+    private downloadMediaService: DownloadMediaService, private fetchService: FetchService, private foldersService: FoldersServiceService) {
     this.currentPath = '/';
     this.canNavigateUp = false;
   }
@@ -105,11 +107,16 @@ export class FileExplorerComponent implements OnInit {
 
   // CRUD handling
   deleteElement(media: Media): void {
-    this.deleteMediaService.deleteMedia(media.id);
+    if (media.isFolder) {
+      this.foldersService.remove(media, environment.currentUserId);
+    } else {
+      this.deleteMediaService.deleteMedia(media.id);
+    }
   }
 
   downloadElement(media: Media): void {
-    this.downloadMediaService.downloadMedia(media, environment.currentUserId);
+
+      this.downloadMediaService.downloadMedia(media, environment.currentUserId);
   }
 
   // Folder navigation handling
