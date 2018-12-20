@@ -5,6 +5,7 @@ import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {Media} from '../../../shared/media.model';
 import {UpdateMediaService} from '../../../services/update-media.service';
 import { environment } from 'src/environments/environment';
+import {FoldersServiceService} from '../../../services/folers-service.service';
 
 @Component({
     selector: 'app-rename-file',
@@ -20,7 +21,8 @@ export class RenameFileComponent {
     modalRef: BsModalRef;
     private modalService: BsModalService;
 
-    constructor(modalService: BsModalService, private updateMediaService: UpdateMediaService) {
+    constructor(modalService: BsModalService, private updateMediaService: UpdateMediaService
+        , private foldersService: FoldersServiceService) {
         this.modalService = modalService;
     }
 
@@ -30,11 +32,15 @@ export class RenameFileComponent {
     }
 
     onRename(name: string): void {
-        if (name.includes('.' + this.file.fileExtension) === false) {
-            name = name + '.' + this.file.fileExtension;
+        if (this.file.isFolder) {
+            this.foldersService.rename(this.file, environment.currentUserId, name)
+        } else {
+            if (name.includes('.' + this.file.fileExtension) === false) {
+                name = name + '.' + this.file.fileExtension;
+            }
+            this.file.name = name;
+            this.updateMediaService.putMedia(this.file, environment.currentUserId); // TODO: later user management
+            this.modalRef.hide();
         }
-        this.file.name = name;
-        this.updateMediaService.putMedia(this.file, environment.currentUserId); // TODO: later user management
-        this.modalRef.hide();
     }
 }

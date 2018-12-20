@@ -27,11 +27,7 @@ export class FoldersServiceService implements IFolderService{
   constructor(private fileService: FilesService, private http: HttpClient) { }
 
   remove(media: Media, userId: string): void {
-    let path = '';
-    if (media.filePath.length > 0 ) {
-      path = media.filePath + '/' + media.name;
-    } else {path = media.name; }
-    path = media.filePath + media.name;
+    const path = media.filePath + media.name;
     const encodedFolderPath = encodeURIComponent(path);
         this.http.delete(environment.API_URL + `/users/${userId}/folders/${encodedFolderPath}`, {
             reportProgress: true,
@@ -40,9 +36,10 @@ export class FoldersServiceService implements IFolderService{
         .subscribe(response => this.fileService.remove(media.id), error1 => console.log(error1));
   }
 
-  rename(media: Media, userId: string, path: string, updatedName: string): void {
-    const encodedCurrentPath = encodeURIComponent(media.filePath + '/' + media.name);
-    this.http.put(environment.API_URL + `/users/${userId}/folders/${encodedCurrentPath}`, updatedName,  {
+  rename(media: Media, userId: string, updatedName: string): void {
+    const encodedCurrentPath = encodeURIComponent(media.filePath + media.name);
+    const encodedNewPath = encodeURIComponent(media.filePath + updatedName);
+    this.http.put(environment.API_URL + `/users/${userId}/folders/${encodedCurrentPath}`, encodedNewPath,  {
         reportProgress: true,
         observe: 'response'
     })
