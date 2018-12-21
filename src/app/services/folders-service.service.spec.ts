@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FolersServiceService } from './folers-service.service';
+import { FolersServiceService } from './folders-service.service';
 
 describe('FolersServiceService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

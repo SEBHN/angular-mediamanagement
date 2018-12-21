@@ -5,6 +5,7 @@ import {HttpClient, HttpResponse} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import { Media } from '../shared/media.model';
 import {FilesService} from './files-service.service';
+import { FetchService } from './fetch.service';
 
 
 
@@ -22,9 +23,9 @@ export interface IFolderService {
   providedIn: 'root'
 })
 
-export class FoldersServiceService implements IFolderService{
+export class FoldersServiceService implements IFolderService {
   
-  constructor(private fileService: FilesService, private http: HttpClient) { }
+  constructor(private fileService: FilesService, private http: HttpClient, private fetchService: FetchService) { }
 
   remove(media: Media, userId: string): void {
     const path = media.filePath + media.name;
@@ -38,16 +39,16 @@ export class FoldersServiceService implements IFolderService{
 
   rename(media: Media, userId: string, updatedName: string): void {
     const encodedCurrentPath = encodeURIComponent(media.filePath + media.name);
-    const encodedNewPath = encodeURIComponent(media.filePath + updatedName);
-    this.http.put(environment.API_URL + `/users/${userId}/folders/${encodedCurrentPath}`, encodedNewPath,  {
+    const newPath = media.filePath + updatedName;
+    this.http.put(environment.API_URL + `/users/${userId}/folders/${encodedCurrentPath}`, newPath,  {
         reportProgress: true,
         observe: 'response'
     })
     .subscribe((response: HttpResponse<any>) => {
-      // filter out media files without tags
-      const mediaInFolder: Media[] = response.body;
-      // update UI with file elements only containing specified tag
-      this.fileService.fileElementsChanged.emit();
+      // update UI with file elements
+      this.fileService.cleanContent();
+      this.fetchService.getCurrentFilesForUser(environment.currentUserId, media.filePath);
+      this.fileService.loadAll();
   }, err => console.log(new Error(err.message)));
   }
 

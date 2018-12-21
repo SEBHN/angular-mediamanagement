@@ -15,7 +15,7 @@ import {DownloadMediaService} from '../services/download-media.service';
 import { FetchService } from '../services/fetch.service';
 import { Folder } from '../shared/folder.model';
 import { environment } from 'src/environments/environment';
-import { FoldersServiceService } from '../services/folers-service.service';
+import { FoldersServiceService } from '../services/folders-service.service';
 import { createElementCssSelector } from '@angular/compiler';
 
 /**

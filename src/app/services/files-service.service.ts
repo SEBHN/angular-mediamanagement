@@ -65,9 +65,6 @@ export class FilesService implements IFileService {
     this.fileElementsChanged.emit(this.getAllForPath(this.currentPath));
   }
 
-  reload(): void {
-    this.fileElementsChanged.emit(this.getAllForPath(this.currentPath));
-  }
 
   createFile(file: FileElement): void {
     this.add(file);
@@ -105,4 +102,13 @@ export class FilesService implements IFileService {
   clone(fileElement: FileElement): FileElement {
     return JSON.parse(JSON.stringify(fileElement));
   }
+
+  cleanContent() {
+    this.map = new Map<string, FileElement>();
+  }
+
+  loadAll() {
+    this.fileElementsChanged.emit(this.getAll());
+  }
+
 }

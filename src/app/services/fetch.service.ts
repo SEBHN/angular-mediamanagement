@@ -48,8 +48,9 @@ export class FetchService {
                         media.tags.forEach(tag => mediaFile.addTag(tag.name));
                     }
 
-                    if(media.fileId != "")
+                    if (media.fileId != "") {
                         filesArray.push(mediaFile);
+                    }
                 });
                 // feed files service with data
                 this.filesService.addMany(filesArray);
