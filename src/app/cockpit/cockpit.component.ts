@@ -65,8 +65,8 @@ export class CockpitComponent implements OnInit {
         this.filesService.fileElementsChanged.emit(this.filesService.getAllForPath('/'));
     }
 
-    searchTag(tag: string): void {
-        this.tagService.searchForTag(this.filesService.getCurrentPath(), tag, environment.currentUserId);
+    searchTags(tags: string): void {
+        this.tagService.searchForTag(this.filesService.getCurrentPath(), tags, environment.currentUserId);
         // clear search input *WARNING* not a clean solution, but for now it's okay :(
         this.searchInputRef.nativeElement.value = '';
     }

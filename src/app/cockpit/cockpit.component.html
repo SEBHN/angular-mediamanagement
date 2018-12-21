@@ -20,8 +20,13 @@
 
         <!-- Search form for tags -->
         <div class="form-inline my-lg-0 mx-3">
+<<<<<<< HEAD
             <input class="form-control mr-sm-2 my-2" placeholder="Search tag1, tag2..." aria-label="Search" #searchInput>
             <button class="btn btn-outline-warning my-2 my-sm-0" (click)="searchTag(searchInput.value)">Search</button>
+=======
+            <input class="form-control mr-sm-2 my-2" placeholder="Search tag..." aria-label="Search" #searchInput (keyup.enter)="searchTags(searchInput.value)">
+            <button class="btn btn-outline-warning my-2 my-sm-0" (click)="searchTags(searchInput.value)">Search</button>
+>>>>>>> develop
         </div>
         <!-- Right ul with Upload and Sign Out -->
         <ul class="navbar-nav py-2">
