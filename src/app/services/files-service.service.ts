@@ -103,12 +103,5 @@ export class FilesService implements IFileService {
     return JSON.parse(JSON.stringify(fileElement));
   }
 
-  cleanContent() {
-    this.map = new Map<string, FileElement>();
-  }
-
-  loadAll() {
-    this.fileElementsChanged.emit(this.getAll());
-  }
 
 }

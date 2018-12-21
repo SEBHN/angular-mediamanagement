@@ -12,7 +12,7 @@ import { faHistory } from '@fortawesome/free-solid-svg-icons';
 export interface IFolderService {
   remove(media: Media, userId: string): void;
 
-  rename(media: Media,  userId:string, path: string, updatedName: string): void;
+  rename(media: Media,  userId: string, path: string, updatedName: string): void;
 }
 
 
@@ -44,9 +44,6 @@ export class FoldersServiceService implements IFolderService {
     .subscribe((response: HttpResponse<any>) => {
       // update UI with file elements
       this.fileService.rename(media.id, updatedName);
-      // this.fileService.cleanContent();
-      // this.fetchService.getCurrentFilesForUser(environment.currentUserId, media.filePath);
-      // this.fileService.loadAll();
   }, err => console.log(new Error(err.message)));
   }
 
