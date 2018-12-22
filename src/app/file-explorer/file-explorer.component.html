@@ -3,10 +3,20 @@
     <!-- A sidebar -->
     <ng-sidebar [(opened)]="sidebarOpened" position="right" animate=true keyClose=true>
       <p>Metadata</p>
-      &nbsp;name: {{filename}} &nbsp;
-      <div class="map" *ngFor="let map of getMetadata() | keyvalue">
-        &nbsp;{{map.key}}: {{map.value}} &nbsp;
-      </div>
+      
+      <table metadatatable>
+        <tbody>
+            <tr namecolumn>
+                <td>name:</td>
+                <td>{{filename}}&nbsp;</td>
+            </tr>
+            <tr metadatacolumn *ngFor="let map of getMetadata() | keyvalue">
+                <td>{{map.key}}:</td>
+                <td>{{map.value}}&nbsp;</td>
+            </tr>
+        </tbody>
+      </table>
+      
 
       <div style="text-align:center">
         <button (click)="closeSidebar()">close</button>
