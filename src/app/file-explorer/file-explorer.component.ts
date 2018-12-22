@@ -49,6 +49,7 @@ export class FileExplorerComponent implements OnInit {
   private currentPath: string;
   private canNavigateUp: boolean;
   sidebarOpened = false;
+  filename: string;
   private metadata: Map<string, string>;
 
   constructor(private filesService: FilesService, private deleteMediaService: DeleteMediaService,
@@ -187,6 +188,7 @@ export class FileExplorerComponent implements OnInit {
     }
     const media = this.filesService.get(element.id) as Media;
     this.metadata = media.fileMetaData;
+    this.filename = media.name;
     this.sidebarOpened = this.metadata != null; // open sidebar only when meta data available
   }
 
