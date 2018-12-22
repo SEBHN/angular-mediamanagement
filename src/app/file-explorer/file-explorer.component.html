@@ -2,11 +2,15 @@
 
     <!-- A sidebar -->
     <ng-sidebar [(opened)]="sidebarOpened" position="right" animate=true keyClose=true>
-      <p>Sidebar contents</p>
+      <p>Metadata</p>
+      &nbsp;name: {{filename}} &nbsp;
       <div class="map" *ngFor="let map of getMetadata() | keyvalue">
-          {{map.key}}: {{map.value}}
+        &nbsp;{{map.key}}: {{map.value}} &nbsp;
       </div>
-      <button (click)="toggleSidebar()">Toggle sidebar</button>
+
+      <div style="text-align:center">
+        <button (click)="closeSidebar()">close</button>
+      </div>
     </ng-sidebar>
 
     <!-- Page content -->
