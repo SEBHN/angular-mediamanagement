@@ -15,7 +15,6 @@ import {DownloadMediaService} from '../services/download-media.service';
 import { FetchService } from '../services/fetch.service';
 import { Folder } from '../shared/folder.model';
 import { environment } from 'src/environments/environment';
-import { isDefined } from '@angular/compiler/src/util';
 
 /**
  * Single component representing Media and Folder in the view.
