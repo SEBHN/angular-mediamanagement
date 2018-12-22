@@ -111,6 +111,7 @@ export class FileExplorerComponent implements OnInit {
   // CRUD handling
   deleteElement(media: Media): void {
     this.deleteMediaService.deleteMedia(media.id);
+    this.closeSidebar();
   }
 
   downloadElement(media: Media): void {
