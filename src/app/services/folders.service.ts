@@ -20,7 +20,7 @@ export interface IFolderService {
   providedIn: 'root'
 })
 
-export class FoldersServiceService implements IFolderService {
+export class FoldersService implements IFolderService {
   
   constructor(private fileService: FilesService, private http: HttpClient, private fetchService: FetchService) { }
 

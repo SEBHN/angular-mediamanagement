@@ -5,7 +5,7 @@ import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {Media} from '../../../shared/media.model';
 import {UpdateMediaService} from '../../../services/update-media.service';
 import { environment } from 'src/environments/environment';
-import {FoldersServiceService} from '../../../services/folders-service.service';
+import {FoldersService} from '../../../services/folders.service';
 
 @Component({
     selector: 'app-rename-file',
@@ -22,7 +22,7 @@ export class RenameFileComponent {
     private modalService: BsModalService;
 
     constructor(modalService: BsModalService, private updateMediaService: UpdateMediaService
-        , private foldersService: FoldersServiceService) {
+        , private foldersService: FoldersService) {
         this.modalService = modalService;
     }
 

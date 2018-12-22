@@ -15,7 +15,7 @@ import {DownloadMediaService} from '../services/download-media.service';
 import { FetchService } from '../services/fetch.service';
 import { Folder } from '../shared/folder.model';
 import { environment } from 'src/environments/environment';
-import { FoldersServiceService } from '../services/folders-service.service';
+import { FoldersService } from '../services/folders.service';
 import { createElementCssSelector } from '@angular/compiler';
 
 /**
@@ -51,7 +51,7 @@ export class FileExplorerComponent implements OnInit {
   private canNavigateUp: boolean;
 
   constructor(private filesService: FilesService, private deleteMediaService: DeleteMediaService,
-    private downloadMediaService: DownloadMediaService, private fetchService: FetchService, private foldersService: FoldersServiceService) {
+    private downloadMediaService: DownloadMediaService, private fetchService: FetchService, private foldersService: FoldersService) {
     this.currentPath = '/';
     this.canNavigateUp = false;
   }
