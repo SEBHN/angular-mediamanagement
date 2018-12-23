@@ -50,12 +50,14 @@ export class FileExplorerComponent implements OnInit {
   sidebarOpened = false;
   filename: string;
   private metadata: Map<string, string>;
+  private iterableMetadata: { key: string; value: string; }[];
 
   constructor(private filesService: FilesService, private deleteMediaService: DeleteMediaService,
     private downloadMediaService: DownloadMediaService, private fetchService: FetchService) {
     this.currentPath = '/';
     this.canNavigateUp = false;
     this.metadata = new Map<string, string>();
+    this.iterableMetadata = [];
   }
 
   // Lifecycle hook before component gets rendered by Angular
@@ -188,6 +190,7 @@ export class FileExplorerComponent implements OnInit {
     const media = this.filesService.get(element.id) as Media;
     this.metadata = media.fileMetaData;
     this.filename = media.name;
+    this.initializeIterableMetadata();
     this.sidebarOpened = this.metadata != null; // open sidebar only when meta data available
   }
 
@@ -195,10 +198,16 @@ export class FileExplorerComponent implements OnInit {
     this.sidebarOpened = false;
   }
 
+  private initializeIterableMetadata() {
+    if (this.metadata != null) {
+      this.iterableMetadata = Object.keys(this.metadata).map(function (key) {
+        const value = this.metadata[key];
+        return { key, value };
+      }, this);
+    }
+  }
+
   getIterableMetadata(): {} {
-    return Object.keys(this.metadata).map(function(key) {
-      const value = this.metadata[key];
-      return {key, value};
-    }, this);
+    return this.iterableMetadata;
   }
 }
