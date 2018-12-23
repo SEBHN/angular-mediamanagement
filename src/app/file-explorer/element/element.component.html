@@ -1,7 +1,8 @@
 <div class="d-flex flex-column justify-content-between" *ngIf="element">
     <button appHighlight
             class="btn btn-transparent my-3"
-            (dblclick)="onDoubleClick(element)">
+            (dblclick)="onDoubleClick(element)"
+            (click)="onClick(element)">
         <fa-icon [icon]="element.isFolder ? faFolder : faFile "class="fa-3x"></fa-icon>
         <p class="lead">{{ element.name }}</p>
         <span *ngFor="let tag of element.tags" class="badge badge-warning">{{ tag.name }}</span>

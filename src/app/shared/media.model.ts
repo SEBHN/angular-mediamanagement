@@ -13,12 +13,13 @@ export class Media implements FileElement {
     creatorId: string;
     tags: Tag[];
     member: string; // used only for the typeguard at runtime
+    fileMetaData: Map<string, string>;
 
     fileId: string;
     fileExtension: string;
 
     constructor(id: string, name: string, fileId: string,
-                fileExtension: string, filePath: string, creatorId: string) {
+                fileExtension: string, filePath: string, creatorId: string, fileMetaData: Map<string, string>) {
         this.id = id;
         this.name = name;
         this.isFolder = false;
@@ -28,6 +29,7 @@ export class Media implements FileElement {
         this.filePath = filePath;
         this.creatorId = creatorId;
         this.member = 'Media';
+        this.fileMetaData = fileMetaData;
     }
 
     getFileId(): string {
