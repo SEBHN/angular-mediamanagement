@@ -1,26 +1,26 @@
-<ng-sidebar-container style = "height: 100vh">
+<ng-sidebar-container style="height: 100vh">
 
     <!-- A sidebar -->
-    <ng-sidebar [(opened)]="sidebarOpened" position="right" animate=true keyClose=true>
-      <p>Metadata</p>
+    <ng-sidebar [(opened)]="sidebarOpened"
+                position="right"
+                animate=true
+                keyClose=true
+                class="text-center">
+      <p class="lead text-warning pt-4">Details</p>
       
-      <table metadatatable>
+      <table metadatatable class="text-left mx-4">
         <tbody>
             <tr namecolumn>
-                <td>name:</td>
+                <td class="text-warning pr-3">name:</td>
                 <td>{{filename}}&nbsp;</td>
             </tr>
             <tr metadatacolumn *ngFor="let map of getIterableMetadata()">
-                <td>{{map.key}}:</td>
+                <td class="text-warning pr-4">{{map.key}}:</td>
                 <td>{{map.value}}&nbsp;</td>
             </tr>
         </tbody>
       </table>
-      
-
-      <div style="text-align:center">
-        <button (click)="closeSidebar()">close</button>
-      </div>
+      <button class="my-3 btn btn-outline-warning" (click)="closeSidebar()">Close</button>
     </ng-sidebar>
 
     <!-- Page content -->
