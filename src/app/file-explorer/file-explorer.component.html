@@ -10,7 +10,7 @@
                 <td>name:</td>
                 <td>{{filename}}&nbsp;</td>
             </tr>
-            <tr metadatacolumn *ngFor="let map of getMetadata() | keyvalue">
+            <tr metadatacolumn *ngFor="let map of getIterableMetadata()">
                 <td>{{map.key}}:</td>
                 <td>{{map.value}}&nbsp;</td>
             </tr>

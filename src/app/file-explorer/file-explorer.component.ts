@@ -195,7 +195,10 @@ export class FileExplorerComponent implements OnInit {
     this.sidebarOpened = false;
   }
 
-  getMetadata(): Map<string, string> {
-    return this.metadata;
+  getIterableMetadata(): {} {
+    return Object.keys(this.metadata).map(function(key) {
+      const value = this.metadata[key];
+      return {key, value};
+    }, this);
   }
 }
