@@ -17,12 +17,16 @@
 
 <context-menu>
     <ng-template contextMenuItem let-item (execute)="downloadElement($event.item)">
-        <fa-icon class="d-inline mr-2 text-dark" [icon]="faDownload"></fa-icon>
-        <p class="lead d-inline text-dark">Download</p>
+        <div *ngIf='!item.isFolder'>
+            <fa-icon class="d-inline mr-2 text-dark" [icon]="faDownload"></fa-icon>
+            <p class="lead d-inline text-dark">Download</p>
+        </div>
     </ng-template>
     <ng-template contextMenuItem let-item (execute)="addTag.openModal($event.item)">
-        <fa-icon class="d-inline mr-2 text-dark" [icon]="faTag"></fa-icon>
-        <p class="lead d-inline text-dark">Add Tag</p>
+        <div *ngIf='!item.isFolder'>
+            <fa-icon class="d-inline mr-2 text-dark" [icon]="faTag"></fa-icon>
+            <p class="lead d-inline text-dark">Add Tag</p>
+        </div>
     </ng-template>
     <ng-template contextMenuItem let-item (execute)="renameModal.openModal($event.item)">
         <fa-icon class="d-inline mr-2 text-dark" [icon]="faEdit"></fa-icon>
