@@ -9,6 +9,7 @@ import { RenameFileComponent } from '../cockpit/modals/rename-file/rename-file.c
 import { HttpClientModule } from '@angular/common/http';
 import { BsModalService, ComponentLoaderFactory, PositioningService } from 'ngx-bootstrap';
 import { AddTagComponent } from '../cockpit/modals/add-tag/add-tag.component';
+import { SidebarModule } from 'ng-sidebar';
 
 describe('RegisterComponent', () => {
   let component: FileExplorerComponent;
@@ -17,7 +18,7 @@ describe('RegisterComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ FileExplorerComponent, ElementComponent, RenameFileComponent, AddTagComponent ],
-      imports: [RouterTestingModule, ContextMenuModule, FontAwesomeModule, HttpClientModule],
+      imports: [RouterTestingModule, ContextMenuModule, FontAwesomeModule, HttpClientModule, SidebarModule.forRoot()],
       providers: [ContextMenuService, BsModalService, ComponentLoaderFactory, PositioningService]
     })
     .compileComponents();

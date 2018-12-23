@@ -49,7 +49,7 @@ export class UploadMediaService {
 
     // creates an media object from the file that the user selects
     getMediaData(file: File, filePath: string, creatorId: string): Media {
-        return new Media(null, file.name, null, this.getExtension(file), filePath, creatorId);
+        return new Media(null, file.name, null, this.getExtension(file), filePath, creatorId, new Map<string, string>());
     }
 
     getExtension(file: File): string {

@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ModalModule } from 'ngx-bootstrap';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AddTagComponent } from './cockpit/modals/add-tag/add-tag.component';
+import { SidebarModule } from 'ng-sidebar';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -23,7 +24,8 @@ describe('AppComponent', () => {
         ModalModule.forRoot(),
         ContextMenuModule.forRoot({
           useBootstrap4: true,
-        })
+        }),
+        SidebarModule.forRoot()
       ],
       declarations: [
         AppComponent,
