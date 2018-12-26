@@ -18,6 +18,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AddTagComponent } from './cockpit/modals/add-tag/add-tag.component';
 import { SidebarModule } from 'ng-sidebar';
+import { OAuthModule } from 'angular-oauth2-oidc';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -34,7 +36,7 @@ import { SidebarModule } from 'ng-sidebar';
         LoginComponent,
         RegisterComponent,
         NotFoundComponent,
-        AddTagComponent
+        AddTagComponent,
     ],
     imports: [
         HttpClientModule,
@@ -45,7 +47,9 @@ import { SidebarModule } from 'ng-sidebar';
             useBootstrap4: true,
         }),
         SidebarModule.forRoot(),
-        AppRoutingModule
+        AppRoutingModule,
+        OAuthModule.forRoot(),
+        FormsModule
     ],
     providers: [],
     bootstrap: [AppComponent]
