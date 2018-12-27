@@ -48,7 +48,12 @@ import { FormsModule } from '@angular/forms';
         }),
         SidebarModule.forRoot(),
         AppRoutingModule,
-        OAuthModule.forRoot(),
+        OAuthModule.forRoot({
+            resourceServer: {
+                allowedUrls: ['http://localhost:8080', 'https://mvs-18-ws-spring-in-cloud.appspot.com'],
+                sendAccessToken: true
+            }
+        }),
         FormsModule
     ],
     providers: [],
