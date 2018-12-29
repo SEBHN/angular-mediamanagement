@@ -45,7 +45,7 @@ export class OktaAuthWrapper {
                 if (isLoginSuccessful) {
                   this.zone.run(() => this.router.navigate(['/media/management'])); // see https://github.com/angular/angular/issues/25837
                 } else {
-                  console.error('Login was not successful!'); // TODO: Visualize in login
+                  console.error('Login was not successful!');
                 }
               });
             });

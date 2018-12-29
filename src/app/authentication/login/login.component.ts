@@ -9,8 +9,9 @@ import { OktaAuthWrapper } from '../../shared/okta.auth.wrapper';
 })
 export class LoginComponent implements OnInit {
 
-  email;
-  password;
+  email: string;
+  password: string;
+  loginError: string;
 
   constructor(private oauthService: OAuthService,
     private oktaAuthWrapper: OktaAuthWrapper) {
@@ -22,7 +23,11 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.oktaAuthWrapper.login(this.email, this.password)
-      .catch(err => console.error('error logging in', err));
+      .catch(err => {
+        console.error('error logging in', err);
+        const error = err as Error; // TODO: Check if AuthApiError can be imported from '@okta/okta-auth-js'
+        this.loginError = error.message;
+      });
   }
 
 
