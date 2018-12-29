@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { OktaAuthWrapper } from '../../shared/okta.auth.wrapper';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -12,9 +13,11 @@ export class LoginComponent implements OnInit {
   email: string;
   password: string;
   loginError: string;
+  oktaRegisterLink: string;
 
   constructor(private oauthService: OAuthService,
     private oktaAuthWrapper: OktaAuthWrapper) {
+      this.oktaRegisterLink = environment.OKTA_URL + '/signin/register';
   }
 
 
@@ -43,5 +46,7 @@ export class LoginComponent implements OnInit {
     }
     return claims['name'];
   }
+
+  
 
 }
