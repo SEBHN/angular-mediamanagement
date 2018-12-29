@@ -13,6 +13,7 @@ import {UploadMediaService} from '../services/upload-media.service';
 import { FilesService } from '../services/files-service.service';
 import {TagService} from '../services/tag.service';
 import {environment} from '../../environments/environment';
+import { OAuthService } from 'angular-oauth2-oidc';
 
 @Component({
     selector: 'app-cockpit',
@@ -35,7 +36,7 @@ export class CockpitComponent implements OnInit {
     @ViewChild('searchInput') searchInputRef: ElementRef;
 
     constructor(private uploadMediaService: UploadMediaService, private filesService: FilesService,
-        private tagService: TagService) {
+        private tagService: TagService, private oauthService: OAuthService) {
         this.uploadMediaService = uploadMediaService;
     }
 
