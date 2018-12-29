@@ -28,6 +28,7 @@ export class CockpitComponent implements OnInit {
     faArrowLeft = faArrowLeft;
     faFolderPlus = faFolderPlus;
     faTag = faTag;
+    oauthService: OAuthService;
 
     // navbar toggle
     private navbarOpen = false;
@@ -36,8 +37,9 @@ export class CockpitComponent implements OnInit {
     @ViewChild('searchInput') searchInputRef: ElementRef;
 
     constructor(private uploadMediaService: UploadMediaService, private filesService: FilesService,
-        private tagService: TagService, private oauthService: OAuthService) {
+        private tagService: TagService, oauthService: OAuthService) {
         this.uploadMediaService = uploadMediaService;
+        this.oauthService = oauthService;
     }
 
     toggleNavbar(): void {
