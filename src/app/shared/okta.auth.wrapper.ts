@@ -1,7 +1,8 @@
 import { OAuthService } from 'angular-oauth2-oidc';
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import * as OktaAuth from '@okta/okta-auth-js';
 import { environment } from '../../environments/environment';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class OktaAuthWrapper {
 
   private authClient: any;
 
-  constructor(private oauthService: OAuthService) {
+  constructor(private oauthService: OAuthService, private router: Router, private zone: NgZone) {
     this.authClient = new OktaAuth({
       url: environment.OKTA_URL,
       issuer: 'default'
@@ -39,6 +40,13 @@ export class OktaAuthWrapper {
               return this.oauthService.tryLogin({
                 customHashFragment: keyValuePair,
                 disableOAuth2StateCheck: true
+              })
+              .then((isLoginSuccessful) => {
+                if (isLoginSuccessful) {
+                  this.zone.run(() => this.router.navigate(['/media/management'])); // see https://github.com/angular/angular/issues/25837
+                } else {
+                  console.error('Login was not successful!'); // TODO: Visualize in login
+                }
               });
             });
         } else {
