@@ -20,7 +20,7 @@
 
         <!-- Search form for tags -->
         <div class="form-inline my-lg-0 mx-3">
-            <input class="form-control mr-sm-2 my-2" placeholder="Search tag..." aria-label="Search" #searchInput (keyup.enter)="searchTags(searchInput.value)">
+            <input class="form-control mr-sm-2 my-2" placeholder="Search tag1, tag2..." aria-label="Search" #searchInput (keyup.enter)="searchTags(searchInput.value)">
             <button *ngIf= 'searchInput.value != ""' class="btn btn-outline-warning my-2 my-sm-0" (click)="resetTagsSearch()">X</button>
             <button class="btn btn-outline-warning my-2 my-sm-0" (click)="searchTags(searchInput.value)">Search</button>
         </div>

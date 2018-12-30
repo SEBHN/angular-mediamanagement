@@ -15,6 +15,8 @@ import {DownloadMediaService} from '../services/download-media.service';
 import { FetchService } from '../services/fetch.service';
 import { Folder } from '../shared/folder.model';
 import { environment } from 'src/environments/environment';
+import { FoldersService } from '../services/folders.service';
+import { createElementCssSelector } from '@angular/compiler';
 
 /**
  * Single component representing Media and Folder in the view.
@@ -47,11 +49,17 @@ export class FileExplorerComponent implements OnInit {
   private mediaFiles: FileElement[];
   private currentPath: string;
   private canNavigateUp: boolean;
+  sidebarOpened = false;
+  filename: string;
+  private metadata: Map<string, string>;
+  private iterableMetadata: { key: string; value: string; }[];
 
   constructor(private filesService: FilesService, private deleteMediaService: DeleteMediaService,
-    private downloadMediaService: DownloadMediaService, private fetchService: FetchService) {
+    private downloadMediaService: DownloadMediaService, private fetchService: FetchService, private foldersService: FoldersService) {
     this.currentPath = '/';
     this.canNavigateUp = false;
+    this.metadata = new Map<string, string>();
+    this.iterableMetadata = [];
   }
 
   // Lifecycle hook before component gets rendered by Angular
@@ -62,6 +70,7 @@ export class FileExplorerComponent implements OnInit {
     this.filesService.applicationPathChanged
       .subscribe((applicationPath) => {
         this.currentPath = applicationPath;
+        this.closeSidebar();
     });
     this.mediaFiles = this.filesService.getAllForPath(this.currentPath);
 
@@ -105,11 +114,17 @@ export class FileExplorerComponent implements OnInit {
 
   // CRUD handling
   deleteElement(media: Media): void {
-    this.deleteMediaService.deleteMedia(media.id);
+    if (media.isFolder) {
+      this.foldersService.remove(media, environment.currentUserId);
+    } else {
+      this.deleteMediaService.deleteMedia(media.id);
+    }
+    this.closeSidebar();
   }
 
   downloadElement(media: Media): void {
-    this.downloadMediaService.downloadMedia(media, environment.currentUserId);
+
+      this.downloadMediaService.downloadMedia(media, environment.currentUserId);
   }
 
   // Folder navigation handling
@@ -164,5 +179,42 @@ export class FileExplorerComponent implements OnInit {
 
   getCurrentPath(): string {
     return this.currentPath;
+  }
+
+  isSidebarOpen() {
+    return this.sidebarOpened;
+  }
+
+  toggleSidebar() {
+    this.sidebarOpened = !this.sidebarOpened;
+  }
+
+  onClicked(element: FileElement) {
+    if (element.isFolder) {
+      this.closeSidebar();
+      return;
+    }
+    const media = this.filesService.get(element.id) as Media;
+    this.metadata = media.fileMetaData;
+    this.filename = media.name;
+    this.initializeIterableMetadata();
+    this.sidebarOpened = this.metadata != null; // open sidebar only when meta data available
+  }
+
+  closeSidebar() {
+    this.sidebarOpened = false;
+  }
+
+  private initializeIterableMetadata() {
+    if (this.metadata != null) {
+      this.iterableMetadata = Object.keys(this.metadata).map(function (key) {
+        const value = this.metadata[key];
+        return { key, value };
+      }, this);
+    }
+  }
+
+  getIterableMetadata(): {} {
+    return this.iterableMetadata;
   }
 }

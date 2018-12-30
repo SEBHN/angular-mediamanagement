@@ -39,7 +39,8 @@ export class FetchService {
                 // add all media from response to result array
                 responseObj.media.forEach((media: Media) => {
                     // parse response to frontend media object
-                    const mediaFile = new Media(media.id, media.name, media.fileId, media.fileExtension, media.filePath, media.creatorId);
+                    const mediaFile = new Media(media.id, media.name, media.fileId, media.fileExtension, media.filePath, media.creatorId,
+                         media.fileMetaData);
                     // set type guard
                     mediaFile.member = 'Media';
                     // if media from response has tags
@@ -48,8 +49,9 @@ export class FetchService {
                         media.tags.forEach(tag => mediaFile.addTag(tag.name));
                     }
 
-                    if(media.fileId != "")
+                    if (media.fileId) {
                         filesArray.push(mediaFile);
+                    }
                 });
                 // feed files service with data
                 this.filesService.addMany(filesArray);

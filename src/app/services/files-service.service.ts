@@ -65,6 +65,7 @@ export class FilesService implements IFileService {
     this.fileElementsChanged.emit(this.getAllForPath(this.currentPath));
   }
 
+
   createFile(file: FileElement): void {
     this.add(file);
     this.fileElementsChanged.emit(this.getAllForPath(this.currentPath));
@@ -101,4 +102,6 @@ export class FilesService implements IFileService {
   clone(fileElement: FileElement): FileElement {
     return JSON.parse(JSON.stringify(fileElement));
   }
+
+
 }
