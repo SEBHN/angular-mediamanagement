@@ -13,11 +13,9 @@ export class LoginComponent implements OnInit {
   email: string;
   password: string;
   loginError: string;
-  oktaRegisterLink: string;
 
   constructor(private oauthService: OAuthService,
     private oktaAuthWrapper: OktaAuthWrapper) {
-      this.oktaRegisterLink = environment.OKTA_URL + '/signin/register';
   }
 
 
@@ -33,12 +31,6 @@ export class LoginComponent implements OnInit {
       });
   }
 
-
-
-  logout() {
-    this.oauthService.logOut();
-  }
-
   get givenName() {
     const claims = this.oauthService.getIdentityClaims();
     if (!claims) {
@@ -46,7 +38,4 @@ export class LoginComponent implements OnInit {
     }
     return claims['name'];
   }
-
-  
-
 }
