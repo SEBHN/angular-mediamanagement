@@ -27,11 +27,11 @@ export class TagService {
      */
     private getMediaForTag(_tags: string, path: string, userId: string): void {
         const encodedCurrentPath = encodeURIComponent(path);
-        let tagAarray = _tags.split(',')
+        const tagArray = _tags.split(',');
         
-        let tagsSearchUri = '?tag='+tagAarray[0].trim()
-        tagAarray.unshift()
-        tagAarray.forEach(tag => {
+        let tagsSearchUri = `?tag${tagArray[0].trim()}`;
+        tagArray.unshift();
+        tagArray.forEach(tag => {
             tagsSearchUri = tagsSearchUri + '&tag=' + tag.trim();
         });
 
