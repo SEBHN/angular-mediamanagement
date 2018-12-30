@@ -13,20 +13,23 @@ export class UsersService {
 
   // POST
   register(user: User) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-          'Authorization': '[insert JWT token here]'
-      })
-    };
-    this.http.post(`${environment.API_URL}/users`, user, httpOptions)
-        .subscribe((res: HttpResponse<any>) => {
+    this.http.post(`${environment.API_URL}/users/register`, JSON.stringify(user), {
+      observe: 'response',
+      headers: {
+          'Content-Type': 'application/json'
+      }
+    }).subscribe((res: HttpResponse<any>) => {
           // redirect user to login if registration was successful
-          if (res.status === 201) {
+          if (res.ok) {
             this.router.navigate(['/login']);
           } else {
+            console.error('Error while register got status code: ' + res.status);
             // TODO: show alert with error?
           }
-        }, error => console.log(new Error(error.message)));
+        }, (error) => {
+          const causedByError = error.error.errorSummary; // TODO: display this error
+          console.log(new Error(error));
+          console.error('Error while register: ' + causedByError);
+        });
   }
 }
