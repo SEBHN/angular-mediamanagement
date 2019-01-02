@@ -37,7 +37,7 @@ export class AddTagComponent {
       }
       if (this.file.tags != null) {
           this.file.tags.push(new Tag(tagName));
-          this.updateMediaService.putMedia(this.file as Media, environment.currentUserId);
+          this.updateMediaService.putMedia(this.file as Media);
           this.modalRef.hide();
       }
     }

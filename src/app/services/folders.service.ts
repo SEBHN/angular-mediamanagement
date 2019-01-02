@@ -21,23 +21,23 @@ export interface IFolderService {
 })
 
 export class FoldersService implements IFolderService {
-  
+
   constructor(private fileService: FilesService, private http: HttpClient, private fetchService: FetchService) { }
 
-  remove(media: Media, userId: string): void {
+  remove(media: Media): void {
     const path = media.filePath + media.name;
     const encodedFolderPath = encodeURIComponent(path);
-        this.http.delete(environment.API_URL + `/users/${userId}/folders/${encodedFolderPath}`, {
+        this.http.delete(environment.API_URL + `/users/folders/${encodedFolderPath}`, {
             reportProgress: true,
             observe: 'response'
         })
         .subscribe(response => this.fileService.remove(media.id), error1 => console.log(error1));
   }
 
-  rename(media: Media, userId: string, updatedName: string): void {
+  rename(media: Media, updatedName: string): void {
     const encodedCurrentPath = encodeURIComponent(media.filePath + media.name);
     const newPath = media.filePath + updatedName;
-    this.http.put(environment.API_URL + `/users/${userId}/folders/${encodedCurrentPath}`, newPath,  {
+    this.http.put(environment.API_URL + `/users/folders/${encodedCurrentPath}`, newPath,  {
         reportProgress: true,
         observe: 'response'
     })

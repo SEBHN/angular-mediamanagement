@@ -115,7 +115,7 @@ export class FileExplorerComponent implements OnInit {
   // CRUD handling
   deleteElement(media: Media): void {
     if (media.isFolder) {
-      this.foldersService.remove(media, environment.currentUserId);
+      this.foldersService.remove(media);
     } else {
       this.deleteMediaService.deleteMedia(media.id);
     }
@@ -123,8 +123,7 @@ export class FileExplorerComponent implements OnInit {
   }
 
   downloadElement(media: Media): void {
-
-      this.downloadMediaService.downloadMedia(media, environment.currentUserId);
+      this.downloadMediaService.downloadMedia(media);
   }
 
   // Folder navigation handling
@@ -135,7 +134,7 @@ export class FileExplorerComponent implements OnInit {
     const shouldFetch: boolean = this.filesService.getAll().some(file => file.filePath === this.currentPath);
     if (!shouldFetch) {
         // need to fetch from backend
-        this.fetchService.getCurrentFilesForUser(environment.currentUserId, this.currentPath);
+        this.fetchService.getCurrentFilesForUser(this.currentPath);
     } else {
         // data exists - get files with current path from service
         this.filesService.addMany(this.filesService.getAllForPath(this.currentPath));

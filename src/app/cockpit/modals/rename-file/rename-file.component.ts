@@ -33,13 +33,13 @@ export class RenameFileComponent {
 
     onRename(name: string): void {
         if (this.file.isFolder) {
-            this.foldersService.rename(this.file, environment.currentUserId, name);
+            this.foldersService.rename(this.file, name);
         } else {
             if (name.includes('.' + this.file.fileExtension) === false) {
                 name = name + '.' + this.file.fileExtension;
             }
             this.file.name = name;
-            this.updateMediaService.putMedia(this.file, environment.currentUserId); // TODO: later user management
+            this.updateMediaService.putMedia(this.file); // TODO: later user management
             this.modalRef.hide();
         }
     }

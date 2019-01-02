@@ -17,10 +17,10 @@ export class UploadMediaService {
     }
 
     // POST File Metadata
-    postMetaData(selectedFile: File, userId: string = environment.currentUserId): void {
+    postMetaData(selectedFile: File): void {
         this.selectedFile = selectedFile;
-        const media = this.getMediaData(selectedFile, this.filesService.getCurrentPath(), userId);
-        this.http.post(API_URL + `/users/${userId}/media/`, JSON.stringify(media), {
+        const media = this.getMediaData(selectedFile, this.filesService.getCurrentPath());
+        this.http.post(API_URL + `/users/media/`, JSON.stringify(media), {
             reportProgress: true,
             observe: 'response',
             headers: {
@@ -28,15 +28,15 @@ export class UploadMediaService {
             }
         })
             .subscribe((response: HttpResponse<any>) => {
-                this.postFile(userId, response.body['id']);
+                this.postFile(response.body['id']);
             }, error => console.log(new Error(error.message)));
     }
 
     // POST
-    postFile(userId: string, fileId: string): void {
+    postFile(fileId: string): void {
         const formData = new FormData();
         formData.append('file', this.selectedFile);
-        this.http.post(API_URL + `/users/${userId}/media/${fileId}/upload`, formData, {
+        this.http.post(API_URL + `/users/media/${fileId}/upload`, formData, {
             reportProgress: true,
             observe: 'response',
         })
@@ -48,8 +48,8 @@ export class UploadMediaService {
     }
 
     // creates an media object from the file that the user selects
-    getMediaData(file: File, filePath: string, creatorId: string): Media {
-        return new Media(null, file.name, null, this.getExtension(file), filePath, creatorId, new Map<string, string>());
+    getMediaData(file: File, filePath: string): Media {
+        return new Media(null, file.name, null, this.getExtension(file), filePath, null, new Map<string, string>());
     }
 
     getExtension(file: File): string {

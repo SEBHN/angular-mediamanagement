@@ -12,8 +12,8 @@ export class DownloadMediaService {
 
   constructor(private http: HttpClient) {}
 
-  downloadMedia(media: Media, userId: string): void {
-    this.http.get(`${environment.API_URL}/users/${userId}/media/${media.id}/download`,
+  downloadMedia(media: Media): void {
+    this.http.get(`${environment.API_URL}/users/media/${media.id}/download`,
      { responseType: 'blob' })
     .subscribe((data) => {
       saveAs(data, media.name);

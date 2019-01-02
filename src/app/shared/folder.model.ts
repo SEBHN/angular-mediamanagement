@@ -11,10 +11,10 @@ export class Folder implements FileElement {
   tags: Tag[];
   member: string; // used only for the type guard at runtime
 
-  constructor(name: string, path: string, creatorId: string) {
+  constructor(name: string, path: string) {
     this.name = name;
     this.filePath = path;
-    this.creatorId = creatorId;
+    this.creatorId = null;
     this.isFolder = true;
     this.tags = [];
     this.member = 'Folder';
