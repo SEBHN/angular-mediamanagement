@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { OktaAuthWrapper } from '../../shared/okta.auth.wrapper';
-import { environment } from '../../../environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,11 +15,15 @@ export class LoginComponent implements OnInit {
   loginError: string;
 
   constructor(private oauthService: OAuthService,
-    private oktaAuthWrapper: OktaAuthWrapper) {
+    private oktaAuthWrapper: OktaAuthWrapper, private router: Router) {
   }
 
 
   ngOnInit() {
+    if (this.oauthService.hasValidIdToken() && this.router.url !== '/') { // force firefox to redirect from login page
+      this.router.navigate(['/']);
+      console.log('forced redirect to home');
+    }
   }
 
   login() {

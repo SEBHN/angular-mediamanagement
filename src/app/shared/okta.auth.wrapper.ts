@@ -43,7 +43,12 @@ export class OktaAuthWrapper {
               })
               .then((isLoginSuccessful) => {
                 if (isLoginSuccessful) {
-                  this.zone.run(() => this.router.navigate(['/media/management'])); // see https://github.com/angular/angular/issues/25837
+                  this.zone.run(() => {
+                    const redirect = this.router.navigate(['/media/management']); // see https://github.com/angular/angular/issues/25837
+                    redirect.then(redirected => {
+                      console.log('Redirect succesful: ' + redirected + ', current url: ' + this.router.url);
+                    });
+                  });
                 } else {
                   console.error('Login was not successful!');
                 }
