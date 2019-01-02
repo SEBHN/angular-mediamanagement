@@ -69,7 +69,14 @@ export class CockpitComponent implements OnInit {
     }
 
     searchTags(tags: string): void {
+        if (!tags) {
+            this.resetTagsSearch();
+        }
         this.tagService.searchForTag(this.filesService.getCurrentPath(), tags);
+    }
+
+    resetTagsSearch(): void {  // update UI for given application path
+        this.filesService.fileElementsChanged.emit(this.filesService.getAllForPath(this.filesService.getCurrentPath()));
         this.searchInputRef.nativeElement.value = '';
     }
 }
