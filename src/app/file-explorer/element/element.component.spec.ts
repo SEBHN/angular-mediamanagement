@@ -36,7 +36,7 @@ describe('ElementComponent', () => {
 
   describe('onDoubleClick()', () => {
       const file = new Media('anId', 'aName', 'aFileId', '.txt', '/', '1337', new Map<string, string>());
-      const folder = new Folder('aFolder', '/im/in/here/send/help', '1337');
+      const folder = new Folder('aFolder', '/im/in/here/send/help');
 
       it('should emit navigatedToFile with media', (done) => {
           filesService.fileDownloaded.subscribe(subscribedFile => {

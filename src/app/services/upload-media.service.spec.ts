@@ -21,7 +21,7 @@ describe('UploadMediaService', () => {
       const service: UploadMediaService = TestBed.get(UploadMediaService);
       const data = new Blob(['Hello Stranger'], { type: 'text/plain' });
       const strangerFile = new File([data], 'stranger.txt');
-      const media = service.getMediaData(strangerFile, path, 'ILIKETESTS');
+      const media = service.getMediaData(strangerFile, path);
       expect(media.getFilePath()).toBe(path);
     });
 
