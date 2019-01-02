@@ -9,6 +9,13 @@
         "webRoot": "${workspaceFolder}"
       },
       {
+        "name": "ng serve firefox",
+        "type": "firefox",
+        "request": "launch",
+        "url": "http://localhost:4200/#",
+        "webRoot": "${workspaceFolder}"
+      },
+      {
         "name": "ng test",
         "type": "chrome",
         "request": "launch",
