@@ -39,7 +39,7 @@ export class RenameFileComponent {
                 name = name + '.' + this.file.fileExtension;
             }
             this.file.name = name;
-            this.updateMediaService.putMedia(this.file); // TODO: later user management
+            this.updateMediaService.putMedia(this.file);
             this.modalRef.hide();
         }
     }

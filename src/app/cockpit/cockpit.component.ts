@@ -12,7 +12,6 @@ import {Folder} from '../shared/folder.model';
 import {UploadMediaService} from '../services/upload-media.service';
 import { FilesService } from '../services/files-service.service';
 import {TagService} from '../services/tag.service';
-import {environment} from '../../environments/environment';
 import { OAuthService } from 'angular-oauth2-oidc';
 
 @Component({

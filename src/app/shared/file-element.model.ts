@@ -8,7 +8,6 @@ export interface FileElement {
   name: string;
   isFolder: boolean;
   filePath: string;
-  creatorId: string;
   tags: Tag[];
   member: string;
 

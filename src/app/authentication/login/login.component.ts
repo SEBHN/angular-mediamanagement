@@ -34,12 +34,4 @@ export class LoginComponent implements OnInit {
         this.loginError = error.message;
       });
   }
-
-  get givenName() {
-    const claims = this.oauthService.getIdentityClaims();
-    if (!claims) {
-      return null;
-    }
-    return claims['name'];
-  }
 }
