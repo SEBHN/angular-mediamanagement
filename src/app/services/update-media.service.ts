@@ -12,8 +12,8 @@ export class UpdateMediaService {
     constructor(private http: HttpClient, private filesService: FilesService) { }
 
     // Media Metadata POST
-    putMedia(media: Media, userId: string): void {
-        this.http.put(`${environment.API_URL}/users/${userId}/media/${media.id}`, JSON.stringify(media), {
+    putMedia(media: Media): void {
+        this.http.put(`${environment.API_URL}/users/media/${media.id}`, JSON.stringify(media), {
             reportProgress: true,
             observe: 'response',
             headers: {

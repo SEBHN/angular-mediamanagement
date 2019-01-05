@@ -12,9 +12,9 @@ export class TagService {
     constructor(private fileService: FilesService, private http: HttpClient) {
     }
 
-    searchForTag(currentPath: string, tag: string, userId: string): void {
+    searchForTag(currentPath: string, tag: string): void {
         if (tag !== '') {
-            this.getMediaForTag(tag, currentPath, userId);
+            this.getMediaForTag(tag, currentPath);
         }
     }
 
@@ -25,17 +25,17 @@ export class TagService {
      * @param userId the current user id
      * @author Emin
      */
-    private getMediaForTag(_tags: string, path: string, userId: string): void {
+    private getMediaForTag(_tags: string, path: string): void {
         const encodedCurrentPath = encodeURIComponent(path);
         const tagArray = _tags.split(',');
-        
+
         let tagsSearchUri = `?tag${tagArray[0].trim()}`;
         tagArray.unshift();
         tagArray.forEach(tag => {
             tagsSearchUri = tagsSearchUri + '&tag=' + tag.trim();
         });
 
-        this.http.get(environment.API_URL + `/users/${userId}/folders/${encodedCurrentPath}/taggedMedia${tagsSearchUri}`, {
+        this.http.get(environment.API_URL + `/users/folders/${encodedCurrentPath}/taggedMedia${tagsSearchUri}`, {
             reportProgress: true,
             observe: 'response'
         })

@@ -12,7 +12,7 @@ import {Folder} from '../shared/folder.model';
 import {UploadMediaService} from '../services/upload-media.service';
 import { FilesService } from '../services/files-service.service';
 import {TagService} from '../services/tag.service';
-import {environment} from '../../environments/environment';
+import { OAuthService } from 'angular-oauth2-oidc';
 
 @Component({
     selector: 'app-cockpit',
@@ -27,6 +27,7 @@ export class CockpitComponent implements OnInit {
     faArrowLeft = faArrowLeft;
     faFolderPlus = faFolderPlus;
     faTag = faTag;
+    oauthService: OAuthService;
 
     // navbar toggle
     private navbarOpen = false;
@@ -35,8 +36,9 @@ export class CockpitComponent implements OnInit {
     @ViewChild('searchInput') searchInputRef: ElementRef;
 
     constructor(private uploadMediaService: UploadMediaService, private filesService: FilesService,
-        private tagService: TagService) {
+        private tagService: TagService, oauthService: OAuthService) {
         this.uploadMediaService = uploadMediaService;
+        this.oauthService = oauthService;
     }
 
     toggleNavbar(): void {
@@ -69,8 +71,7 @@ export class CockpitComponent implements OnInit {
         if (!tags) {
             this.resetTagsSearch();
         }
-        this.tagService.searchForTag(this.filesService.getCurrentPath(), tags, environment.currentUserId);
-        // clear search input *WARNING* not a clean solution, but for now it's okay :(
+        this.tagService.searchForTag(this.filesService.getCurrentPath(), tags);
     }
 
     resetTagsSearch(): void {  // update UI for given application path

@@ -15,9 +15,9 @@ export class FetchService {
     constructor(private http: HttpClient, private filesService: FilesService) {
     }
 
-    getCurrentFilesForUser(userId: string, currentPath: string) {
+    getCurrentFilesForUser(currentPath: string) {
         const encodedCurrentPath = encodeURIComponent(currentPath);
-        this.http.get(environment.API_URL + `/users/${userId}/folders/${encodedCurrentPath}/media/`, {
+        this.http.get(environment.API_URL + `/users/folders/${encodedCurrentPath}/media/`, {
             reportProgress: true,
             observe: 'response'
         })
@@ -30,7 +30,7 @@ export class FetchService {
                 if (responseObj.subfolders.length > 0) {
                     // mark all subfolders as such
                     responseObj.subfolders.forEach((subfolder: FileElement) => {
-                        const folder = new Folder(subfolder.name, currentPath, userId);
+                        const folder = new Folder(subfolder.name, currentPath);
                         // apply type guard
                         folder.member = 'Folder';
                         filesArray.push(folder);

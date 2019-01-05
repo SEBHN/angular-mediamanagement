@@ -11,7 +11,7 @@ export class DeleteMediaService {
     constructor(private http: HttpClient, private fileService: FilesService) {
     }
 
-    deleteMediaUrl = environment.API_URL + '/users/{userID}/media/{id}';
+    deleteMediaUrl = environment.API_URL + '/users/media/{id}';
     tempID: string;
 
     // REST call to delet media
@@ -31,6 +31,6 @@ export class DeleteMediaService {
     // returns the delete media URL after it replaces the {userID} field and {id} field
     getDeleteMediaUrl(mediaId: string): string {
         // TODO: replace the userID placeholder with the userID from user class
-        return  this.deleteMediaUrl.replace('{userID}', environment.currentUserId).replace('{id}', mediaId);
+        return  this.deleteMediaUrl.replace('{id}', mediaId);
     }
 }

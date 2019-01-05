@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
 
   onRegister(name: string, email: string, password: string) {
     if (email !== '' && this.isRealEmail(email) && password !== '') {
-       this.usersService.register(new User('', email, false, password, 'JWT token'));
+       this.usersService.register(new User('', name, email, false, password));
     } else {
       // TODO: show alert with error?
     }

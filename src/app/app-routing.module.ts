@@ -5,11 +5,13 @@ import { CockpitComponent } from './cockpit/cockpit.component';
 import { LoginComponent } from './authentication/login/login.component';
 import { RegisterComponent } from './authentication/register/register.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { OAuthModule } from 'angular-oauth2-oidc';
+import { AuthGuard } from './shared/auth.guard.service';
 
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: 'media/management', pathMatch: 'full' },
-  { path: 'media', component: FileExplorerComponent, children: [
+  { path: '', redirectTo: 'media/management', pathMatch: 'full', canActivate: [AuthGuard] },
+  { path: 'media', component: FileExplorerComponent, canActivate: [AuthGuard], children: [
     { path: 'management', component: CockpitComponent }
   ] },
   { path: 'login', component: LoginComponent },
@@ -20,7 +22,8 @@ const appRoutes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    OAuthModule.forRoot()
   ],
   exports: [RouterModule]
 })

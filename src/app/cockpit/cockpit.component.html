@@ -34,7 +34,7 @@
                 </a>
             </li>
             <li class="nav-item mx-2">
-                <a appHighlight class="nav-link">
+                <a appHighlight class="nav-link" (click)="oauthService.logOut()">
                     Sign out
                     <fa-icon [icon]="faSignOutAlt" class="ml-1"></fa-icon>
                 </a>

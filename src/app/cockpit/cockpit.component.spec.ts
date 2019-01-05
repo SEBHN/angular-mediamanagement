@@ -6,6 +6,7 @@ import { CreateFolderComponent } from './modals/create-folder/create-folder.comp
 import { HttpClientModule } from '@angular/common/http';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { ModalModule } from 'ngx-bootstrap';
+import { OAuthModule } from 'angular-oauth2-oidc';
 
 describe('CockpitComponent', () => {
   let component: CockpitComponent;
@@ -17,7 +18,8 @@ describe('CockpitComponent', () => {
       imports: [
         FontAwesomeModule,
         HttpClientModule,
-        ModalModule.forRoot()
+        ModalModule.forRoot(),
+        OAuthModule.forRoot(),
       ],
       providers: [
         BsModalService

@@ -12,6 +12,8 @@ import { ModalModule } from 'ngx-bootstrap';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AddTagComponent } from './cockpit/modals/add-tag/add-tag.component';
 import { SidebarModule } from 'ng-sidebar';
+import { OAuthModule } from 'angular-oauth2-oidc';
+import { FormsModule } from '@angular/forms';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -25,7 +27,14 @@ describe('AppComponent', () => {
         ContextMenuModule.forRoot({
           useBootstrap4: true,
         }),
-        SidebarModule.forRoot()
+        SidebarModule.forRoot(),
+        OAuthModule.forRoot({
+          resourceServer: {
+              allowedUrls: ['http://localhost:8080', 'https://mvs-18-ws-spring-in-cloud.appspot.com'],
+              sendAccessToken: true
+          }
+        }),
+        FormsModule
       ],
       declarations: [
         AppComponent,
