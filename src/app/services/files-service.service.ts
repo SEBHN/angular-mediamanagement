@@ -58,6 +58,7 @@ export class FilesService implements IFileService {
     filesArray.forEach((media) => {
       this.createFile(media);
     });
+      this.fileElementsChanged.emit(this.getAllForPath(this.currentPath));
   }
 
   remove(id: string): void {
