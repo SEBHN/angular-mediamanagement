@@ -4,10 +4,6 @@ import * as OktaAuth from '@okta/okta-auth-js';
 import { environment } from '../../environments/environment';
 import {Router} from '@angular/router';
 
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-
-import { AppModule } from '../../app/app.module';
-
 
 @Injectable({
   providedIn: 'root'
