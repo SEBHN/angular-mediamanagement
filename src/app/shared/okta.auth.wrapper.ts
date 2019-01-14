@@ -4,6 +4,11 @@ import * as OktaAuth from '@okta/okta-auth-js';
 import { environment } from '../../environments/environment';
 import {Router} from '@angular/router';
 
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+
+import { AppModule } from '../../app/app.module';
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -19,7 +24,7 @@ export class OktaAuthWrapper {
   }
 
   login(username: string, password: string): Promise<any> {
-    return this.oauthService.createAndSaveNonce().then(nonce => {
+    const auth =  this.oauthService.createAndSaveNonce().then(nonce => {
       return this.authClient.signIn({
         username: username,
         password: password
@@ -47,6 +52,11 @@ export class OktaAuthWrapper {
                     const redirect = this.router.navigate(['/media/management']); // see https://github.com/angular/angular/issues/25837
                     redirect.then(redirected => {
                       console.log('Redirect succesful: ' + redirected + ', current url: ' + this.router.url);
+
+                      // Warning! Workaround for double folder navigation (application ist loaded twice)
+                      platformBrowserDynamic().bootstrapModule(AppModule)
+                      .catch(err => console.error(err));
+
                     });
                   });
                 } else {
@@ -59,5 +69,6 @@ export class OktaAuthWrapper {
         }
       });
     });
+    return auth;
   }
 }
