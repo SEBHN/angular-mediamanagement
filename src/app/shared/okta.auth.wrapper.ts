@@ -24,7 +24,7 @@ export class OktaAuthWrapper {
   }
 
   login(username: string, password: string): Promise<any> {
-    const auth =  this.oauthService.createAndSaveNonce().then(nonce => {
+    return this.oauthService.createAndSaveNonce().then(nonce => {
       return this.authClient.signIn({
         username: username,
         password: password
@@ -49,14 +49,9 @@ export class OktaAuthWrapper {
               .then((isLoginSuccessful) => {
                 if (isLoginSuccessful) {
                   this.zone.run(() => {
-                    const redirect = this.router.navigate(['/media/management']); // see https://github.com/angular/angular/issues/25837
+                    const redirect = this.router.navigate([window.location.origin]); // see https://github.com/angular/angular/issues/25837
                     redirect.then(redirected => {
                       console.log('Redirect succesful: ' + redirected + ', current url: ' + this.router.url);
-
-                      // Warning! Workaround for double folder navigation (application ist loaded twice)
-                      platformBrowserDynamic().bootstrapModule(AppModule)
-                      .catch(err => console.error(err));
-
                     });
                   });
                 } else {
@@ -69,6 +64,5 @@ export class OktaAuthWrapper {
         }
       });
     });
-    return auth;
   }
 }
