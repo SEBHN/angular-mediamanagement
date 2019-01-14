@@ -11,7 +11,7 @@ export class DeleteMediaService {
     constructor(private http: HttpClient, private fileService: FilesService) {
     }
 
-    deleteMediaUrl = environment.API_URL + '/users/media/{id}';
+    deleteMediaUrl = environment.API_URL + '/media/{id}';
     tempID: string;
 
     // REST call to delet media
