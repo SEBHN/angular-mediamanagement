@@ -4,6 +4,7 @@ import * as OktaAuth from '@okta/okta-auth-js';
 import { environment } from '../../environments/environment';
 import {Router} from '@angular/router';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -44,7 +45,7 @@ export class OktaAuthWrapper {
               .then((isLoginSuccessful) => {
                 if (isLoginSuccessful) {
                   this.zone.run(() => {
-                    const redirect = this.router.navigate(['/media/management']); // see https://github.com/angular/angular/issues/25837
+                    const redirect = this.router.navigate([window.location.origin]); // see https://github.com/angular/angular/issues/25837
                     redirect.then(redirected => {
                       console.log('Redirect succesful: ' + redirected + ', current url: ' + this.router.url);
                     });
