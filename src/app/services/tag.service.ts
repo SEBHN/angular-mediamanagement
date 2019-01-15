@@ -35,7 +35,7 @@ export class TagService {
             tagsSearchUri = tagsSearchUri + '&tag=' + tag.trim();
         });
 
-        this.http.get(environment.API_URL + `/users/folders/${encodedCurrentPath}/taggedMedia${tagsSearchUri}`, {
+        this.http.get(environment.API_URL + `/folders/${encodedCurrentPath}/taggedMedia${tagsSearchUri}`, {
             reportProgress: true,
             observe: 'response'
         })
