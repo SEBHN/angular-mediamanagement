@@ -3,6 +3,7 @@ import { Injectable, NgZone } from '@angular/core';
 import * as OktaAuth from '@okta/okta-auth-js';
 import { environment } from '../../environments/environment';
 import {Router} from '@angular/router';
+import { routerNgProbeToken } from '@angular/router/src/router_module';
 
 
 @Injectable({
@@ -32,7 +33,7 @@ export class OktaAuthWrapper {
             scopes: ['openid', 'profile', 'email'],
             sessionToken: response.sessionToken,
             nonce: nonce,
-            redirectUri: window.location.origin
+            redirectUri: window.location.origin + '/media/management'
           })
             .then((tokens) => {
               const idToken = tokens[0].idToken;
@@ -45,7 +46,7 @@ export class OktaAuthWrapper {
               .then((isLoginSuccessful) => {
                 if (isLoginSuccessful) {
                   this.zone.run(() => {
-                    const redirect = this.router.navigate([window.location.origin]); // see https://github.com/angular/angular/issues/25837
+                    const redirect = this.router.navigate(["./media/management"]); // see https://github.com/angular/angular/issues/25837
                     redirect.then(redirected => {
                       console.log('Redirect succesful: ' + redirected + ', current url: ' + this.router.url);
                     });
