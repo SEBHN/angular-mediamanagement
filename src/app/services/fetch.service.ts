@@ -17,7 +17,7 @@ export class FetchService {
 
     getCurrentFilesForUser(currentPath: string) {
         const encodedCurrentPath = encodeURIComponent(currentPath);
-        this.http.get(environment.API_URL + `/users/folders/${encodedCurrentPath}/media/`, {
+        this.http.get(environment.API_URL + `/folders/${encodedCurrentPath}/media/`, {
             reportProgress: true,
             observe: 'response'
         })

@@ -13,7 +13,7 @@ export class UpdateMediaService {
 
     // Media Metadata POST
     putMedia(media: Media): void {
-        this.http.put(`${environment.API_URL}/users/media/${media.id}`, JSON.stringify(media), {
+        this.http.put(`${environment.API_URL}/media/${media.id}`, JSON.stringify(media), {
             reportProgress: true,
             observe: 'response',
             headers: {

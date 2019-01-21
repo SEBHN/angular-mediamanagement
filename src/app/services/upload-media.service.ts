@@ -20,7 +20,7 @@ export class UploadMediaService {
     postMetaData(selectedFile: File): void {
         this.selectedFile = selectedFile;
         const media = this.getMediaData(selectedFile, this.filesService.getCurrentPath());
-        this.http.post(API_URL + `/users/media/`, JSON.stringify(media), {
+        this.http.post(API_URL + `/media/`, JSON.stringify(media), {
             reportProgress: true,
             observe: 'response',
             headers: {
@@ -36,7 +36,7 @@ export class UploadMediaService {
     postFile(fileId: string): void {
         const formData = new FormData();
         formData.append('file', this.selectedFile);
-        this.http.post(API_URL + `/users/media/${fileId}/upload`, formData, {
+        this.http.post(API_URL + `/media/${fileId}/upload`, formData, {
             reportProgress: true,
             observe: 'response',
         })
