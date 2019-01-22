@@ -35,4 +35,3 @@ deployment:
   only:
     - develop
     - master
-    - double_folder_navigation
