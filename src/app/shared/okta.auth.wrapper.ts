@@ -21,6 +21,7 @@ export class OktaAuthWrapper {
   }
 
   login(username: string, password: string): Promise<any> {
+    const productionPrefix = environment.production ? '/mvs/' : '/'
     return this.oauthService.createAndSaveNonce().then(nonce => {
       return this.authClient.signIn({
         username: username,
@@ -33,7 +34,7 @@ export class OktaAuthWrapper {
             scopes: ['openid', 'profile', 'email'],
             sessionToken: response.sessionToken,
             nonce: nonce,
-            redirectUri: window.location.origin + '/media/management'
+            redirectUri: window.location.origin + productionPrefix + 'media/management'
           })
             .then((tokens) => {
               const idToken = tokens[0].idToken;
