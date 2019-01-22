@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { OktaAuthWrapper } from '../../shared/okta.auth.wrapper';
 import { Router } from '@angular/router';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { AppModule } from '../../../app/app.module';
 
 @Component({
   selector: 'app-login',
@@ -20,9 +22,11 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit() {
-    if (this.oauthService.hasValidIdToken() && this.router.url !== '/') { // force firefox to redirect from login page
-      this.router.navigate(['/']);
-      console.log('forced redirect to home');
+    if (this.oauthService.hasValidIdToken() && this.router.url !== '/') { // force firefox to redirect from login page and reload page
+      platformBrowserDynamic().bootstrapModule(AppModule) //damn ugly workaround
+      .catch(err => console.error(err));
+      this.router.navigate(["./media/management"]);
+      console.log('forced redirect to home and reload page');
     }
   }
 
