@@ -40,7 +40,7 @@ export class RenameFileComponent {
             }
             this.file.name = name;
             this.updateMediaService.putMedia(this.file);
-            this.modalRef.hide();
         }
+        this.modalRef.hide();
     }
 }
