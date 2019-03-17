@@ -10,7 +10,7 @@ export const authConfig: AuthConfig = {
   redirectUri: window.location.origin,
 
   // The SPA's id. The SPA is registerd with this id at the auth-server
-  clientId: '0oahyyghlrI8poUre0h7',
+  clientId: environment.OKTA_CLIENT_ID,
 
   // set the scope for the permissions the client should request
   // The first three are defined by OIDC. The 4th is a usecase-specific one

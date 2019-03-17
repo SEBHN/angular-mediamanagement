@@ -37,3 +37,7 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# auth configs
+auth.config.json
+auth.config.prod.json
