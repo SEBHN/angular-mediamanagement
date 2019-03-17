@@ -58,7 +58,7 @@ jobs:
           at: /root/project
       - run:
           name: Deploy to gh-pages
-          command: npx ngh --dir=dist/spring-frontend --repo=https://${$GH_TOKEN}@github.com/SEBHN/mvs.git --name="MVS Publisher" --email=443_3w4md4sjdioa@byom.de
+          command: npx ngh --dir=dist/spring-frontend --repo=https://${GH_TOKEN}@github.com/SEBHN/mvs.git --name="MVS Publisher" --email=443_3w4md4sjdioa@byom.de
           
 workflows:
   version: 2
