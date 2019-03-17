@@ -1,0 +1,72 @@
+version: 2
+jobs:
+  preparations:
+    docker:
+      - image: dxjoke/docker-angular-ci-build
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: install-npm
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: copy auth json
+          command: cp auth.config.json.sample auth.config.json 
+      - run:
+          name: copy auth json (prod)
+          command: cp auth.config.json.sample auth.config.prod.json 
+  build:
+    docker:
+      - image: dxjoke/docker-angular-ci-build
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: copy auth json
+          command: cp auth.config.json.sample auth.config.json 
+      - run:
+          name: copy auth json (prod)
+          command: cp auth.config.json.sample auth.config.prod.json     
+      - run:
+          name: build
+          command: npm run build
+      - run:
+          name: production build
+          command: ng build --prod --base-href "https://sebhn.github.io/mvs/" 
+      - run:
+          name: test
+          command: npm test
+
+  deploy:
+    docker:
+      - image: dxjoke/docker-angular-ci-build
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Deploy to gh-pages
+          command: npx ngh --dir=dist/spring-frontend --repo=https://$GH_TOKEN@github.com/SEBHN/mvs.git --name="MVS Publisher" --email=443_3w4md4sjdioa@byom.de
+          
+workflows:
+  version: 2
+  prepare_and_build:
+    jobs:
+      - preparations
+      - build:
+          requires:
+            - preparations
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: 
+                - master
+                - develop
