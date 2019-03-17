@@ -16,10 +16,7 @@ jobs:
             - ./node_modules
       - run:
           name: copy auth json
-          command: cp auth.config.json.sample auth.config.json 
-      - run:
-          name: copy auth json (prod)
-          command: cp auth.config.json.sample auth.config.prod.json 
+          command: cp auth.config.json.sample auth.config.json && cp auth.config.json.sample auth.config.prod.json
   build:
     docker:
       - image: dxjoke/docker-angular-ci-build
