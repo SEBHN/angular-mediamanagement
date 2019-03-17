@@ -1,5 +1,5 @@
 # SpringFrontend
-![pipeline status](https://git.it.hs-heilbronn.de/bkyuchuk/angular-7-mvs/badges/develop/pipeline.svg)
+[![CircleCI](https://circleci.com/gh/SEBHN/angular-mediamanagement.svg?style=svg)](https://circleci.com/gh/SEBHN/angular-mediamanagement)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.2.
 
