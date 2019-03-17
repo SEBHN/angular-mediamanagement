@@ -39,6 +39,10 @@ jobs:
       - run:
           name: production build
           command: ng build --prod --base-href "https://sebhn.github.io/mvs/" 
+      - persist_to_workspace:
+          root: /root/project
+          paths:
+            - dist/
       - run:
           name: test
           command: npm test
@@ -50,6 +54,8 @@ jobs:
       - checkout
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
+      - attach_workspace:
+          at: /root/project
       - run:
           name: Deploy to gh-pages
           command: npx ngh --dir=dist/spring-frontend --repo=https://$GH_TOKEN@github.com/SEBHN/mvs.git --name="MVS Publisher" --email=443_3w4md4sjdioa@byom.de
