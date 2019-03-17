@@ -6,6 +6,8 @@ stages:
 
 before_script:
   - npm install
+  - echo $AUTH_CONFIG_JSON | base64 -d > auth.config.json
+  - echo $AUTH_CONFIG_PROD_JSON | base64 -d > auth.config.prod.json
 
 app-build:
   stage: build
