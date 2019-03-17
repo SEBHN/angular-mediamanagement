@@ -45,7 +45,7 @@ module.exports = function (config) {
   };
 
   
-  if (process.env.CI_SERVER || process.env.CIRCLE_BRANCH) { // isGitlab or isCircleCI
+  if (process.env.CI_SERVER || process.env.CI) { // isGitlab or isCircleCI
     configuration.browsers = ['ChromeHeadless'];
     configuration.singleRun = true
   }
